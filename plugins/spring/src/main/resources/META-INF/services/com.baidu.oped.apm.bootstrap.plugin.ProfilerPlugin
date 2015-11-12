@@ -1,0 +1,2 @@
+com.baidu.oped.apm.plugin.spring.beans.SpringBeansPlugin
+com.baidu.oped.apm.plugin.spring.web.SpringWebMvcPlugin

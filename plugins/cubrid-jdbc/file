@@ -1,0 +1,17 @@
+file
+
+
+
+base=/Users/mason/Workspaces/github/pinpoint/plugins
+path=src/main/resources/META-INF/services
+plugin=com.baidu.oped.apm.bootstrap.plugin.ProfilerPlugin
+provider=com.baidu.oped.apm.common.trace.TraceMetadataProvider
+pluginTo=com.baidu.oped.apm.bootstrap.plugin.ProfilerPlugin
+providerTo=com.baidu.oped.apm.common.trace.TraceMetadataProvider
+
+for i in `ls`
+do
+	echo "rename "$base/$i/$path/$plugin
+	mv $base/$i/$path/$plugin $base/$i/$path/$pluginTo
+	mv $base/$i/$path/$provider $base/$i/$path/$providerTo
+done

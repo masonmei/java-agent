@@ -1,0 +1,2 @@
+com.baidu.oped.apm.plugin.spring.beans.SpringBeansTraceMetadataProvider
+com.baidu.oped.apm.plugin.spring.web.SpringWebMvcTraceMetadataProvider

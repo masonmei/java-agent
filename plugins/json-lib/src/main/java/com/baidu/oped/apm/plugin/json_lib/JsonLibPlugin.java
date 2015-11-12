@@ -1,0 +1,153 @@
+/**
+ * Copyright 2014 NAVER Corp.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.baidu.oped.apm.plugin.json_lib;
+
+import java.lang.reflect.Modifier;
+import java.security.ProtectionDomain;
+
+import com.baidu.oped.apm.bootstrap.instrument.InstrumentClass;
+import com.baidu.oped.apm.bootstrap.instrument.InstrumentException;
+import com.baidu.oped.apm.bootstrap.instrument.InstrumentMethod;
+import com.baidu.oped.apm.bootstrap.instrument.MethodFilters;
+import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
+import com.baidu.oped.apm.bootstrap.instrument.transformer.TransformCallback;
+import com.baidu.oped.apm.bootstrap.interceptor.BasicMethodInterceptor;
+import com.baidu.oped.apm.bootstrap.logging.PLogger;
+import com.baidu.oped.apm.bootstrap.logging.PLoggerFactory;
+import com.baidu.oped.apm.bootstrap.plugin.ProfilerPlugin;
+import com.baidu.oped.apm.bootstrap.plugin.ProfilerPluginSetupContext;
+
+/**
+ * @author Sangyoon Lee
+ *
+ */
+public class JsonLibPlugin implements ProfilerPlugin {
+    private static final String BASIC_INTERCEPTOR = BasicMethodInterceptor.class.getName();
+    private static final String PARSING_INTERCEPTOR = "com.baidu.oped.apm.plugin.json_lib.interceptor.ParsingInterceptor";
+    private static final String TO_STRING_INTERCEPTOR = "com.baidu.oped.apm.plugin.json_lib.interceptor.ToStringInterceptor";
+
+    private static final String GROUP = "json-lib";
+
+    private final PLogger logger = PLoggerFactory.getLogger(this.getClass());
+
+    @Override
+    public void setup(ProfilerPluginSetupContext context) {
+        addJSONSerializerInterceptor(context, "net.sf.json.JSONSerializer");
+        addJSONObjectInterceptor(context, "net.sf.json.JSONObject");
+        addJSONArrayInterceptor(context, "net.sf.json.JSONArray");
+    }
+    
+    private void addJSONSerializerInterceptor(ProfilerPluginSetupContext context, String clazzName) {
+        context.addClassFileTransformer(clazzName, new TransformCallback() {
+
+            @Override
+            public byte[] doInTransform(Instrumentor instrumentContext, ClassLoader classLoader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws InstrumentException {
+                InstrumentClass target = instrumentContext.getInstrumentClass(classLoader, className, classfileBuffer);
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toJSON"))) {
+                    addInterceptor(method, PARSING_INTERCEPTOR);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toJava"))) {
+                    addInterceptor(method, BASIC_INTERCEPTOR, JsonLibConstants.SERVICE_TYPE);
+                }
+
+                return target.toBytecode();
+            }
+
+        });
+
+    }
+
+    private void addJSONObjectInterceptor(ProfilerPluginSetupContext context, String clazzName) {
+        context.addClassFileTransformer(clazzName, new TransformCallback() {
+
+            @Override
+            public byte[] doInTransform(Instrumentor instrumentContext, ClassLoader classLoader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws InstrumentException {
+                InstrumentClass target = instrumentContext.getInstrumentClass(classLoader, className, classfileBuffer);
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("fromObject"))) {
+                    addInterceptor(method, PARSING_INTERCEPTOR);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toBean"))) {
+                    addInterceptor(method, BASIC_INTERCEPTOR, JsonLibConstants.SERVICE_TYPE);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toString"))) {
+                    addInterceptor(method, TO_STRING_INTERCEPTOR);
+                }
+
+                return target.toBytecode();
+            }
+
+        });
+    }
+
+    private void addJSONArrayInterceptor(ProfilerPluginSetupContext context, String clazzName) {
+        context.addClassFileTransformer(clazzName, new TransformCallback() {
+
+            @Override
+            public byte[] doInTransform(Instrumentor instrumentContext, ClassLoader classLoader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws InstrumentException {
+                InstrumentClass target = instrumentContext.getInstrumentClass(classLoader, className, classfileBuffer);
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("fromObject"))) {
+                    addInterceptor(method, PARSING_INTERCEPTOR);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toArray"))) {
+                    addInterceptor(method, BASIC_INTERCEPTOR, JsonLibConstants.SERVICE_TYPE);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toList"))) {
+                    addInterceptor(method, BASIC_INTERCEPTOR, JsonLibConstants.SERVICE_TYPE);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toCollection"))) {
+                    addInterceptor(method, BASIC_INTERCEPTOR, JsonLibConstants.SERVICE_TYPE);
+                }
+
+                for (InstrumentMethod method : target.getDeclaredMethods(MethodFilters.name("toString"))) {
+                    addInterceptor(method, TO_STRING_INTERCEPTOR);
+                }
+
+                return target.toBytecode();
+            }
+
+        });
+
+    }
+
+    private boolean addInterceptor(InstrumentMethod method, String interceptorClassName, Object... constructorArgs) {
+        if (method != null && isPublicMethod(method)) {
+            try {
+                method.addGroupedInterceptor(interceptorClassName, constructorArgs, GROUP);
+                return true;
+            } catch (InstrumentException e) {
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Unsupported method " + method, e);
+                }
+            }
+        }
+        return false;
+    }
+
+
+    private boolean isPublicMethod(InstrumentMethod method) {
+        int modifier = method.getModifiers();
+        return Modifier.isPublic(modifier);
+    }
+
+}

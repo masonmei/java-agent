@@ -1,0 +1,9 @@
+# Please modify following 
+# The included/excluded paths are applied sequentially from up to down
+# + included_path_patterns
+# - excluded_path_patterns
+* default
+- \com.baidu.oped.apm\thrift\dto
+- \com.baidu.oped.apm\common\util\apache
+- \com.baidu.oped.apm\profiler\util\jdk
+- \com.baidu.oped.apm\bootstrap\util\spring
