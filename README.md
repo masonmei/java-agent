@@ -1,19 +1,19 @@
-![Pinpoint](web/src/main/webapp/images/logo.png)
+![Apm](web/src/main/webapp/images/logo.png)
 
-[![Build Status](https://travis-ci.org/naver/pinpoint.svg?branch=master)](https://travis-ci.org/naver/pinpoint)
+[![Build Status](https://travis-ci.org/naver/apm.svg?branch=master)](https://travis-ci.org/naver/apm)
 
-**Pinpoint** is an APM (Application Performance Management) tool for large-scale distributed systems written in Java. Modelled after [Google's Dapper paper](http://research.google.com/pubs/pub36356.html), Pinpoint provides a solution to help analyze the overall structure of the system and how components within them are interconnected by tracing transactions across distributed applications.
+**Apm** is an APM (Application Performance Management) tool for large-scale distributed systems written in Java. Modelled after [Google's Dapper paper](http://research.google.com/pubs/pub36356.html), Apm provides a solution to help analyze the overall structure of the system and how components within them are interconnected by tracing transactions across distributed applications.
 
 * Install agents without changing a single line of code
 * Minimal impact on performance (approximately 3% increase in resource usage)
 
 ## Latest Release (2015/9/9)
-We're happy to announce the release of Pinpoint **v1.1.1**. <br/>
-Please check release note at (https://github.com/naver/pinpoint/releases/tag/1.1.1)<br/>
+We're happy to announce the release of Apm **v1.1.1**. <br/>
+Please check release note at (https://github.com/naver/apm/releases/tag/1.1.1)<br/>
 We're now focusing on developing **v1.5.0**.
 
 ## Overview
-Services nowadays often consist of many different components, communicating amongst themselves as well as making API calls to external services. How each and every transaction gets executed is often left as a blackbox. Pinpoint traces transaction flows between these components and provides a clear view to identify problem areas and potential bottlenecks.
+Services nowadays often consist of many different components, communicating amongst themselves as well as making API calls to external services. How each and every transaction gets executed is often left as a blackbox. Apm traces transaction flows between these components and provides a clear view to identify problem areas and potential bottlenecks.
 
 * **ServerMap** - Understand the topology of any distributed systems by visualizing how their components are interconnected. Clicking on a node reveals details about the component, such as its current status, and transaction count.
 * **Request/Response Scatter Chart** - Visualize request count and response patterns over time to identify potential problems. Transactions can be selected for additional detail by **dragging over the chart**.
@@ -29,7 +29,7 @@ Services nowadays often consist of many different components, communicating amon
   ![Inspector](doc/img/ss_inspector.png)
 
 ## Architecture
-![Pinpoint Architecture](doc/img/pinpoint-architecture.png)
+![Apm Architecture](doc/img/apm-architecture.png)
 
 
 
@@ -43,11 +43,11 @@ Services nowadays often consist of many different components, communicating amon
 * Arcus, Memcached, Redis
 
 ## Quick Start
-You may run a sample Pinpoint instance in your own machine by running four simple scripts for each components: Collector, Web, Sample TestApp, HBase.
+You may run a sample Apm instance in your own machine by running four simple scripts for each components: Collector, Web, Sample TestApp, HBase.
 
-Once the components are running, you should be able to visit http://localhost:28080 to view the Pinpoint Web UI, and http://localhost:28081 to generate transactions on the Sample TestApp.
+Once the components are running, you should be able to visit http://localhost:28080 to view the Apm Web UI, and http://localhost:28081 to generate transactions on the Sample TestApp.
 
-For details, please refer to the [quick-start guide](quickstart/README.md "Pinpoint quick-start guide").
+For details, please refer to the [quick-start guide](quickstart/README.md "Apm quick-start guide").
 
 ## Installation
 **Build Requirements**
@@ -61,9 +61,9 @@ For details, please refer to the [quick-start guide](quickstart/README.md "Pinpo
 
 **Prerequisites**
 
-Java version required to run Pinpoint:
+Java version required to run Apm:
 
-Pinpoint Version | Agent | Collector | Web
+Apm Version | Agent | Collector | Web
 ---------------- | ----- | --------- | ---
 1.0.x | 6+ | 6+ | 6+
 1.1.x | 6+ | 7+ | 7+
@@ -71,7 +71,7 @@ Pinpoint Version | Agent | Collector | Web
 
 HBase compatibility table:
 
-Pinpoint Version | HBase 0.94.x | HBase 0.98.x | HBase 1.0.x | HBase 1.1.x
+Apm Version | HBase 0.94.x | HBase 0.98.x | HBase 1.0.x | HBase 1.1.x
 ---------------- | ------------ | ------------ | ----------- | -----------
 1.0.x | yes | no | no | no
 1.1.x | no | not tested | yes | not tested
@@ -80,21 +80,21 @@ Pinpoint Version | HBase 0.94.x | HBase 0.98.x | HBase 1.0.x | HBase 1.1.x
 
 **Installation**
 
-To set up your very own Pinpoint instance you can either **download the build results** from our [**latest release**](https://github.com/naver/pinpoint/releases/latest), or manually build from your Git clone.
+To set up your very own Apm instance you can either **download the build results** from our [**latest release**](https://github.com/naver/apm/releases/latest), or manually build from your Git clone.
 Take a look at our [installation guide](doc/installation.md) for further instructions.
 
 ## Issues
-For feature requests and bug reports, feel free to post them [here](https://github.com/naver/pinpoint/issues).
+For feature requests and bug reports, feel free to post them [here](https://github.com/naver/apm/issues).
 
 
 ## User Group
-For Q/A and discussion [here](https://groups.google.com/forum/#!forum/pinpoint_user).
+For Q/A and discussion [here](https://groups.google.com/forum/#!forum/apm_user).
 
 
 ## Wiki
 For roadmap, user guide, documentation.
 We welcome any documentation contribution.
-[here](https://github.com/naver/pinpoint/wiki).
+[here](https://github.com/naver/apm/wiki).
 
 
 ## Contribution
@@ -105,7 +105,7 @@ For contributions, please make a pull-request against our `master` branch.
 We would love to see additional tracing support for libraries such as [Storm](https://storm.apache.org/), [HBase](http://hbase.apache.org/), as well as profiler support for additional languages (.NET, C++).
 
 ## License
-Pinpoint is licensed under the Apache License, Version 2.0.
+Apm is licensed under the Apache License, Version 2.0.
 See [LICENSE](LICENSE) for full license text.
 
 ```

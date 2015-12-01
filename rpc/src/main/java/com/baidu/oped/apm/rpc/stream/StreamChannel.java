@@ -16,7 +16,7 @@
 
 package com.baidu.oped.apm.rpc.stream;
 
-import com.baidu.oped.apm.rpc.PinpointSocketException;
+import com.baidu.oped.apm.rpc.ApmSocketException;
 import com.baidu.oped.apm.rpc.packet.stream.StreamCode;
 import com.baidu.oped.apm.rpc.packet.stream.StreamPingPacket;
 import com.baidu.oped.apm.rpc.packet.stream.StreamPongPacket;
@@ -156,7 +156,7 @@ public abstract class StreamChannel {
     void assertState(StreamChannelStateCode stateCode) {
         final StreamChannelStateCode currentCode = getCurrentState();
         if (!checkState(currentCode, stateCode)) {
-            throw new PinpointSocketException("expected:<" + stateCode + "> but was:<" + currentCode + ">;");
+            throw new ApmSocketException("expected:<" + stateCode + "> but was:<" + currentCode + ">;");
         }
     }
 

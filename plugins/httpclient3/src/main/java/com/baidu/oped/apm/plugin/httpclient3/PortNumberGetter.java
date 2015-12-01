@@ -19,5 +19,5 @@ package com.baidu.oped.apm.plugin.httpclient3;
  *
  */
 public interface PortNumberGetter {
-    int _$PINPOINT$_getPortNumber();
+    int _$APM$_getPortNumber();
 }

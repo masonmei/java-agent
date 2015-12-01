@@ -16,11 +16,11 @@
 
 package com.baidu.oped.apm.rpc.server;
 
-import com.baidu.oped.apm.rpc.PinpointSocket;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
-import com.baidu.oped.apm.rpc.client.PinpointClientHandshaker;
-import com.baidu.oped.apm.rpc.util.PinpointRPCTestUtils;
+import com.baidu.oped.apm.rpc.ApmSocket;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
+import com.baidu.oped.apm.rpc.client.ApmClientHandshaker;
+import com.baidu.oped.apm.rpc.util.ApmRPCTestUtils;
 import com.baidu.oped.apm.rpc.util.TimerFactory;
 import org.jboss.netty.util.Timer;
 import org.junit.AfterClass;
@@ -47,7 +47,7 @@ public class HandshakeTest {
     @BeforeClass
     public static void setUp() throws IOException {
         timer = TimerFactory.createHashedWheelTimer(HandshakeTest.class.getSimpleName(), 100, TimeUnit.MILLISECONDS, 512);
-        bindPort = PinpointRPCTestUtils.findAvailablePort();
+        bindPort = ApmRPCTestUtils.findAvailablePort();
     }
 
     @AfterClass
@@ -60,52 +60,52 @@ public class HandshakeTest {
     // simple test
     @Test
     public void handshakeTest1() throws InterruptedException {
-        PinpointServerAcceptor serverAcceptor = PinpointRPCTestUtils.createPinpointServerFactory(bindPort, SimpleServerMessageListener.DUPLEX_INSTANCE);
+        ApmServerAcceptor serverAcceptor = ApmRPCTestUtils.createApmServerFactory(bindPort, SimpleServerMessageListener.DUPLEX_INSTANCE);
 
-        PinpointClientFactory clientFactory1 = PinpointRPCTestUtils.createClientFactory(PinpointRPCTestUtils.getParams(), PinpointRPCTestUtils.createEchoClientListener());
-        PinpointClientFactory clientFactory2 = PinpointRPCTestUtils.createClientFactory(PinpointRPCTestUtils.getParams(), null);
+        ApmClientFactory clientFactory1 = ApmRPCTestUtils.createClientFactory(ApmRPCTestUtils.getParams(), ApmRPCTestUtils.createEchoClientListener());
+        ApmClientFactory clientFactory2 = ApmRPCTestUtils.createClientFactory(ApmRPCTestUtils.getParams(), null);
         try {
-            PinpointClient client = clientFactory1.connect("127.0.0.1", bindPort);
-            PinpointClient client2 = clientFactory2.connect("127.0.0.1", bindPort);
+            ApmClient client = clientFactory1.connect("127.0.0.1", bindPort);
+            ApmClient client2 = clientFactory2.connect("127.0.0.1", bindPort);
 
             Thread.sleep(500);
 
-            List<PinpointSocket> writableServerList = serverAcceptor.getWritableSocketList();
+            List<ApmSocket> writableServerList = serverAcceptor.getWritableSocketList();
             if (writableServerList.size() != 2) {
                 Assert.fail();
             }
 
-            PinpointRPCTestUtils.close(client, client2);
+            ApmRPCTestUtils.close(client, client2);
         } finally {
             clientFactory1.release();
             clientFactory2.release();
 
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
     @Test
     public void handshakeTest2() throws InterruptedException {
-        PinpointServerAcceptor serverAcceptor = PinpointRPCTestUtils.createPinpointServerFactory(bindPort, SimpleServerMessageListener.DUPLEX_INSTANCE);
+        ApmServerAcceptor serverAcceptor = ApmRPCTestUtils.createApmServerFactory(bindPort, SimpleServerMessageListener.DUPLEX_INSTANCE);
 
-        Map params = PinpointRPCTestUtils.getParams();
+        Map params = ApmRPCTestUtils.getParams();
         
-        PinpointClientFactory clientFactory1 = PinpointRPCTestUtils.createClientFactory(PinpointRPCTestUtils.getParams(), PinpointRPCTestUtils.createEchoClientListener());
+        ApmClientFactory clientFactory1 = ApmRPCTestUtils.createClientFactory(ApmRPCTestUtils.getParams(), ApmRPCTestUtils.createEchoClientListener());
 
         try {
-            PinpointClient client = clientFactory1.connect("127.0.0.1", bindPort);
+            ApmClient client = clientFactory1.connect("127.0.0.1", bindPort);
             Thread.sleep(500);
 
-            PinpointSocket writableServer = getWritableServer("application", "agent", (Long) params.get(AgentHandshakePropertyType.START_TIMESTAMP.getName()), serverAcceptor.getWritableSocketList());
+            ApmSocket writableServer = getWritableServer("application", "agent", (Long) params.get(AgentHandshakePropertyType.START_TIMESTAMP.getName()), serverAcceptor.getWritableSocketList());
             Assert.assertNotNull(writableServer);
 
             writableServer = getWritableServer("application", "agent", (Long) params.get(AgentHandshakePropertyType.START_TIMESTAMP.getName()) + 1, serverAcceptor.getWritableSocketList());
             Assert.assertNull(writableServer);
 
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
         } finally {
             clientFactory1.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -114,7 +114,7 @@ public class HandshakeTest {
         int retryInterval = 100;
         int maxHandshakeCount = 10;
 
-        PinpointClientHandshaker handshaker = new PinpointClientHandshaker(timer, retryInterval, maxHandshakeCount);
+        ApmClientHandshaker handshaker = new ApmClientHandshaker(timer, retryInterval, maxHandshakeCount);
         handshaker.handshakeComplete(null);
 
         Assert.assertEquals(null, handshaker.getHandshakeResult());
@@ -127,13 +127,13 @@ public class HandshakeTest {
         int retryInterval = 100;
         int maxHandshakeCount = 10;
 
-        PinpointClientHandshaker handshaker = new PinpointClientHandshaker(timer, retryInterval, maxHandshakeCount);
+        ApmClientHandshaker handshaker = new ApmClientHandshaker(timer, retryInterval, maxHandshakeCount);
         handshaker.handshakeAbort();
 
         Assert.assertTrue(handshaker.isFinished());
     }
 
-    private PinpointSocket getWritableServer(String applicationName, String agentId, long startTimeMillis, List<PinpointSocket> writableServerList) {
+    private ApmSocket getWritableServer(String applicationName, String agentId, long startTimeMillis, List<ApmSocket> writableServerList) {
         if (applicationName == null) {
             return null;
         }
@@ -146,12 +146,12 @@ public class HandshakeTest {
             return null;
         }
 
-        List<PinpointSocket> result = new ArrayList<PinpointSocket>();
+        List<ApmSocket> result = new ArrayList<ApmSocket>();
 
-        for (PinpointSocket writableServer : writableServerList) {
+        for (ApmSocket writableServer : writableServerList) {
 
-            if (writableServer instanceof  PinpointServer) {
-                Map agentProperties = ((PinpointServer)writableServer).getChannelProperties();
+            if (writableServer instanceof  ApmServer) {
+                Map agentProperties = ((ApmServer)writableServer).getChannelProperties();
 
                 if (!applicationName.equals(agentProperties.get(AgentHandshakePropertyType.APPLICATION_NAME.getName()))) {
                     continue;

@@ -169,22 +169,22 @@ public class JavassistClassTest {
         
         Class<?> objectTraceValue = loader.loadClass(ObjectTraceValue.class.getName());
         Assert.assertTrue("ObjectTraceValue implements fail", objectTraceValue.isInstance(testObject));
-        objectTraceValue.getMethod("_$PINPOINT$_setTraceObject", Object.class).invoke(testObject, "a");
-        Object get = objectTraceValue.getMethod("_$PINPOINT$_getTraceObject").invoke(testObject);
+        objectTraceValue.getMethod("_$APM$_setTraceObject", Object.class).invoke(testObject, "a");
+        Object get = objectTraceValue.getMethod("_$APM$_getTraceObject").invoke(testObject);
         Assert.assertEquals("a", get);
         
 
         Class<?> intTraceValue = loader.loadClass(IntTraceValue.class.getName());
         Assert.assertTrue("IntTraceValue implements fail", intTraceValue.isInstance(testObject));
-        intTraceValue.getMethod("_$PINPOINT$_setTraceInt", int.class).invoke(testObject, 1);
-        int a = (Integer)intTraceValue.getMethod("_$PINPOINT$_getTraceInt").invoke(testObject);
+        intTraceValue.getMethod("_$APM$_setTraceInt", int.class).invoke(testObject, 1);
+        int a = (Integer)intTraceValue.getMethod("_$APM$_getTraceInt").invoke(testObject);
         Assert.assertEquals(1, a);
 
         
         Class<?> databaseTraceValue = loader.loadClass(DatabaseInfoTraceValue.class.getName());
         Assert.assertTrue("DatabaseInfoTraceValue implements fail", databaseTraceValue.isInstance(testObject));
-        databaseTraceValue.getMethod("_$PINPOINT$_setTraceDatabaseInfo", DatabaseInfo.class).invoke(testObject, UnKnownDatabaseInfo.INSTANCE);
-        Object databaseInfo = databaseTraceValue.getMethod("_$PINPOINT$_getTraceDatabaseInfo").invoke(testObject);
+        databaseTraceValue.getMethod("_$APM$_setTraceDatabaseInfo", DatabaseInfo.class).invoke(testObject, UnKnownDatabaseInfo.INSTANCE);
+        Object databaseInfo = databaseTraceValue.getMethod("_$APM$_getTraceDatabaseInfo").invoke(testObject);
         Assert.assertSame(UnKnownDatabaseInfo.INSTANCE, databaseInfo);
     }
 
@@ -363,13 +363,13 @@ public class JavassistClassTest {
         Method method = testObject.getClass().getMethod("setValue", String.class);
         method.invoke(testObject, value);
         
-        Method getString = stringGetter.getMethod("_$PINPOINT$_getString");
+        Method getString = stringGetter.getMethod("_$APM$_getString");
         Assert.assertEquals(value, getString.invoke(testObject));
 
         Method setIntValue = testObject.getClass().getMethod("setIntValue", int.class);
         setIntValue.invoke(testObject, intValue);
 
-        Method getInt = intGetter.getMethod("_$PINPOINT$_getInt");
+        Method getInt = intGetter.getMethod("_$APM$_getInt");
         Assert.assertEquals(intValue, getInt.invoke(testObject));
 
     }

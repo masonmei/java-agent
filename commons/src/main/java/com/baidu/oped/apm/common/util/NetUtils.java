@@ -54,7 +54,7 @@ public final class NetUtils {
 
     public static InetSocketAddress toInetSocketAddress(String address) {
         try {
-            URI uri = new URI("pinpoint://" + address);
+            URI uri = new URI("apm://" + address);
 
             return new InetSocketAddress(uri.getHost(), uri.getPort());
         } catch (URISyntaxException ignore) {

@@ -183,7 +183,7 @@ public class ThriftRequestProperty {
         } else if (headerType == TType.BOOL) {
             this.thriftHeaders.put(headerKey, (Boolean)value);
         } else {
-            throw new TProtocolException("Invalid pinpoint header type - " + headerType);
+            throw new TProtocolException("Invalid apm header type - " + headerType);
         }
     }
     
@@ -207,7 +207,7 @@ public class ThriftRequestProperty {
             } else if (headerType == TType.BOOL) {
                 oprot.writeBool((Boolean)headerValue);
             } else {
-                throw new TProtocolException("Invalid pinpoint header type - " + headerType);
+                throw new TProtocolException("Invalid apm header type - " + headerType);
             }
         } finally {
             oprot.writeFieldEnd();

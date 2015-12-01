@@ -77,7 +77,7 @@ public final class ChunkHeaderBufferedTBaseSerializerFactory implements Serializ
     public ChunkHeaderBufferedTBaseSerializer createSerializer() {
         ByteArrayOutputStream baos = null;
         if (safetyGuaranteed) {
-            baos = new PinpointByteArrayOutputStream(outputStreamSize, autoExpand);
+            baos = new ApmByteArrayOutputStream(outputStreamSize, autoExpand);
         } else {
             baos = new UnsafeByteArrayOutputStream(outputStreamSize, autoExpand);
         }

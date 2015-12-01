@@ -19,9 +19,9 @@
 
 package com.baidu.oped.apm.rpc.util;
 
-import com.baidu.oped.apm.rpc.PinpointSocketException;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
+import com.baidu.oped.apm.rpc.ApmSocketException;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,26 +34,26 @@ public final class ClientFactoryUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientFactoryUtils.class);
 
-    public static PinpointClient createPinpointClient(String host, int port, PinpointClientFactory clientFactory) {
+    public static ApmClient createApmClient(String host, int port, ApmClientFactory clientFactory) {
         InetSocketAddress connectAddress = new InetSocketAddress(host, port);
-        return createPinpointClient(connectAddress, clientFactory);
+        return createApmClient(connectAddress, clientFactory);
     }
 
-    public static PinpointClient createPinpointClient(InetSocketAddress connectAddress, PinpointClientFactory clientFactory) {
-        PinpointClient pinpointClient = null;
+    public static ApmClient createApmClient(InetSocketAddress connectAddress, ApmClientFactory clientFactory) {
+        ApmClient apmClient = null;
         for (int i = 0; i < 3; i++) {
             try {
-                pinpointClient = clientFactory.connect(connectAddress);
+                apmClient = clientFactory.connect(connectAddress);
                 LOGGER.info("tcp connect success. remote:{}", connectAddress);
-                return pinpointClient;
-            } catch (PinpointSocketException e) {
+                return apmClient;
+            } catch (ApmSocketException e) {
                 LOGGER.warn("tcp connect fail. retmoe:{} try reconnect, retryCount:{}", connectAddress, i);
             }
         }
         LOGGER.warn("change background tcp connect mode remote:{} ", connectAddress);
-        pinpointClient = clientFactory.scheduledConnect(connectAddress);
+        apmClient = clientFactory.scheduledConnect(connectAddress);
 
-        return pinpointClient;
+        return apmClient;
     }
 
 }

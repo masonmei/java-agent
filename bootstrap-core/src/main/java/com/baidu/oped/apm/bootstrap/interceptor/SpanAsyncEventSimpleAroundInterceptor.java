@@ -26,7 +26,7 @@ public abstract class SpanAsyncEventSimpleAroundInterceptor implements AroundInt
     }
     
     private AsyncTraceId getAsyncTraceId(Object target) {
-        return target instanceof AsyncTraceIdAccessor ? ((AsyncTraceIdAccessor)target)._$PINPOINT$_getAsyncTraceId() : null;
+        return target instanceof AsyncTraceIdAccessor ? ((AsyncTraceIdAccessor)target)._$APM$_getAsyncTraceId() : null;
     }
 
     @Override

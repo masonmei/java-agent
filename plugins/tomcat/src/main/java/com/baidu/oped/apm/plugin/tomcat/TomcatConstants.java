@@ -36,6 +36,6 @@ public final class TomcatConstants {
     public static final String METADATA_ASYNC = "com.baidu.oped.apm.plugin.tomcat.AsyncAccessor";
     public static final String METADATA_ASYNC_TRACE_ID = "com.baidu.oped.apm.bootstrap.interceptor.AsyncTraceIdAccessor";
 
-    public static final String ATTRIBUTE_PINPOINT_TRACE = "PINPOINT_TRACE";
+    public static final String ATTRIBUTE_APM_TRACE = "APM_TRACE";
     public static final String TOMCAT_SERVLET_ASYNC_SCOPE = "TomcatServletAsyncScope";
 }

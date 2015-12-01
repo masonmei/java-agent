@@ -33,13 +33,13 @@ import com.baidu.oped.apm.bootstrap.plugin.test.Expectations;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @see JacksonPlugin#intercept_ObjectMapper(com.baidu.oped.apm.bootstrap.plugin.ProfilerPluginSetupContext)
  * @author Sungkook Kim
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"org.codehaus.jackson:jackson-mapper-asl:[1.0.1],[1.1.2],[1.2.1],[1.3.5],[1.4.5],[1.5.8],[1.6.9],[1.7.9],[1.8.11],[1.9.13]"})
 public class ObjectMapper_1_x_IT {
     /**

@@ -126,7 +126,7 @@ public class ApiInterceptor implements AroundInterceptor {
 
             // find the target node
             if (result instanceof Future && result instanceof OperationAccessor) {
-                Operation op = ((OperationAccessor)result)._$PINPOINT$_getOperation();
+                Operation op = ((OperationAccessor)result)._$APM$_getOperation();
 
                 if (op != null) {
                     MemcachedNode handlingNode = op.getHandlingNode();
@@ -143,7 +143,7 @@ public class ApiInterceptor implements AroundInterceptor {
 
             if (target instanceof ServiceCodeAccessor) {
                 // determine the service type
-                String serviceCode = ((ServiceCodeAccessor)target)._$PINPOINT$_getServiceCode();
+                String serviceCode = ((ServiceCodeAccessor)target)._$APM$_getServiceCode();
                 if (serviceCode != null) {
                     recorder.recordDestinationId(serviceCode);
                     recorder.recordServiceType(ArcusConstants.ARCUS);
@@ -162,7 +162,7 @@ public class ApiInterceptor implements AroundInterceptor {
                     this.traceContext.getAsyncId();
                     final AsyncTraceId asyncTraceId = trace.getAsyncTraceId();
                     recorder.recordNextAsyncId(asyncTraceId.getAsyncId());
-                    ((AsyncTraceIdAccessor)result)._$PINPOINT$_setAsyncTraceId(asyncTraceId);
+                    ((AsyncTraceIdAccessor)result)._$APM$_setAsyncTraceId(asyncTraceId);
                     if (isDebug) {
                         logger.debug("Set asyncTraceId metadata {}", asyncTraceId);
                     }

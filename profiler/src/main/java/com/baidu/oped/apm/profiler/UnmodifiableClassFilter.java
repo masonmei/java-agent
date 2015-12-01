@@ -46,7 +46,7 @@ public class UnmodifiableClassFilter implements ClassFileFilter {
             return SKIP;
         }
 
-        // Skip pinpoint packages too.
+        // Skip apm packages too.
         if (className.startsWith("com.baidu.oped.apm/")) {
             return SKIP;
         }

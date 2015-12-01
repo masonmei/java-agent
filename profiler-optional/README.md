@@ -1,9 +1,9 @@
-# pinpoint-profiler-optional
+# apm-profiler-optional
 
-**pinpoint-profiler-optional** is an optional package for pinpoint-profiler, adding features that are implemented using APIs available in JDK 7 or later.
+**apm-profiler-optional** is an optional package for apm-profiler, adding features that are implemented using APIs available in JDK 7 or later.
 
 ## Requirements
-In order to build pinpoint-profiler-optional, the following requirements must be met:
+In order to build apm-profiler-optional, the following requirements must be met:
 
 * JDK 7+ installed
 * `JAVA_7_HOME` environment variable set to JDK 7 home directory

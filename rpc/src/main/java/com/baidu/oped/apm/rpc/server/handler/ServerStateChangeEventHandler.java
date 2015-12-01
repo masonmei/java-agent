@@ -18,15 +18,15 @@ package com.baidu.oped.apm.rpc.server.handler;
 
 import com.baidu.oped.apm.rpc.StateChangeEventListener;
 import com.baidu.oped.apm.rpc.common.SocketStateCode;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
+import com.baidu.oped.apm.rpc.server.ApmServer;
 
 /**
  * @author koo.taejin
  */
-public interface ServerStateChangeEventHandler extends StateChangeEventListener<PinpointServer> {
+public interface ServerStateChangeEventHandler extends StateChangeEventListener<ApmServer> {
 
-    void eventPerformed(PinpointServer pinpointServer, SocketStateCode stateCode) throws Exception;
+    void eventPerformed(ApmServer apmServer, SocketStateCode stateCode) throws Exception;
     
-    void exceptionCaught(PinpointServer pinpointServer, SocketStateCode stateCode, Throwable e);
+    void exceptionCaught(ApmServer apmServer, SocketStateCode stateCode, Throwable e);
 
 }

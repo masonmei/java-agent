@@ -39,8 +39,8 @@ public class ClassPathResolver {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
-    private static final Pattern DEFAULT_AGENT_PATTERN = Pattern.compile("pinpoint-bootstrap(-[0-9]+\\.[0-9]+\\.[0-9]+(\\-SNAPSHOT)?)?\\.jar");
-    private static final Pattern DEFAULT_AGENT_CORE_PATTERN = Pattern.compile("pinpoint-bootstrap-core(-[0-9]+\\.[0-9]+\\.[0-9]+(\\-SNAPSHOT)?)?\\.jar");
+    private static final Pattern DEFAULT_AGENT_PATTERN = Pattern.compile("apm-bootstrap(-[0-9]+\\.[0-9]+\\.[0-9]+(\\-SNAPSHOT)?)?\\.jar");
+    private static final Pattern DEFAULT_AGENT_CORE_PATTERN = Pattern.compile("apm-bootstrap-core(-[0-9]+\\.[0-9]+\\.[0-9]+(\\-SNAPSHOT)?)?\\.jar");
 
     private String classPath;
 
@@ -240,7 +240,7 @@ public class ClassPathResolver {
             try {
                 urls[i] = jars[i].toURI().toURL();
             } catch (MalformedURLException e) {
-                // TODO have to change to PinpointException AFTER moving the exception to pinpoint-common
+                // TODO have to change to ApmException AFTER moving the exception to apm-common
                 throw new RuntimeException("Fail to load plugin jars", e);
             }
         }
@@ -290,7 +290,7 @@ public class ClassPathResolver {
     }
 
     public String getAgentConfigPath() {
-        return agentDirPath + File.separator + "pinpoint.config";
+        return agentDirPath + File.separator + "apm.config";
     }
 
 }

@@ -36,7 +36,7 @@ import com.baidu.oped.apm.test.TestClassLoaderFactory;
  */
 public class TestContext implements Closeable {
 
-    private static final String BASE_TEST_CLASS_NAME = "com.baidu.oped.apm.test.junit4.BasePinpointTest";
+    private static final String BASE_TEST_CLASS_NAME = "com.baidu.oped.apm.test.junit4.BaseApmTest";
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -61,7 +61,7 @@ public class TestContext implements Closeable {
 
     private MockAgent createMockAgent() {
         logger.trace("agent create");
-        return MockAgent.of("pinpoint.config");
+        return MockAgent.of("apm.config");
     }
 
     public ClassLoader getClassLoader() {

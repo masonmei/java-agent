@@ -26,12 +26,12 @@ import com.baidu.oped.apm.common.util.SystemPropertyKey;
 import com.baidu.oped.apm.profiler.context.DefaultServerMetaData;
 import com.baidu.oped.apm.profiler.context.DefaultServerMetaDataHolder;
 import com.baidu.oped.apm.profiler.sender.TcpDataSender;
-import com.baidu.oped.apm.rpc.PinpointSocket;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
+import com.baidu.oped.apm.rpc.ApmSocket;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
 import com.baidu.oped.apm.rpc.packet.*;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
-import com.baidu.oped.apm.rpc.server.PinpointServerAcceptor;
+import com.baidu.oped.apm.rpc.server.ApmServer;
+import com.baidu.oped.apm.rpc.server.ApmServerAcceptor;
 import com.baidu.oped.apm.rpc.server.ServerMessageListener;
 import com.baidu.oped.apm.rpc.util.ClientFactoryUtils;
 import com.baidu.oped.apm.thrift.dto.TResult;
@@ -64,19 +64,19 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener serverListener = new ResponseServerMessageListener(requestCount, successCount);
 
-        PinpointServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
+        ApmServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
 
-        PinpointClientFactory clientFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, clientFactory);
+        ApmClientFactory clientFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, clientFactory);
 
-        TcpDataSender sender = new TcpDataSender(pinpointClient);
+        TcpDataSender sender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(sender, agentInfoSendRetryIntervalMs, getAgentInfo());
 
         try {
             agentInfoSender.start();
             Thread.sleep(10000L);
         } finally {
-            closeAll(serverAcceptor, agentInfoSender, pinpointClient, clientFactory);
+            closeAll(serverAcceptor, agentInfoSender, apmClient, clientFactory);
         }
         assertEquals(1, requestCount.get());
         assertEquals(1, successCount.get());
@@ -91,19 +91,19 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener serverListener = new ResponseServerMessageListener(requestCount, successCount, expectedTriesUntilSuccess);
 
-        PinpointServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
+        ApmServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
 
-        PinpointClientFactory socketFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, socketFactory);
+        ApmClientFactory socketFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, socketFactory);
 
-        TcpDataSender dataSender = new TcpDataSender(pinpointClient);
+        TcpDataSender dataSender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(dataSender, agentInfoSendRetryIntervalMs, getAgentInfo());
 
         try {
             agentInfoSender.start();
             Thread.sleep(agentInfoSendRetryIntervalMs * expectedTriesUntilSuccess);
         } finally {
-            closeAll(serverAcceptor, agentInfoSender, pinpointClient, socketFactory);
+            closeAll(serverAcceptor, agentInfoSender, apmClient, socketFactory);
         }
         assertEquals(expectedTriesUntilSuccess, requestCount.get());
         assertEquals(1, successCount.get());
@@ -117,10 +117,10 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener serverListener = new ResponseServerMessageListener(requestCount, successCount);
 
-        PinpointClientFactory clientFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, clientFactory);
+        ApmClientFactory clientFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, clientFactory);
 
-        TcpDataSender dataSender = new TcpDataSender(pinpointClient);
+        TcpDataSender dataSender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(dataSender, agentInfoSendRetryIntervalMs, getAgentInfo());
 
         try {
@@ -131,7 +131,7 @@ public class AgentInfoSenderTest {
             Thread.sleep(1000L);
             createAndDeleteServer(serverListener, 5000L);
         } finally {
-            closeAll(null, agentInfoSender, pinpointClient, clientFactory);
+            closeAll(null, agentInfoSender, apmClient, clientFactory);
         }
         assertEquals(1, requestCount.get());
         assertEquals(1, successCount.get());
@@ -146,19 +146,19 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener serverListener = new ResponseServerMessageListener(requestCount, successCount, Integer.MAX_VALUE);
 
-        PinpointServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
+        ApmServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
 
-        PinpointClientFactory socketFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, socketFactory);
+        ApmClientFactory socketFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, socketFactory);
 
-        TcpDataSender dataSender = new TcpDataSender(pinpointClient);
+        TcpDataSender dataSender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(dataSender, agentInfoSendRetryIntervalMs, getAgentInfo());
 
         try {
             agentInfoSender.start();
             Thread.sleep(agentInfoSendRetryIntervalMs * minimumAgentInfoSendRetryCount);
         } finally {
-            closeAll(serverAcceptor, agentInfoSender, pinpointClient, socketFactory);
+            closeAll(serverAcceptor, agentInfoSender, apmClient, socketFactory);
         }
         assertTrue(requestCount.get() >= minimumAgentInfoSendRetryCount);
         assertEquals(0, successCount.get());
@@ -173,12 +173,12 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener serverListener = new ResponseServerMessageListener(requestCount, successCount);
 
-        PinpointServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
+        ApmServerAcceptor serverAcceptor = createServerAcceptor(serverListener);
 
-        PinpointClientFactory clientFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, clientFactory);
+        ApmClientFactory clientFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, clientFactory);
 
-        TcpDataSender sender = new TcpDataSender(pinpointClient);
+        TcpDataSender sender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(sender, agentInfoSendRetryIntervalMs, getAgentInfo());
         final List<ServerMetaData> serverMetaDataObjects = new ArrayList<ServerMetaData>();
         serverMetaDataObjects.add(new DefaultServerMetaData("server1", Collections.<String>emptyList(), Collections.<Integer, String>emptyMap(), Collections.<ServiceInfo>emptyList()));
@@ -193,7 +193,7 @@ public class AgentInfoSenderTest {
             }
             Thread.sleep(10000L);
         } finally {
-            closeAll(serverAcceptor, agentInfoSender, pinpointClient, clientFactory);
+            closeAll(serverAcceptor, agentInfoSender, apmClient, clientFactory);
         }
         // Then
         assertEquals(5, requestCount.get());
@@ -215,12 +215,12 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener delayedServerListener = new ResponseServerMessageListener(requestCount, successCount);
 
-        PinpointServerAcceptor serverAcceptor = createServerAcceptor(delayedServerListener);
+        ApmServerAcceptor serverAcceptor = createServerAcceptor(delayedServerListener);
 
-        PinpointClientFactory clientFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, clientFactory);
+        ApmClientFactory clientFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, clientFactory);
 
-        TcpDataSender sender = new TcpDataSender(pinpointClient);
+        TcpDataSender sender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(sender, agentInfoSendRetryIntervalMs, getAgentInfo());
         final ServerMetaDataHolder metaDataContext = new DefaultServerMetaDataHolder(Collections.<String>emptyList());
         metaDataContext.addListener(agentInfoSender);
@@ -249,7 +249,7 @@ public class AgentInfoSenderTest {
         try {
             Thread.sleep(10000L);
         } finally {
-            closeAll(serverAcceptor, agentInfoSender, pinpointClient, clientFactory);
+            closeAll(serverAcceptor, agentInfoSender, apmClient, clientFactory);
         }
         // Then
         assertTrue("Failed with exceptions : " + exceptions, exceptions.isEmpty());
@@ -267,10 +267,10 @@ public class AgentInfoSenderTest {
 
         ResponseServerMessageListener serverListener = new ResponseServerMessageListener(requestCount, successCount, expectedTriesUntilSuccess);
 
-        PinpointClientFactory clientFactory = createPinpointClientFactory();
-        PinpointClient pinpointClient = ClientFactoryUtils.createPinpointClient(HOST, PORT, clientFactory);
+        ApmClientFactory clientFactory = createApmClientFactory();
+        ApmClient apmClient = ClientFactoryUtils.createApmClient(HOST, PORT, clientFactory);
 
-        TcpDataSender dataSender = new TcpDataSender(pinpointClient);
+        TcpDataSender dataSender = new TcpDataSender(apmClient);
         AgentInfoSender agentInfoSender = new AgentInfoSender(dataSender, agentInfoSendRetryIntervalMs, getAgentInfo());
 
         long startTime = System.currentTimeMillis();
@@ -286,14 +286,14 @@ public class AgentInfoSenderTest {
             }
 
         } finally {
-            closeAll(null, agentInfoSender, pinpointClient, clientFactory);
+            closeAll(null, agentInfoSender, apmClient, clientFactory);
         }
         assertEquals(1, successCount.get());
         assertEquals(expectedTriesUntilSuccess, requestCount.get());
     }
 
-    private PinpointServerAcceptor createServerAcceptor(ServerMessageListener listener) {
-        PinpointServerAcceptor serverAcceptor = new PinpointServerAcceptor();
+    private ApmServerAcceptor createServerAcceptor(ServerMessageListener listener) {
+        ApmServerAcceptor serverAcceptor = new ApmServerAcceptor();
         // server.setMessageListener(new
         // NoResponseServerMessageListener(requestCount));
         serverAcceptor.setMessageListener(listener);
@@ -303,7 +303,7 @@ public class AgentInfoSenderTest {
     }
 
     private void createAndDeleteServer(ServerMessageListener listener, long waitTimeMillis) throws InterruptedException {
-        PinpointServerAcceptor server = null;
+        ApmServerAcceptor server = null;
         try {
             server = createServerAcceptor(listener);
             Thread.sleep(waitTimeMillis);
@@ -314,7 +314,7 @@ public class AgentInfoSenderTest {
         }
     }
 
-    private void closeAll(PinpointServerAcceptor serverAcceptor, AgentInfoSender agentInfoSender, PinpointClient pinpointClient, PinpointClientFactory factory) {
+    private void closeAll(ApmServerAcceptor serverAcceptor, AgentInfoSender agentInfoSender, ApmClient apmClient, ApmClientFactory factory) {
         if (serverAcceptor != null) {
             serverAcceptor.close();
         }
@@ -323,8 +323,8 @@ public class AgentInfoSenderTest {
             agentInfoSender.stop();
         }
 
-        if (pinpointClient != null) {
-            pinpointClient.close();
+        if (apmClient != null) {
+            apmClient.close();
         }
 
         if (factory != null) {
@@ -355,13 +355,13 @@ public class AgentInfoSenderTest {
         }
 
         @Override
-        public void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket) {
-            logger.info("handleSend packet:{}, remote:{}", sendPacket, pinpointSocket.getRemoteAddress());
+        public void handleSend(SendPacket sendPacket, ApmSocket apmSocket) {
+            logger.info("handleSend packet:{}, remote:{}", sendPacket, apmSocket.getRemoteAddress());
         }
 
         @Override
-        public void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket) {
-            logger.info("handleRequest packet:{}, remote:{}", requestPacket, pinpointSocket.getRemoteAddress());
+        public void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket) {
+            logger.info("handleRequest packet:{}, remote:{}", requestPacket, apmSocket.getRemoteAddress());
 
             int requestCount = this.requestCount.incrementAndGet();
             if (requestCount < successCondition) {
@@ -376,7 +376,7 @@ public class AgentInfoSenderTest {
 
                 this.successCount.incrementAndGet();
 
-                pinpointSocket.response(requestPacket, resultBytes);
+                apmSocket.response(requestPacket, resultBytes);
             } catch (TException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -389,13 +389,13 @@ public class AgentInfoSenderTest {
         }
 
         @Override
-        public void handlePing(PingPacket pingPacket, PinpointServer pinpointServer) {
-            logger.info("ping received {} {} ", pingPacket, pinpointServer);
+        public void handlePing(PingPacket pingPacket, ApmServer apmServer) {
+            logger.info("ping received {} {} ", pingPacket, apmServer);
         }
     }
     
-    private PinpointClientFactory createPinpointClientFactory() {
-        PinpointClientFactory clientFactory = new PinpointClientFactory();
+    private ApmClientFactory createApmClientFactory() {
+        ApmClientFactory clientFactory = new ApmClientFactory();
         clientFactory.setTimeoutMillis(1000 * 5);
         clientFactory.setProperties(Collections.<String, Object>emptyMap());
 

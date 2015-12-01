@@ -34,7 +34,7 @@ import com.baidu.oped.apm.plugin.thrift.ThriftHeader;
 import com.baidu.oped.apm.plugin.thrift.field.accessor.ServerMarkerFlagFieldAccessor;
 
 /**
- * This interceptor checks each {@link org.apache.thrift.protocol.TField TField} received if it is a Pinpoint trace data. If so, this interceptor leaves a
+ * This interceptor checks each {@link org.apache.thrift.protocol.TField TField} received if it is a Apm trace data. If so, this interceptor leaves a
  * marker for the next interceptor to read actual value of the trace data.
  * <ul>
  * <li>Synchronous
@@ -83,7 +83,7 @@ public class TProtocolReadFieldBeginInterceptor implements AroundInterceptor {
         if (!validate(target)) {
             return;
         }
-        final boolean shouldTrace = ((ServerMarkerFlagFieldAccessor)target)._$PINPOINT$_getServerMarkerFlag();
+        final boolean shouldTrace = ((ServerMarkerFlagFieldAccessor)target)._$APM$_getServerMarkerFlag();
         if (shouldTrace) {
             InterceptorGroupInvocation currentTransaction = this.group.getCurrentInvocation();
             Object attachment = currentTransaction.getAttachment();
@@ -108,7 +108,7 @@ public class TProtocolReadFieldBeginInterceptor implements AroundInterceptor {
 
     private void handleClientRequest(TField field, ThriftClientCallContext clientCallContext) {
         ThriftHeader traceHeaderKey = ThriftHeader.findThriftHeaderKeyById(field.id);
-        // check if field is pinpoint header field
+        // check if field is apm header field
         if (traceHeaderKey == null || field.type != traceHeaderKey.getType()) {
             clientCallContext.setTraceHeaderToBeRead(NONE);
         } else {

@@ -22,7 +22,7 @@ import com.baidu.oped.apm.bootstrap.context.TraceContext;
 import com.baidu.oped.apm.bootstrap.context.TraceId;
 import com.baidu.oped.apm.bootstrap.context.TraceType;
 import com.baidu.oped.apm.bootstrap.sampler.Sampler;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.context.storage.AsyncStorage;
 import com.baidu.oped.apm.profiler.context.storage.Storage;
 import com.baidu.oped.apm.profiler.context.storage.StorageFactory;
@@ -140,7 +140,7 @@ public class ThreadLocalTraceFactory implements TraceFactory {
     private void checkBeforeTraceObject() {
         final Trace old = this.threadLocalBinder.get();
         if (old != null) {
-            final PinpointException exception = new PinpointException("already Trace Object exist.");
+            final ApmException exception = new ApmException("already Trace Object exist.");
             if (logger.isWarnEnabled()) {
                 logger.warn("beforeTrace:{}", old, exception);
             }

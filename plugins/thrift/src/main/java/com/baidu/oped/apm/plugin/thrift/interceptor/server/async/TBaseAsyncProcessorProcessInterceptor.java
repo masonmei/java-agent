@@ -157,8 +157,8 @@ public class TBaseAsyncProcessorProcessInterceptor implements AroundInterceptor 
 
     private void attachMarkersToInputProtocol(TProtocol iprot, boolean flag) {
         if (validateInputProtocol(iprot)) {
-            ((ServerMarkerFlagFieldAccessor)iprot)._$PINPOINT$_setServerMarkerFlag(flag);
-            ((AsyncMarkerFlagFieldAccessor)iprot)._$PINPOINT$_setAsyncMarkerFlag(flag);
+            ((ServerMarkerFlagFieldAccessor)iprot)._$APM$_setServerMarkerFlag(flag);
+            ((AsyncMarkerFlagFieldAccessor)iprot)._$APM$_setAsyncMarkerFlag(flag);
         }
     }
 

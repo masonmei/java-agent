@@ -24,12 +24,12 @@ import org.junit.runner.RunWith;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author netspider
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({ "org.apache.httpcomponents:httpasyncclient:[4.0,)" })
 public class ClosableAsyncHttpClientIT {
     

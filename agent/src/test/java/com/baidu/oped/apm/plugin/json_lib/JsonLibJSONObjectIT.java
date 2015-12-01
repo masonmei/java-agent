@@ -28,12 +28,12 @@ import org.junit.runner.RunWith;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  *@author Sangyoon Lee
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"net.sf.json-lib:json-lib:jar:jdk15:(,)"})
 public class JsonLibJSONObjectIT {
 
@@ -64,7 +64,7 @@ public class JsonLibJSONObjectIT {
     public void mapToJsonTest() throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         
-        map.put("name", "pinpoint");
+        map.put("name", "apm");
         map.put("lib", "json-lib");
 
         JSONObject jsonObject = JSONObject.fromObject(map);

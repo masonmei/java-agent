@@ -8,25 +8,25 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>pinpoint-tomcat-plugin</artifactId>
-    <name>pinpoint-tomcat-plugin</name>
+    <artifactId>apm-tomcat-plugin</artifactId>
+    <name>apm-tomcat-plugin</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-bootstrap-core</artifactId>
+            <artifactId>apm-bootstrap-core</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-profiler</artifactId>
+            <artifactId>apm-profiler</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-test</artifactId>
+            <artifactId>apm-test</artifactId>
             <scope>test</scope>
         </dependency>
 

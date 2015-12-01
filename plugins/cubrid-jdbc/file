@@ -2,7 +2,7 @@ file
 
 
 
-base=/Users/mason/Workspaces/github/pinpoint/plugins
+base=/Users/mason/Workspaces/github/apm/plugins
 path=src/main/resources/META-INF/services
 plugin=com.baidu.oped.apm.bootstrap.plugin.ProfilerPlugin
 provider=com.baidu.oped.apm.common.trace.TraceMetadataProvider

@@ -84,7 +84,7 @@ public class RequestBuilderBuildMethodInterceptor implements AroundInterceptor {
             builder.header(Header.HTTP_PARENT_APPLICATION_TYPE.toString(), Short.toString(traceContext.getServerTypeCode()));
 
             if (target instanceof HttpUrlGetter) {
-                final HttpUrl url = ((HttpUrlGetter) target)._$PINPOINT$_getHttpUrl();
+                final HttpUrl url = ((HttpUrlGetter) target)._$APM$_getHttpUrl();
                 if (url != null) {
                     final String endpoint = getDestinationId(url);
                     logger.debug("Set HTTP_HOST {}", endpoint);

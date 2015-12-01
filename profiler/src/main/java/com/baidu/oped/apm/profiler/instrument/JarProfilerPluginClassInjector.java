@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentClassPool;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 /**
  * @author Jongho Moon
@@ -52,14 +52,14 @@ public class JarProfilerPluginClassInjector implements ClassInjector {
             ADD_URL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
             ADD_URL.setAccessible(true);
         } catch (Exception e) {
-            throw new PinpointException("Cannot access URLClassLoader.addURL(URL)", e);
+            throw new ApmException("Cannot access URLClassLoader.addURL(URL)", e);
         }
         
         try {
             DEFINE_CLASS = ClassLoader.class.getDeclaredMethod("defineClass", String.class, byte[].class, int.class, int.class);
             DEFINE_CLASS.setAccessible(true);
         } catch (Exception e) {
-            throw new PinpointException("Cannot access ClassLoader.defineClass(String, byte[], int, int)", e);
+            throw new ApmException("Cannot access ClassLoader.defineClass(String, byte[], int, int)", e);
         }
     }
     
@@ -102,7 +102,7 @@ public class JarProfilerPluginClassInjector implements ClassInjector {
             }
         } catch (Exception e) {
             logger.warn("Failed to load plugin class {} with classLoader {}", className, classLoader, e);
-            throw new PinpointException("Failed to load plugin class " + className + " with classLoader " + classLoader, e);
+            throw new ApmException("Failed to load plugin class " + className + " with classLoader " + classLoader, e);
         }
     }
 

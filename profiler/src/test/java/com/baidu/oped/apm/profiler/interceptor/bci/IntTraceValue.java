@@ -21,6 +21,6 @@ package com.baidu.oped.apm.profiler.interceptor.bci;
  * @author emeroad
  */
 public interface IntTraceValue {
-    void _$PINPOINT$_setTraceInt(int value);
-    int _$PINPOINT$_getTraceInt();
+    void _$APM$_setTraceInt(int value);
+    int _$APM$_getTraceInt();
 }

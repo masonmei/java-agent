@@ -67,7 +67,7 @@ public class DispatcherEnqueueMethodInterceptor implements AroundInterceptor {
             recorder.recordNextAsyncId(asyncTraceId.getAsyncId());
 
             // set async id.
-            ((AsyncTraceIdAccessor)args[0])._$PINPOINT$_setAsyncTraceId(asyncTraceId);
+            ((AsyncTraceIdAccessor)args[0])._$APM$_setAsyncTraceId(asyncTraceId);
             if (isDebug) {
                 logger.debug("Set asyncTraceId metadata {}", asyncTraceId);
             }

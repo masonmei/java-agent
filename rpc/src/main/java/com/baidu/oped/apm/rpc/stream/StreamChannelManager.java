@@ -16,7 +16,7 @@
 
 package com.baidu.oped.apm.rpc.stream;
 
-import com.baidu.oped.apm.rpc.PinpointSocketException;
+import com.baidu.oped.apm.rpc.ApmSocketException;
 import com.baidu.oped.apm.rpc.packet.PacketType;
 import com.baidu.oped.apm.rpc.packet.stream.*;
 import com.baidu.oped.apm.rpc.util.AssertUtils;
@@ -91,7 +91,7 @@ public class StreamChannelManager {
 
         StreamChannelContext old = channelMap.put(streamChannelId, newStreamChannelContext);
         if (old != null) {
-            throw new PinpointSocketException("already streamChannelId exist:" + streamChannelId + " streamChannel:" + old);
+            throw new ApmSocketException("already streamChannelId exist:" + streamChannelId + " streamChannel:" + old);
         }
 
         // the order of below code is very important.

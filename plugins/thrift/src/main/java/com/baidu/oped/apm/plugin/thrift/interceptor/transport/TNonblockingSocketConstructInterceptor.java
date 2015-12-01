@@ -47,10 +47,10 @@ public class TNonblockingSocketConstructInterceptor implements AroundInterceptor
         }
         if (validate(target, args)) {
             Socket socket = ((TNonblockingSocket)target).getSocketChannel().socket();
-            ((SocketFieldAccessor)target)._$PINPOINT$_setSocket(socket);
+            ((SocketFieldAccessor)target)._$APM$_setSocket(socket);
             if (args[2] instanceof SocketAddress) {
                 SocketAddress socketAddress = (SocketAddress)args[2];
-                ((SocketAddressFieldAccessor)target)._$PINPOINT$_setSocketAddress(socketAddress);
+                ((SocketAddressFieldAccessor)target)._$APM$_setSocketAddress(socketAddress);
             }
         }
     }

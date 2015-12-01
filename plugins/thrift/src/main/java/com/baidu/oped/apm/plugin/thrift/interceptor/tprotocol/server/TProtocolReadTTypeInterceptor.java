@@ -81,7 +81,7 @@ public class TProtocolReadTTypeInterceptor implements AroundInterceptor {
         if (!validate(target)) {
             return;
         }
-        final boolean shouldTrace = ((ServerMarkerFlagFieldAccessor)target)._$PINPOINT$_getServerMarkerFlag();
+        final boolean shouldTrace = ((ServerMarkerFlagFieldAccessor)target)._$APM$_getServerMarkerFlag();
         if (shouldTrace) {
             InterceptorGroupInvocation currentTransaction = this.group.getCurrentInvocation();
             Object attachment = currentTransaction.getAttachment();

@@ -19,6 +19,6 @@ package com.baidu.oped.apm.plugin.arcus;
  *
  */
 public interface ServiceCodeAccessor {
-    void _$PINPOINT$_setServiceCode(String serviceCode);
-    String _$PINPOINT$_getServiceCode();
+    void _$APM$_setServiceCode(String serviceCode);
+    String _$APM$_getServiceCode();
 }

@@ -19,6 +19,6 @@ package com.baidu.oped.apm.plugin.arcus;
  *
  */
 public interface CacheNameAccessor {
-    void _$PINPOINT$_setCacheName(String serviceCode);
-    String _$PINPOINT$_getCacheName();
+    void _$APM$_setCacheName(String serviceCode);
+    String _$APM$_getCacheName();
 }

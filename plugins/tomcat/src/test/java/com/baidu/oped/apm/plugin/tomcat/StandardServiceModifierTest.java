@@ -28,12 +28,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.baidu.oped.apm.bootstrap.context.ServerMetaData;
-import com.baidu.oped.apm.test.junit4.BasePinpointTest;
+import com.baidu.oped.apm.test.junit4.BaseApmTest;
 
 /**
  * @author hyungil.jeong
  */
-public class StandardServiceModifierTest extends BasePinpointTest {
+public class StandardServiceModifierTest extends BaseApmTest {
 
     private StandardService service;
     

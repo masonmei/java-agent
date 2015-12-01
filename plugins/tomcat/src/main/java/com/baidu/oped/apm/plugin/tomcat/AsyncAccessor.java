@@ -1,6 +1,6 @@
 package com.baidu.oped.apm.plugin.tomcat;
 
 public interface AsyncAccessor {
-    void _$PINPOINT$_setAsync(boolean async);
-    boolean _$PINPOINT$_isAsync();
+    void _$APM$_setAsync(boolean async);
+    boolean _$APM$_isAsync();
 }

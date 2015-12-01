@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.oped.apm.common.util.PinpointThreadFactory;
+import com.baidu.oped.apm.common.util.ApmThreadFactory;
 
 /**
  * @author emeroad
@@ -50,7 +50,7 @@ public class AsyncQueueingExecutor<T> implements Runnable {
 
 
     public AsyncQueueingExecutor() {
-        this(1024 * 5, "Pinpoint-AsyncQueueingExecutor");
+        this(1024 * 5, "Apm-AsyncQueueingExecutor");
     }
 
     public AsyncQueueingExecutor(int queueSize, String executorName) {
@@ -67,7 +67,7 @@ public class AsyncQueueingExecutor<T> implements Runnable {
     }
 
     private Thread createExecuteThread(String executorName) {
-        final ThreadFactory threadFactory = new PinpointThreadFactory(executorName, true);
+        final ThreadFactory threadFactory = new ApmThreadFactory(executorName, true);
         Thread thread = threadFactory.newThread(this);
         thread.start();
         return thread;

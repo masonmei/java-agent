@@ -22,6 +22,6 @@ import java.net.Socket;
  * @author HyunGil Jeong
  */
 public interface SocketFieldAccessor {
-    void _$PINPOINT$_setSocket(Socket socket);
-    Socket _$PINPOINT$_getSocket();
+    void _$APM$_setSocket(Socket socket);
+    Socket _$APM$_getSocket();
 }

@@ -684,7 +684,7 @@ public class PluginTestAgent extends DefaultAgent implements PluginTestVerifier 
     
     private InstrumentMethod getMethodInfo(InstrumentClass ic, Method method) {
         Class<?>[] parameterTypes = method.getParameterTypes();
-        String[] parameterTypeNames = JavaAssistUtils.toPinpointParameterType(parameterTypes);
+        String[] parameterTypeNames = JavaAssistUtils.toApmParameterType(parameterTypes);
         
         return ic.getDeclaredMethod(method.getName(), parameterTypeNames);
     }

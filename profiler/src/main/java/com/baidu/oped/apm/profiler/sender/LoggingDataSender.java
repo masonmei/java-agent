@@ -18,7 +18,7 @@ package com.baidu.oped.apm.profiler.sender;
 
 import com.baidu.oped.apm.rpc.FutureListener;
 import com.baidu.oped.apm.rpc.ResponseMessage;
-import com.baidu.oped.apm.rpc.client.PinpointClientReconnectEventListener;
+import com.baidu.oped.apm.rpc.client.ApmClientReconnectEventListener;
 
 import org.apache.thrift.TBase;
 import org.slf4j.Logger;
@@ -67,13 +67,13 @@ public class LoggingDataSender implements EnhancedDataSender {
     }
 
     @Override
-    public boolean addReconnectEventListener(PinpointClientReconnectEventListener eventListener) {
+    public boolean addReconnectEventListener(ApmClientReconnectEventListener eventListener) {
         logger.info("addReconnectEventListener eventListener:{}", eventListener);
         return false;
     }
 
     @Override
-    public boolean removeReconnectEventListener(PinpointClientReconnectEventListener eventListener) {
+    public boolean removeReconnectEventListener(ApmClientReconnectEventListener eventListener) {
         logger.info("removeReconnectEventListener eventListener:{}", eventListener);
         return false;
     }

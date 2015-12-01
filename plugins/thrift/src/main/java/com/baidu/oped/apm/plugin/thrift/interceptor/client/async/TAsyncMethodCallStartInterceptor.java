@@ -45,7 +45,7 @@ public class TAsyncMethodCallStartInterceptor extends TAsyncMethodCallInternalMe
         }
 
         // Retrieve asyncTraceId
-        final AsyncTraceId asyncTraceId = ((AsyncTraceIdFieldAccessor)target)._$PINPOINT$_getAsyncTraceId();
+        final AsyncTraceId asyncTraceId = ((AsyncTraceIdFieldAccessor)target)._$APM$_getAsyncTraceId();
         Trace trace = traceContext.currentTraceObject();
         // Check if the method was invoked by the same thread or not, probabaly safe not to check but just in case.
         if (trace == null) {
@@ -58,7 +58,7 @@ public class TAsyncMethodCallStartInterceptor extends TAsyncMethodCallInternalMe
             SpanEventRecorder recorder = trace.currentSpanEventRecorder();
             recorder.recordServiceType(ServiceType.ASYNC);
             recorder.recordApi(this.thriftAsyncClientMethodDescriptor);
-            ((AsyncMarkerFlagFieldAccessor)target)._$PINPOINT$_setAsyncMarkerFlag(Boolean.TRUE);
+            ((AsyncMarkerFlagFieldAccessor)target)._$APM$_setAsyncMarkerFlag(Boolean.TRUE);
         }
         super.before(target, args);
     }

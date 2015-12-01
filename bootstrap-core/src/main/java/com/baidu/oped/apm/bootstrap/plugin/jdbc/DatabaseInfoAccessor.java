@@ -21,6 +21,6 @@ import com.baidu.oped.apm.bootstrap.context.DatabaseInfo;
  *
  */
 public interface DatabaseInfoAccessor {
-    void _$PINPOINT$_setDatabaseInfo(DatabaseInfo info);
-    DatabaseInfo _$PINPOINT$_getDatabaseInfo();
+    void _$APM$_setDatabaseInfo(DatabaseInfo info);
+    DatabaseInfo _$APM$_getDatabaseInfo();
 }

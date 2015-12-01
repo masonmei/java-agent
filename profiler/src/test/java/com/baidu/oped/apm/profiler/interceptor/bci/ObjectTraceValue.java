@@ -22,7 +22,7 @@ package com.baidu.oped.apm.profiler.interceptor.bci;
  */
 public interface ObjectTraceValue {
 
-    void _$PINPOINT$_setTraceObject(Object value);
+    void _$APM$_setTraceObject(Object value);
 
-    Object _$PINPOINT$_getTraceObject();
+    Object _$APM$_getTraceObject();
 }

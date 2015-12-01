@@ -44,6 +44,6 @@ public class PropertyUtilsTest  {
 
     private void assertProperty(Properties properties) {
         String test = properties.getProperty("test");
-        Assert.assertEquals("pinpoint", test);
+        Assert.assertEquals("apm", test);
     }
 }

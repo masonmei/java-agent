@@ -20,6 +20,6 @@ package com.baidu.oped.apm.plugin.thrift.field.accessor;
  * @author HyunGil Jeong
  */
 public interface AsyncCallEndFlagFieldAccessor {
-    void _$PINPOINT$_setAsyncCallEndFlag(boolean flag);
-    boolean _$PINPOINT$_getAsyncCallEndFlag();
+    void _$APM$_setAsyncCallEndFlag(boolean flag);
+    boolean _$APM$_getAsyncCallEndFlag();
 }

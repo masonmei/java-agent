@@ -99,6 +99,6 @@ public class InvokeCodeGenerator {
     }
     
     public static String getInterceptorVar(int interceptorId) {
-        return "_$PINPOINT$_interceptor" + interceptorId;
+        return "_$APM$_interceptor" + interceptorId;
     }
 }

@@ -16,7 +16,7 @@
 
 package com.baidu.oped.apm.bootstrap.util;
 
-import com.baidu.oped.apm.common.PinpointConstants;
+import com.baidu.oped.apm.common.ApmConstants;
 import com.baidu.oped.apm.common.util.BytesUtils;
 
 import java.util.regex.Matcher;
@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  */
 public final class IdValidateUtils {
 
-    private static final int DEFAULT_MAX_LENGTH = PinpointConstants.AGENT_NAME_MAX_LEN;
+    private static final int DEFAULT_MAX_LENGTH = ApmConstants.AGENT_NAME_MAX_LEN;
 
 //    private static final Pattern ID_PATTERN = Pattern.compile("[a-zA-Z0-9\\._\\-]{1,24}");
     private static final Pattern ID_PATTERN = Pattern.compile("[a-zA-Z0-9\\._\\-]+");

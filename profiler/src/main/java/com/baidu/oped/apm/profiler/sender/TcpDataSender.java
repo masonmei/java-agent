@@ -33,8 +33,8 @@ import org.slf4j.LoggerFactory;
 import com.baidu.oped.apm.rpc.Future;
 import com.baidu.oped.apm.rpc.FutureListener;
 import com.baidu.oped.apm.rpc.ResponseMessage;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientReconnectEventListener;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientReconnectEventListener;
 import com.baidu.oped.apm.rpc.util.TimerFactory;
 import com.baidu.oped.apm.thrift.dto.TResult;
 import com.baidu.oped.apm.thrift.io.HeaderTBaseDeserializer;
@@ -55,7 +55,7 @@ public class TcpDataSender extends AbstractDataSender implements EnhancedDataSen
         ChannelBuffers.buffer(2);
     }
 
-    private final PinpointClient client;
+    private final ApmClient client;
     private final Timer timer;
     
     private final AtomicBoolean fireState = new AtomicBoolean(false);
@@ -69,15 +69,15 @@ public class TcpDataSender extends AbstractDataSender implements EnhancedDataSen
 
     private AsyncQueueingExecutor<Object> executor;
 
-    public TcpDataSender(PinpointClient client) {
+    public TcpDataSender(ApmClient client) {
         this.client = client;
         this.timer = createTimer();
         writeFailFutureListener = new WriteFailFutureListener(logger, "io write fail.", "host", -1);
-        this.executor = createAsyncQueueingExecutor(1024 * 5, "Pinpoint-TcpDataExecutor");
+        this.executor = createAsyncQueueingExecutor(1024 * 5, "Apm-TcpDataExecutor");
     }
     
     private Timer createTimer() {
-        HashedWheelTimer timer = TimerFactory.createHashedWheelTimer("Pinpoint-DataSender-Timer", 100, TimeUnit.MILLISECONDS, 512);
+        HashedWheelTimer timer = TimerFactory.createHashedWheelTimer("Apm-DataSender-Timer", 100, TimeUnit.MILLISECONDS, 512);
         timer.start();
         return timer;
     }
@@ -105,13 +105,13 @@ public class TcpDataSender extends AbstractDataSender implements EnhancedDataSen
     }
 
     @Override
-    public boolean addReconnectEventListener(PinpointClientReconnectEventListener eventListener) {
-        return this.client.addPinpointClientReconnectEventListener(eventListener);
+    public boolean addReconnectEventListener(ApmClientReconnectEventListener eventListener) {
+        return this.client.addApmClientReconnectEventListener(eventListener);
     }
 
     @Override
-    public boolean removeReconnectEventListener(PinpointClientReconnectEventListener eventListener) {
-        return this.client.removePinpointClientReconnectEventListener(eventListener);
+    public boolean removeReconnectEventListener(ApmClientReconnectEventListener eventListener) {
+        return this.client.removeApmClientReconnectEventListener(eventListener);
     }
 
     @Override

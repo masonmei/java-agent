@@ -109,8 +109,8 @@ public class TAsyncClientManagerCallInterceptor implements AroundInterceptor {
                 parentTraceInfo.setParentApplicationType(this.traceContext.getServerTypeCode());
                 parentTraceInfo.setAcceptorHost(remoteAddress);
 
-                ((AsyncCallRemoteAddressFieldAccessor)asyncMethodCallObj)._$PINPOINT$_setAsyncCallRemoteAddress(remoteAddress);
-                ((AsyncNextSpanIdFieldAccessor)asyncMethodCallObj)._$PINPOINT$_setAsyncNextSpanId(nextSpanId);
+                ((AsyncCallRemoteAddressFieldAccessor)asyncMethodCallObj)._$APM$_setAsyncCallRemoteAddress(remoteAddress);
+                ((AsyncNextSpanIdFieldAccessor)asyncMethodCallObj)._$APM$_setAsyncNextSpanId(nextSpanId);
             }
             InterceptorGroupInvocation currentTransaction = this.group.getCurrentInvocation();
             currentTransaction.setAttachment(parentTraceInfo);
@@ -182,7 +182,7 @@ public class TAsyncClientManagerCallInterceptor implements AroundInterceptor {
         final AsyncTraceId asyncTraceId = trace.getAsyncTraceId();
         SpanEventRecorder recorder = trace.currentSpanEventRecorder();
         recorder.recordNextAsyncId(asyncTraceId.getAsyncId());
-        ((AsyncTraceIdFieldAccessor)asyncMethodCallObj)._$PINPOINT$_setAsyncTraceId(asyncTraceId);
+        ((AsyncTraceIdFieldAccessor)asyncMethodCallObj)._$APM$_setAsyncTraceId(asyncTraceId);
         if (isDebug) {
             logger.debug("Set asyncTraceId metadata {}", asyncTraceId);
         }
@@ -193,7 +193,7 @@ public class TAsyncClientManagerCallInterceptor implements AroundInterceptor {
         if (!(asyncMethodCallObj instanceof SocketAddressFieldAccessor)) {
             return ThriftConstants.UNKNOWN_ADDRESS;
         }
-        SocketAddress socketAddress = ((SocketAddressFieldAccessor)asyncMethodCallObj)._$PINPOINT$_getSocketAddress();
+        SocketAddress socketAddress = ((SocketAddressFieldAccessor)asyncMethodCallObj)._$APM$_getSocketAddress();
         return ThriftUtils.getHostPort((SocketAddress)socketAddress);
     }
 

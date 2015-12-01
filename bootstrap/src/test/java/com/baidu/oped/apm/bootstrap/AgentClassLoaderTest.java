@@ -60,7 +60,7 @@ public class AgentClassLoaderTest {
 
         logger.info("lib location:" + location);
         String path = location.getPath();
-        // file:/D:/nhn_source/pinpoint_project/pinpoint-tomcat-profiler/target/classes/
+        // file:/D:/nhn_source/apm_project/apm-tomcat-profiler/target/classes/
         int dirPath = path.lastIndexOf("target/classes/");
         if (dirPath == -1) {
             throw new RuntimeException("target/classes/ not found");

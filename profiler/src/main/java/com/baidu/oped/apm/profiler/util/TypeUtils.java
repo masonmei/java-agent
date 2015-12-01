@@ -18,7 +18,7 @@ package com.baidu.oped.apm.profiler.util;
 
 import java.lang.annotation.Annotation;
 
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 // TODO move package
 public final class TypeUtils {

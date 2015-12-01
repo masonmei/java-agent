@@ -17,7 +17,7 @@
 package com.baidu.oped.apm.rpc.client;
 
 import com.baidu.oped.apm.rpc.MessageListener;
-import com.baidu.oped.apm.rpc.PinpointSocket;
+import com.baidu.oped.apm.rpc.ApmSocket;
 import com.baidu.oped.apm.rpc.packet.RequestPacket;
 import com.baidu.oped.apm.rpc.packet.SendPacket;
 import org.slf4j.Logger;
@@ -41,18 +41,18 @@ public class SimpleMessageListener implements MessageListener {
     }
 
     @Override
-    public void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket) {
-        logger.info("handleSend packet:{}, remote:{}", sendPacket, pinpointSocket.getRemoteAddress());
+    public void handleSend(SendPacket sendPacket, ApmSocket apmSocket) {
+        logger.info("handleSend packet:{}, remote:{}", sendPacket, apmSocket.getRemoteAddress());
     }
 
     @Override
-    public void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket) {
-        logger.info("handleRequest packet:{}, remote:{}", requestPacket, pinpointSocket.getRemoteAddress());
+    public void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket) {
+        logger.info("handleRequest packet:{}, remote:{}", requestPacket, apmSocket.getRemoteAddress());
 
         if (echo) {
-            pinpointSocket.response(requestPacket, requestPacket.getPayload());
+            apmSocket.response(requestPacket, requestPacket.getPayload());
         } else {
-            pinpointSocket.response(requestPacket, new byte[0]);
+            apmSocket.response(requestPacket, new byte[0]);
         }
     }
 

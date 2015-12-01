@@ -7,8 +7,8 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>pinpoint-agent</artifactId>
-    <name>pinpoint-agent-distribution</name>
+    <artifactId>apm-agent</artifactId>
+    <name>apm-agent-distribution</name>
 
     <!-- this module contains integration tests. if we set packaging to pom, 
         tests are not run. so we set it to jar even though the project will not be 
@@ -18,17 +18,17 @@
     <dependencies>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-profiler</artifactId>
+            <artifactId>apm-profiler</artifactId>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-profiler-optional</artifactId>
+            <artifactId>apm-profiler-optional</artifactId>
         </dependency>
 
         <!-- plug-ins -->
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-plugins</artifactId>
+            <artifactId>apm-plugins</artifactId>
             <type>zip</type>
             <scope>runtime</scope>
         </dependency>
@@ -37,7 +37,7 @@
         <!-- for tests -->
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-test</artifactId>
+            <artifactId>apm-test</artifactId>
             <scope>test</scope>
         </dependency>
         
@@ -184,7 +184,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- AbstractPinpointPluginTestSuite needs this to resolve 
+                    <!-- AbstractApmPluginTestSuite needs this to resolve 
                         path of required jars -->
                     <useSystemClassLoader>false</useSystemClassLoader>
                     <failIfNoTests>true</failIfNoTests>

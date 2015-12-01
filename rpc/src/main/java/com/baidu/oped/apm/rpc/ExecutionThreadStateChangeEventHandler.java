@@ -18,18 +18,18 @@ package com.baidu.oped.apm.rpc;
 
 import java.util.concurrent.Executor;
 
-import com.baidu.oped.apm.rpc.PinpointSocket;
+import com.baidu.oped.apm.rpc.ApmSocket;
 import com.baidu.oped.apm.rpc.StateChangeEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.oped.apm.rpc.common.SocketStateCode;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
+import com.baidu.oped.apm.rpc.server.ApmServer;
 
 /**
  * @author koo.taejin
  */
-public abstract class ExecutionThreadStateChangeEventHandler<S extends PinpointSocket> implements StateChangeEventListener<S> {
+public abstract class ExecutionThreadStateChangeEventHandler<S extends ApmSocket> implements StateChangeEventListener<S> {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
@@ -42,26 +42,26 @@ public abstract class ExecutionThreadStateChangeEventHandler<S extends PinpointS
     }
     
     @Override
-    public void eventPerformed(S pinpointSocket, SocketStateCode stateCode) {
-        Execution execution = new Execution(pinpointSocket, stateCode);
+    public void eventPerformed(S apmSocket, SocketStateCode stateCode) {
+        Execution execution = new Execution(apmSocket, stateCode);
         this.executor.execute(execution);
     }
     
     private class Execution implements Runnable {
-        private final S pinpointSocket;
+        private final S apmSocket;
         private final SocketStateCode stateCode;
 
-        public Execution(S pinpointSocket, SocketStateCode stateCode) {
-            this.pinpointSocket = pinpointSocket;
+        public Execution(S apmSocket, SocketStateCode stateCode) {
+            this.apmSocket = apmSocket;
             this.stateCode = stateCode;
         }
         
         @Override
         public void run() {
             try {
-                handler.eventPerformed(pinpointSocket, stateCode);
+                handler.eventPerformed(apmSocket, stateCode);
             } catch (Exception e) {
-                handler.exceptionCaught(pinpointSocket, stateCode, e);
+                handler.exceptionCaught(apmSocket, stateCode, e);
             }
         }
     }

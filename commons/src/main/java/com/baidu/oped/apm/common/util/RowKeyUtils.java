@@ -16,7 +16,7 @@
 
 package com.baidu.oped.apm.common.util;
 
-import static com.baidu.oped.apm.common.PinpointConstants.AGENT_NAME_MAX_LEN;
+import static com.baidu.oped.apm.common.ApmConstants.AGENT_NAME_MAX_LEN;
 import static com.baidu.oped.apm.common.util.BytesUtils.INT_BYTE_LENGTH;
 import static com.baidu.oped.apm.common.util.BytesUtils.LONG_BYTE_LENGTH;
 

@@ -43,8 +43,8 @@ public class InvokeBeforeCodeGenerator extends InvokeCodeGenerator {
         builder.begin();
 
         // try {
-        //     _$PINPOINT$_holder13 = InterceptorRegistry.findInterceptor(13);
-        //     (($INTERCEPTOR_TYPE)_$PINPOINT$_holder13.getInterceptor.before($ARGUMENTS);
+        //     _$APM$_holder13 = InterceptorRegistry.findInterceptor(13);
+        //     (($INTERCEPTOR_TYPE)_$APM$_holder13.getInterceptor.before($ARGUMENTS);
         // } catch (Throwable t) {
         //     InterceptorInvokerHelper.handleException(t);
         // }
@@ -58,7 +58,7 @@ public class InvokeBeforeCodeGenerator extends InvokeCodeGenerator {
             builder.format(");");
         }
         
-        builder.format("} catch (java.lang.Throwable _$PINPOINT_EXCEPTION$_) { %1$s.handleException(_$PINPOINT_EXCEPTION$_); }", getInterceptorInvokerHelperClassName());
+        builder.format("} catch (java.lang.Throwable _$APM_EXCEPTION$_) { %1$s.handleException(_$APM_EXCEPTION$_); }", getInterceptorInvokerHelperClassName());
         
         builder.end();
         

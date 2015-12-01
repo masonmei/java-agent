@@ -26,14 +26,14 @@ import com.ibatis.sqlmap.engine.impl.SqlMapClientImpl;
 import com.ibatis.sqlmap.engine.impl.SqlMapSessionImpl;
 import com.baidu.oped.apm.common.Version;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointAgent;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmAgent;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author HyunGil Jeong
  */
-@RunWith(PinpointPluginTestSuite.class)
-@PinpointAgent("agent/target/pinpoint-agent-" + Version.VERSION)
+@RunWith(ApmPluginTestSuite.class)
+@ApmAgent("agent/target/apm-agent-" + Version.VERSION)
 @Dependency({ "org.apache.ibatis:ibatis-sqlmap:[2.3.4.726]", "org.mockito:mockito-all:1.8.4" })
 public class SqlMapSessionIT extends SqlMapExecutorTestBase {
 

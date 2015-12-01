@@ -26,20 +26,20 @@ import org.slf4j.LoggerFactory;
 /**
  * @Author Taejin Koo
  */
-public class LoggingStateChangeEventListener implements StateChangeEventListener<PinpointSocket> {
+public class LoggingStateChangeEventListener implements StateChangeEventListener<ApmSocket> {
 
     public static final LoggingStateChangeEventListener INSTANCE = new LoggingStateChangeEventListener();
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public void eventPerformed(PinpointSocket pinpointSocket, SocketStateCode stateCode) throws Exception {
-        logger.info("eventPerformed socket:{}, stateCode:{}", pinpointSocket, stateCode);
+    public void eventPerformed(ApmSocket apmSocket, SocketStateCode stateCode) throws Exception {
+        logger.info("eventPerformed socket:{}, stateCode:{}", apmSocket, stateCode);
     }
 
     @Override
-    public void exceptionCaught(PinpointSocket pinpointSocket, SocketStateCode stateCode, Throwable e) {
-        logger.warn("exceptionCaught message:{}, socket:{}, stateCode:{}", e.getMessage(), pinpointSocket, stateCode, e);
+    public void exceptionCaught(ApmSocket apmSocket, SocketStateCode stateCode, Throwable e) {
+        logger.warn("exceptionCaught message:{}, socket:{}, stateCode:{}", e.getMessage(), apmSocket, stateCode, e);
     }
 
 }

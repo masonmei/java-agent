@@ -39,7 +39,7 @@ public class TAsyncMethodCallDoReadingResponseBodyInterceptor extends TAsyncMeth
         if (throwable != null) {
             return;
         }
-        boolean endAsyncBlock = ((AsyncCallEndFlagFieldAccessor)target)._$PINPOINT$_getAsyncCallEndFlag();
+        boolean endAsyncBlock = ((AsyncCallEndFlagFieldAccessor)target)._$APM$_getAsyncCallEndFlag();
         if (endAsyncBlock) {
             final Trace trace = super.traceContext.currentTraceObject();
             // shouldn't be null

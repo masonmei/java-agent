@@ -79,7 +79,7 @@ public class PreparedStatementExecuteQueryInterceptor implements AroundIntercept
 
         SpanEventRecorder recorder = trace.traceBlockBegin();
         try {
-            DatabaseInfo databaseInfo = (target instanceof DatabaseInfoAccessor) ? ((DatabaseInfoAccessor)target)._$PINPOINT$_getDatabaseInfo() : null;
+            DatabaseInfo databaseInfo = (target instanceof DatabaseInfoAccessor) ? ((DatabaseInfoAccessor)target)._$APM$_getDatabaseInfo() : null;
             
             if (databaseInfo == null) {
                 databaseInfo = UnKnownDatabaseInfo.INSTANCE;
@@ -91,11 +91,11 @@ public class PreparedStatementExecuteQueryInterceptor implements AroundIntercept
 
             ParsingResult parsingResult = null;
             if (target instanceof ParsingResultAccessor) {
-                parsingResult = ((ParsingResultAccessor)target)._$PINPOINT$_getParsingResult();
+                parsingResult = ((ParsingResultAccessor)target)._$APM$_getParsingResult();
             }
             Map<Integer, String> bindValue = null;
             if (target instanceof BindValueAccessor) {
-                bindValue = ((BindValueAccessor)target)._$PINPOINT$_getBindValue();
+                bindValue = ((BindValueAccessor)target)._$APM$_getBindValue();
             }
             if (bindValue != null) {
                 String bindString = toBindVariable(bindValue);
@@ -123,7 +123,7 @@ public class PreparedStatementExecuteQueryInterceptor implements AroundIntercept
 
     private void clean(Object target) {
         if (target instanceof BindValueAccessor) {
-            ((BindValueAccessor)target)._$PINPOINT$_setBindValue(new HashMap<Integer, String>());
+            ((BindValueAccessor)target)._$APM$_setBindValue(new HashMap<Integer, String>());
         }
     }
 

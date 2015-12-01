@@ -35,12 +35,12 @@ import com.baidu.oped.apm.bootstrap.plugin.test.Expectations;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author jaehong.kim
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({ "com.google.http-client:google-http-client:[1.19.0],[1.20.0,)" })
 public class HttpRequestIT {
     

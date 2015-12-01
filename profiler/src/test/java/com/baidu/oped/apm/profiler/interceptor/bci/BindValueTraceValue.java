@@ -23,6 +23,6 @@ import java.util.Map;
  * @author emeroad
  */
 public interface BindValueTraceValue {
-    void _$PINPOINT$_setTraceBindValue(Map<Integer, String> value);
-    Map<Integer, String> _$PINPOINT$_getTraceBindValue();
+    void _$APM$_setTraceBindValue(Map<Integer, String> value);
+    Map<Integer, String> _$APM$_getTraceBindValue();
 }

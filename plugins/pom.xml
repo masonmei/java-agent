@@ -7,8 +7,8 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>pinpoint-plugins</artifactId>
-    <name>pinpoint-plugins</name>
+    <artifactId>apm-plugins</artifactId>
+    <name>apm-plugins</name>
     <packaging>pom</packaging>
 
     <modules>
@@ -43,132 +43,132 @@
     <dependencies>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-httpclient3-plugin</artifactId>
+            <artifactId>apm-httpclient3-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-httpclient4-plugin</artifactId>
+            <artifactId>apm-httpclient4-plugin</artifactId>
             <version>${project.version}</version>
         </dependency> 
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-ning-asynchttpclient-plugin</artifactId>
+            <artifactId>apm-ning-asynchttpclient-plugin</artifactId>
             <version>${project.version}</version>
         </dependency> 
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-gson-plugin</artifactId>
+            <artifactId>apm-gson-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-cubrid-jdbc-driver-plugin</artifactId>
+            <artifactId>apm-cubrid-jdbc-driver-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-mysql-jdbc-driver-plugin</artifactId>
+            <artifactId>apm-mysql-jdbc-driver-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-jtds-plugin</artifactId>
+            <artifactId>apm-jtds-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-oracle-jdbc-driver-plugin</artifactId>
+            <artifactId>apm-oracle-jdbc-driver-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-commons-dbcp-plugin</artifactId>
+            <artifactId>apm-commons-dbcp-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-jdk-http-plugin</artifactId>
+            <artifactId>apm-jdk-http-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-redis-plugin</artifactId>
+            <artifactId>apm-redis-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-tomcat-plugin</artifactId>
+            <artifactId>apm-tomcat-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-json-lib-plugin</artifactId>
+            <artifactId>apm-json-lib-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-jackson-plugin</artifactId>
+            <artifactId>apm-jackson-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-thrift-plugin</artifactId>
+            <artifactId>apm-thrift-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-user-plugin</artifactId>
+            <artifactId>apm-user-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-arcus-plugin</artifactId>
+            <artifactId>apm-arcus-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-google-httpclient-plugin</artifactId>
+            <artifactId>apm-google-httpclient-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-jetty-plugin</artifactId>
+            <artifactId>apm-jetty-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-spring-plugin</artifactId>
+            <artifactId>apm-spring-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-spring-boot-plugin</artifactId>
+            <artifactId>apm-spring-boot-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-ibatis-plugin</artifactId>
+            <artifactId>apm-ibatis-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-mybatis-plugin</artifactId>
+            <artifactId>apm-mybatis-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-okhttp-plugin</artifactId>
+            <artifactId>apm-okhttp-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-log4j-plugin</artifactId>
+            <artifactId>apm-log4j-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-logback-plugin</artifactId>
+            <artifactId>apm-logback-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

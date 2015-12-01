@@ -17,7 +17,7 @@ public class ApiInterceptorTest {
 //
 //        when(methodInfo.getDescriptor()).thenReturn(methodDescriptor);
 //        when(methodInfo.getParameterTypes()).thenReturn(parameterTypes);
-//        when(target._$PINPOINT$_getObject()).thenReturn("serviceCode");
+//        when(target._$APM$_getObject()).thenReturn("serviceCode");
 //
 //        ApiInterceptor interceptor = new ApiInterceptor(traceContext, methodInfo, true);
 //

@@ -42,10 +42,10 @@ public class TAsyncMethodCallDoWritingRequestBodyInterceptor extends TAsyncMetho
     protected void doInBeforeTrace(SpanEventRecorder recorder, Object target, Object[] args) {
         super.doInBeforeTrace(recorder, target, args);
 
-        Long nextSpanId = ((AsyncNextSpanIdFieldAccessor)target)._$PINPOINT$_getAsyncNextSpanId();
+        Long nextSpanId = ((AsyncNextSpanIdFieldAccessor)target)._$APM$_getAsyncNextSpanId();
         recorder.recordNextSpanId(nextSpanId);
 
-        String remoteAddress = ((AsyncCallRemoteAddressFieldAccessor)target)._$PINPOINT$_getAsyncCallRemoteAddress();
+        String remoteAddress = ((AsyncCallRemoteAddressFieldAccessor)target)._$APM$_getAsyncCallRemoteAddress();
         recorder.recordDestinationId(remoteAddress);
 
         String methodUri = ThriftUtils.getAsyncMethodCallName((TAsyncMethodCall<?>)target);
@@ -62,7 +62,7 @@ public class TAsyncMethodCallDoWritingRequestBodyInterceptor extends TAsyncMetho
         if (throwable != null) {
             return;
         }
-        boolean endAsyncBlock = ((AsyncCallEndFlagFieldAccessor)target)._$PINPOINT$_getAsyncCallEndFlag();
+        boolean endAsyncBlock = ((AsyncCallEndFlagFieldAccessor)target)._$APM$_getAsyncCallEndFlag();
         if (endAsyncBlock) {
             final Trace trace = super.traceContext.currentTraceObject();
             // shouldn't be null

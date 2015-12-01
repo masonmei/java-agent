@@ -17,7 +17,7 @@
 package com.baidu.oped.apm.profiler;
 
 import com.baidu.oped.apm.bootstrap.util.NetworkUtils;
-import com.baidu.oped.apm.common.PinpointConstants;
+import com.baidu.oped.apm.common.ApmConstants;
 import com.baidu.oped.apm.common.Version;
 import com.baidu.oped.apm.common.trace.ServiceType;
 import com.baidu.oped.apm.common.util.BytesUtils;
@@ -49,8 +49,8 @@ public class AgentInformationFactory {
         // This could be a problem if more than one server instances run on a box.
         final String machineName = NetworkUtils.getHostName();
         final String hostIp = NetworkUtils.getHostIp();
-        final String agentId = getId("pinpoint.agentId", machineName, PinpointConstants.AGENT_NAME_MAX_LEN);
-        final String applicationName = getId("pinpoint.applicationName", "UnknownApplicationName", PinpointConstants.APPLICATION_NAME_MAX_LEN);
+        final String agentId = getId("apm.agentId", machineName, ApmConstants.AGENT_NAME_MAX_LEN);
+        final String applicationName = getId("apm.applicationName", "UnknownApplicationName", ApmConstants.APPLICATION_NAME_MAX_LEN);
         final long startTime = RuntimeMXBeanUtils.getVmStartTime();
         final int pid = RuntimeMXBeanUtils.getPid();
         final String jvmVersion = JvmUtils.getSystemProperty(SystemPropertyKey.JAVA_VERSION);

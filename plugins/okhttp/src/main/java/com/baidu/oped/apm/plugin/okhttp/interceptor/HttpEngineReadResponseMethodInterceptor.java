@@ -104,7 +104,7 @@ public class HttpEngineReadResponseMethodInterceptor implements AroundIntercepto
             recorder.recordException(throwable);
 
             if (statusCode) {
-                Response response = ((UserResponseGetter) target)._$PINPOINT$_getUserResponse();
+                Response response = ((UserResponseGetter) target)._$APM$_getUserResponse();
                 if (response != null) {
                     recorder.recordAttribute(AnnotationKey.HTTP_STATUS_CODE, response.code());
                 }

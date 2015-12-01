@@ -8,14 +8,14 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>pinpoint-httpclient3-plugin</artifactId>
-    <name>pinpoint-httpclient3-plugin</name>
+    <artifactId>apm-httpclient3-plugin</artifactId>
+    <name>apm-httpclient3-plugin</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-bootstrap-core</artifactId>
+            <artifactId>apm-bootstrap-core</artifactId>
             <scope>provided</scope>
         </dependency>
 

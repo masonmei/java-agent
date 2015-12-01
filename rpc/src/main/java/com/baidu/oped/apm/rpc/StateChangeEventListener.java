@@ -24,10 +24,10 @@ import com.baidu.oped.apm.rpc.common.SocketStateCode;
 /**
  * @Author Taejin Koo
  */
-public interface StateChangeEventListener<S extends PinpointSocket> {
+public interface StateChangeEventListener<S extends ApmSocket> {
 
-    void eventPerformed(S pinpointSocket, SocketStateCode stateCode) throws Exception;
+    void eventPerformed(S apmSocket, SocketStateCode stateCode) throws Exception;
 
-    void exceptionCaught(S pinpointSocket, SocketStateCode stateCode, Throwable e);
+    void exceptionCaught(S apmSocket, SocketStateCode stateCode, Throwable e);
 
 }

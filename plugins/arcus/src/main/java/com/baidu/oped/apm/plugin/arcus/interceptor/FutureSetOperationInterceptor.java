@@ -37,7 +37,7 @@ public class FutureSetOperationInterceptor implements AroundInterceptor {
             logger.beforeInterceptor(target, args);
         }
 
-        ((OperationAccessor)target)._$PINPOINT$_setOperation((Operation)args[0]);
+        ((OperationAccessor)target)._$APM$_setOperation((Operation)args[0]);
     }
 
     @Override

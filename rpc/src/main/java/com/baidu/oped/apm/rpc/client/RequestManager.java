@@ -31,11 +31,11 @@ import org.slf4j.LoggerFactory;
 import com.baidu.oped.apm.rpc.ChannelWriteFailListenableFuture;
 import com.baidu.oped.apm.rpc.DefaultFuture;
 import com.baidu.oped.apm.rpc.FailureEventHandler;
-import com.baidu.oped.apm.rpc.PinpointSocketException;
+import com.baidu.oped.apm.rpc.ApmSocketException;
 import com.baidu.oped.apm.rpc.ResponseMessage;
 import com.baidu.oped.apm.rpc.packet.RequestPacket;
 import com.baidu.oped.apm.rpc.packet.ResponsePacket;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
+import com.baidu.oped.apm.rpc.server.ApmServer;
 
 /**
  * @author emeroad
@@ -89,7 +89,7 @@ public class RequestManager {
             future.setTimeout(timeout);
         } catch (IllegalStateException e) {
             // this case is that timer has been shutdown. That maybe just means that socket has been closed.
-            future.setFailure(new PinpointSocketException("socket closed")) ;
+            future.setFailure(new ApmSocketException("socket closed")) ;
         }
     }
 
@@ -112,14 +112,14 @@ public class RequestManager {
         future.setResult(response);
     }
 
-    public void messageReceived(ResponsePacket responsePacket, PinpointServer pinpointServer) {
+    public void messageReceived(ResponsePacket responsePacket, ApmServer apmServer) {
         final int requestId = responsePacket.getRequestId();
         final DefaultFuture<ResponseMessage> future = removeMessageFuture(requestId);
         if (future == null) {
-            logger.warn("future not found:{}, pinpointServer:{}", responsePacket, pinpointServer);
+            logger.warn("future not found:{}, apmServer:{}", responsePacket, apmServer);
             return;
         } else {
-            logger.debug("responsePacket arrived packet:{}, pinpointServer:{}", responsePacket, pinpointServer);
+            logger.debug("responsePacket arrived packet:{}, apmServer:{}", responsePacket, apmServer);
         }
 
         ResponseMessage response = new ResponseMessage();
@@ -148,7 +148,7 @@ public class RequestManager {
 
         final DefaultFuture old = this.requestMap.put(requestId, future);
         if (old != null) {
-            throw new PinpointSocketException("unexpected error. old future exist:" + old + " id:" + requestId);
+            throw new ApmSocketException("unexpected error. old future exist:" + old + " id:" + requestId);
         }
 
         // when future fails, put a handle in order to remove a failed future in the requestMap.
@@ -162,7 +162,7 @@ public class RequestManager {
 
     public void close() {
         logger.debug("close()");
-        final PinpointSocketException closed = new PinpointSocketException("socket closed");
+        final ApmSocketException closed = new ApmSocketException("socket closed");
 
         // Could you handle race conditions of "close" more precisely?
 //        final Timer timer = this.timer;

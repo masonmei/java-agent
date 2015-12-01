@@ -23,7 +23,7 @@ import com.baidu.oped.apm.bootstrap.instrument.InstrumentMethod;
 import com.baidu.oped.apm.bootstrap.interceptor.annotation.Name;
 import com.baidu.oped.apm.bootstrap.interceptor.annotation.NoCache;
 import com.baidu.oped.apm.bootstrap.interceptor.group.InterceptorGroup;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.util.TypeUtils;
 
 /**
@@ -63,7 +63,7 @@ public class InterceptorArgumentProvider implements ArgumentProvider {
             
             if (annotation == null) {
                 if (interceptorGroup == null) {
-                    throw new PinpointException("Group parameter is not annotated with @Name and the target class is not associated with any Group");
+                    throw new ApmException("Group parameter is not annotated with @Name and the target class is not associated with any Group");
                 } else {
                     return Option.withValue(interceptorGroup);
                 }

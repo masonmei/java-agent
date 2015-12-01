@@ -35,16 +35,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.baidu.oped.apm.common.Version;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointAgent;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmAgent;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * Tests against mybatis-spring 1.1.0+. Prior versions do not handle mocked SqlSession proxies well.
  * 
  * @author HyunGil Jeong
  */
-@RunWith(PinpointPluginTestSuite.class)
-@PinpointAgent("agent/target/pinpoint-agent-" + Version.VERSION)
+@RunWith(ApmPluginTestSuite.class)
+@ApmAgent("agent/target/apm-agent-" + Version.VERSION)
 @Dependency({ "org.mybatis:mybatis-spring:[1.1.0,)", "org.mybatis:mybatis:3.2.7",
         "org.springframework:spring-jdbc:[4.1.7.RELEASE]", "org.mockito:mockito-all:1.8.4" })
 public class SqlSessionTemplateIT extends SqlSessionTestBase {

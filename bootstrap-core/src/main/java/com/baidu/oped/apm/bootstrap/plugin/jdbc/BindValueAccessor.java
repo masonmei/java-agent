@@ -21,6 +21,6 @@ import java.util.Map;
  *
  */
 public interface BindValueAccessor {
-    void _$PINPOINT$_setBindValue(Map<Integer, String> map);
-    Map<Integer, String> _$PINPOINT$_getBindValue();
+    void _$APM$_setBindValue(Map<Integer, String> map);
+    Map<Integer, String> _$APM$_getBindValue();
 }

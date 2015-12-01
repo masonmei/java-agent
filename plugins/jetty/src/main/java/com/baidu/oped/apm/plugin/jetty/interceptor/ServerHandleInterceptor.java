@@ -194,7 +194,7 @@ public class ServerHandleInterceptor implements AroundInterceptor {
 
     private void setTraceMetadata(final Request request, final Trace trace) {
         if (request instanceof TraceAccessor) {
-            ((TraceAccessor)request)._$PINPOINT$_setTrace(trace);            
+            ((TraceAccessor)request)._$APM$_setTrace(trace);            
         }
     }
 

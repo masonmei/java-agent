@@ -23,7 +23,7 @@ import java.util.concurrent.*;
  */
 public final class ExecutorFactory {
 
-    private static final ThreadFactory DEFAULT_THREAD_FACTORY = new PinpointThreadFactory("Pinpoint-defaultThreadFactory", true);
+    private static final ThreadFactory DEFAULT_THREAD_FACTORY = new ApmThreadFactory("Apm-defaultThreadFactory", true);
 
     private ExecutorFactory() {
     }
@@ -37,7 +37,7 @@ public final class ExecutorFactory {
     }
 
     public static ThreadPoolExecutor newFixedThreadPool(int nThreads, int workQueueMaxSize, String threadFactoryName, boolean daemon) {
-        ThreadFactory threadFactory = new PinpointThreadFactory(threadFactoryName, daemon);
+        ThreadFactory threadFactory = new ApmThreadFactory(threadFactoryName, daemon);
         return newFixedThreadPool(nThreads, workQueueMaxSize, threadFactory);
     }
 

@@ -83,7 +83,7 @@ public class ProcessFunctionProcessInterceptor implements AroundInterceptor {
         // We set the marker inside server's input protocol to safeguard against such cases.
         Object iprot = args[1];
         if (validateInputProtocol(iprot)) {
-            ((ServerMarkerFlagFieldAccessor)iprot)._$PINPOINT$_setServerMarkerFlag(true);
+            ((ServerMarkerFlagFieldAccessor)iprot)._$APM$_setServerMarkerFlag(true);
         }
     }
 
@@ -95,7 +95,7 @@ public class ProcessFunctionProcessInterceptor implements AroundInterceptor {
         // Unset server marker
         Object iprot = args[1];
         if (validateInputProtocol(iprot)) {
-            ((ServerMarkerFlagFieldAccessor)iprot)._$PINPOINT$_setServerMarkerFlag(false);
+            ((ServerMarkerFlagFieldAccessor)iprot)._$APM$_setServerMarkerFlag(false);
         }
     }
 

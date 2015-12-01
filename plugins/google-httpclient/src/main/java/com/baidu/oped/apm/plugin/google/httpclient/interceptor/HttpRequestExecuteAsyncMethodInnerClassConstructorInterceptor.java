@@ -58,7 +58,7 @@ public class HttpRequestExecuteAsyncMethodInnerClassConstructorInterceptor imple
             final InterceptorGroupInvocation transaction = interceptorGroup.getCurrentInvocation();
             if (transaction != null && transaction.getAttachment() != null) {
                 final AsyncTraceId asyncTraceId = (AsyncTraceId) transaction.getAttachment();
-                ((AsyncTraceIdAccessor)target)._$PINPOINT$_setAsyncTraceId(asyncTraceId);
+                ((AsyncTraceIdAccessor)target)._$APM$_setAsyncTraceId(asyncTraceId);
                 // clear.
                 transaction.removeAttachment();
             }

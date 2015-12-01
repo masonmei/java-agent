@@ -14,7 +14,7 @@
  */
 package com.baidu.oped.apm.test;
 
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.instrument.ClassInjector;
 
 /**
@@ -29,7 +29,7 @@ public class TestProfilerPluginClassLoader implements ClassInjector {
         try {
             return (Class<? extends T>) targetClassLoader.loadClass(className);
         } catch (ClassNotFoundException e) {
-            throw new PinpointException("Cannot find class: " + className, e);
+            throw new ApmException("Cannot find class: " + className, e);
         }
     }
 }

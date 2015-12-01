@@ -21,7 +21,7 @@ import com.baidu.oped.apm.bootstrap.instrument.InstrumentException;
 import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
 import com.baidu.oped.apm.bootstrap.instrument.matcher.Matcher;
 import com.baidu.oped.apm.bootstrap.instrument.transformer.TransformCallback;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.plugin.xml.transformer.MatchableClassFileTransformer;
 
 import java.lang.instrument.IllegalClassFormatException;
@@ -69,7 +69,7 @@ public class MatchableClassFileTransformerGuardDelegate implements MatchableClas
             // WARN external plugin api
             return transformCallback.doInTransform(guard, loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
         } catch (InstrumentException e) {
-            throw new PinpointException(e);
+            throw new ApmException(e);
         } finally {
             guard.close();
         }

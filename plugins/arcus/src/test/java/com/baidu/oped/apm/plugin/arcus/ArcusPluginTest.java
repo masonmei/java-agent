@@ -4,15 +4,15 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 //@RunWith(ForkRunner.class)
-//@PinpointConfig("pinpoint-test.config")
-//@PinpointAgent("build/pinpoint-agent")
+//@ApmConfig("apm-test.config")
+//@ApmAgent("build/apm-agent")
 //@OnChildClassLoader
 public class ArcusPluginTest {
 
     // TODO how to test intercpetor?
     
     @Test
-    @Ignore // until arcus modifier/interceptors are removed from pinpoint-profiler
+    @Ignore // until arcus modifier/interceptors are removed from apm-profiler
     public void test() throws Exception {
 //
 //        Class<?> arcusClient = Class.forName("net.spy.memcached.ArcusClient");

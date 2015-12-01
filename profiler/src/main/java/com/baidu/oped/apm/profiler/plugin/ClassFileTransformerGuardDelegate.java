@@ -20,7 +20,7 @@ import com.baidu.oped.apm.bootstrap.instrument.GuardInstrumentor;
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentException;
 import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
 import com.baidu.oped.apm.bootstrap.instrument.transformer.TransformCallback;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
@@ -55,7 +55,7 @@ public class ClassFileTransformerGuardDelegate implements ClassFileTransformer {
             // WARN external plugin api
             return transformCallback.doInTransform(guard, loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
         } catch (InstrumentException e) {
-            throw new PinpointException(e);
+            throw new ApmException(e);
         } finally {
             guard.close();
         }

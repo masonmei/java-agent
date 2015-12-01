@@ -20,5 +20,5 @@ package com.baidu.oped.apm;
  * @author emeroad
  */
 public final class ProductInfo {
-    public static final String NAME = "pinpoint";
+    public static final String NAME = "apm";
 }

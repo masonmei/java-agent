@@ -31,7 +31,7 @@ import com.baidu.oped.apm.bootstrap.instrument.InstrumentClass;
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentClassPool;
 import com.baidu.oped.apm.bootstrap.instrument.NotFoundInstrumentException;
 import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.instrument.classpool.IsolateMultipleClassPool;
 import com.baidu.oped.apm.profiler.instrument.classpool.MultipleClassPool;
 import com.baidu.oped.apm.profiler.instrument.classpool.NamedClassPool;
@@ -88,9 +88,9 @@ public class JavassistClassPool implements InstrumentClassPool {
                         systemClassPool.appendClassPath(bootStrapJar);
                     }
                 } catch (NotFoundException ex) {
-                    throw new PinpointException("bootStrapJar not found. Caused by:" + ex.getMessage(), ex);
+                    throw new ApmException("bootStrapJar not found. Caused by:" + ex.getMessage(), ex);
                 }
-                // append pinpoint classLoader
+                // append apm classLoader
                 systemClassPool.appendClassPath(new ClassClassPath(this.getClass()));
             }
         });
@@ -141,7 +141,7 @@ public class JavassistClassPool implements InstrumentClassPool {
         try {
             getClassPool(null).appendClassPath(jar);
         } catch (NotFoundException e) {
-            throw new PinpointException(e);
+            throw new ApmException(e);
         }
     }
 }

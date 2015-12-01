@@ -14,7 +14,7 @@
  */
 package com.baidu.oped.apm.plugin.jetty;
 
-import com.baidu.oped.apm.bootstrap.instrument.transformer.PinpointClassFileTransformers;
+import com.baidu.oped.apm.bootstrap.instrument.transformer.ApmClassFileTransformers;
 import com.baidu.oped.apm.bootstrap.plugin.ProfilerPlugin;
 import com.baidu.oped.apm.bootstrap.plugin.ProfilerPluginSetupContext;
 
@@ -32,10 +32,10 @@ public class JettyPlugin implements ProfilerPlugin {
     }
 
     private void addServerInterceptor(ProfilerPluginSetupContext context, JettyConfiguration config){
-        context.addClassFileTransformer("org.eclipse.jetty.server.Server", PinpointClassFileTransformers.addInterceptor("com.baidu.oped.apm.plugin.jetty.interceptor.ServerHandleInterceptor", va(config.getJettyExcludeUrlFilter())));
+        context.addClassFileTransformer("org.eclipse.jetty.server.Server", ApmClassFileTransformers.addInterceptor("com.baidu.oped.apm.plugin.jetty.interceptor.ServerHandleInterceptor", va(config.getJettyExcludeUrlFilter())));
     }
     
     private void addRequestEditor(ProfilerPluginSetupContext context) {
-        context.addClassFileTransformer("org.eclipse.jetty.server.Request", PinpointClassFileTransformers.addField("com.baidu.oped.apm.plugin.jetty.interceptor.TraceAccessor"));
+        context.addClassFileTransformer("org.eclipse.jetty.server.Request", ApmClassFileTransformers.addField("com.baidu.oped.apm.plugin.jetty.interceptor.TraceAccessor"));
     }
 }

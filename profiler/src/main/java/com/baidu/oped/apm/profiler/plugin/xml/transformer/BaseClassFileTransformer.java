@@ -20,7 +20,7 @@ import java.security.ProtectionDomain;
 
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentException;
 import com.baidu.oped.apm.bootstrap.plugin.ProfilerPluginSetupContext;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 /**
  * @author Jongho Moon
@@ -38,7 +38,7 @@ public abstract class BaseClassFileTransformer implements ClassFileTransformer {
         try {
            return transform(pluginContext, loader, className, classBeingRedefined, protectionDomain, classfileBuffer); 
         } catch (InstrumentException e) {
-            throw new PinpointException(e);
+            throw new ApmException(e);
         }
     } 
     

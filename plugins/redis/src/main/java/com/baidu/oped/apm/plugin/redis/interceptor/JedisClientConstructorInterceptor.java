@@ -60,7 +60,7 @@ public class JedisClientConstructorInterceptor implements AroundInterceptor {
                 // set default port
                 endPoint.append(":").append(6379);
             }
-            ((EndPointAccessor)target)._$PINPOINT$_setEndPoint(endPoint.toString());
+            ((EndPointAccessor)target)._$APM$_setEndPoint(endPoint.toString());
         } catch (Throwable t) {
             logger.warn("Failed to BEFORE process. {}", t.getMessage(), t);
         }

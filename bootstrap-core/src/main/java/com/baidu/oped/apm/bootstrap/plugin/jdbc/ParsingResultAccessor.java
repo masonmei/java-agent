@@ -21,6 +21,6 @@ import com.baidu.oped.apm.bootstrap.context.ParsingResult;
  *
  */
 public interface ParsingResultAccessor {
-    void _$PINPOINT$_setParsingResult(ParsingResult result);
-    ParsingResult _$PINPOINT$_getParsingResult();
+    void _$APM$_setParsingResult(ParsingResult result);
+    ParsingResult _$APM$_getParsingResult();
 }

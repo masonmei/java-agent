@@ -19,5 +19,5 @@ package com.baidu.oped.apm.plugin.httpclient3;
  *
  */
 public interface HostNameGetter {
-    String _$PINPOINT$_getHostName();
+    String _$APM$_getHostName();
 }

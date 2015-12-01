@@ -34,21 +34,21 @@ public class UnsupportOperationMessageListener implements MessageListener {
     private static final UnsupportOperationMessageListener INSTANCE = new UnsupportOperationMessageListener();
 
     @Override
-    public void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket) {
+    public void handleSend(SendPacket sendPacket, ApmSocket apmSocket) {
         StringBuilder errorMessage = new StringBuilder();
         errorMessage.append("Unsupported handleSend method");
         errorMessage.append("packet:").append(sendPacket);
-        errorMessage.append(", remote::").append(pinpointSocket.getRemoteAddress());
+        errorMessage.append(", remote::").append(apmSocket.getRemoteAddress());
 
         throw new UnsupportedOperationException(errorMessage.toString());
     }
 
     @Override
-    public void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket) {
+    public void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket) {
         StringBuilder errorMessage = new StringBuilder();
         errorMessage.append("Unsupported handleRequest method");
         errorMessage.append("packet:").append(requestPacket);
-        errorMessage.append(", remote::").append(pinpointSocket.getRemoteAddress());
+        errorMessage.append(", remote::").append(apmSocket.getRemoteAddress());
 
         throw new UnsupportedOperationException(errorMessage.toString());
     }

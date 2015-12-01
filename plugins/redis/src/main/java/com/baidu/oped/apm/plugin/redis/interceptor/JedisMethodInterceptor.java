@@ -61,7 +61,7 @@ public class JedisMethodInterceptor extends SpanEventSimpleAroundInterceptorForP
         String endPoint = null;
 
         if (target instanceof EndPointAccessor) {
-            endPoint = ((EndPointAccessor) target)._$PINPOINT$_getEndPoint();
+            endPoint = ((EndPointAccessor) target)._$APM$_getEndPoint();
         }
         
         final InterceptorGroupInvocation invocation = interceptorGroup.getCurrentInvocation();

@@ -16,7 +16,7 @@
 
 package com.baidu.oped.apm.common.bo;
 
-import com.baidu.oped.apm.common.PinpointConstants;
+import com.baidu.oped.apm.common.ApmConstants;
 import com.baidu.oped.apm.common.util.BytesUtils;
 import com.baidu.oped.apm.common.util.RowKeyUtils;
 import com.baidu.oped.apm.common.util.TimeUtils;
@@ -106,17 +106,17 @@ public class ApiMetaDataBo {
     }
 
     public void readRowKey(byte[] bytes) {
-        this.agentId = BytesUtils.safeTrim(BytesUtils.toString(bytes, 0, PinpointConstants.AGENT_NAME_MAX_LEN));
+        this.agentId = BytesUtils.safeTrim(BytesUtils.toString(bytes, 0, ApmConstants.AGENT_NAME_MAX_LEN));
         this.startTime = TimeUtils.recoveryTimeMillis(readTime(bytes));
         this.apiId = readKeyCode(bytes);
     }
 
     private static long readTime(byte[] rowKey) {
-        return BytesUtils.bytesToLong(rowKey, PinpointConstants.AGENT_NAME_MAX_LEN);
+        return BytesUtils.bytesToLong(rowKey, ApmConstants.AGENT_NAME_MAX_LEN);
     }
 
     private static int readKeyCode(byte[] rowKey) {
-        return BytesUtils.bytesToInt(rowKey, PinpointConstants.AGENT_NAME_MAX_LEN + BytesUtils.LONG_BYTE_LENGTH);
+        return BytesUtils.bytesToInt(rowKey, ApmConstants.AGENT_NAME_MAX_LEN + BytesUtils.LONG_BYTE_LENGTH);
     }
 
     public byte[] toRowKey() {

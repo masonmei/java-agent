@@ -16,12 +16,12 @@
 
 package com.baidu.oped.apm.plugin.jdbc.oracle.parser;
 
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 /**
  * @author emeroad
  */
-public class OracleConnectionStringException extends PinpointException {
+public class OracleConnectionStringException extends ApmException {
 
     public OracleConnectionStringException() {
     }

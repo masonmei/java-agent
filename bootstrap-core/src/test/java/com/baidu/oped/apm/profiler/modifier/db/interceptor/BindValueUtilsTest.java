@@ -112,7 +112,7 @@ public class BindValueUtilsTest {
         Assert.assertEquals("12345...(6), ...(2)", result);
     }
 
-    // #737 https://github.com/naver/pinpoint/issues/737
+    // #737 https://github.com/naver/apm/issues/737
     @Test
     public void test_734_bug_regression() throws Exception {
         Map<Integer, String> bindValue = new HashMap<Integer, String>();

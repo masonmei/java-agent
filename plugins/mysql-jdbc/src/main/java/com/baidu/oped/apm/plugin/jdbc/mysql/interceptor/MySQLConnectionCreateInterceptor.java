@@ -67,7 +67,7 @@ public class MySQLConnectionCreateInterceptor implements AroundInterceptor {
             if (InterceptorUtils.isSuccess(throwable)) {
                 // Set only if connection is success.
                 if (target instanceof DatabaseInfoAccessor) {
-                    ((DatabaseInfoAccessor) target)._$PINPOINT$_setDatabaseInfo(databaseInfo);
+                    ((DatabaseInfoAccessor) target)._$APM$_setDatabaseInfo(databaseInfo);
                 }
             }
         }

@@ -21,7 +21,7 @@ import com.baidu.oped.apm.bootstrap.context.TraceContext;
 import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
 import com.baidu.oped.apm.bootstrap.interceptor.annotation.Name;
 import com.baidu.oped.apm.bootstrap.interceptor.group.InterceptorGroup;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.util.TypeUtils;
 
 /**
@@ -53,7 +53,7 @@ public class ProfilerPluginArgumentProvider implements ArgumentProvider {
             InterceptorGroup group = pluginContext.getInterceptorGroup(annotation.value());
             
             if (group == null) {
-                throw new PinpointException("No such Group: " + annotation.value());
+                throw new ApmException("No such Group: " + annotation.value());
             }
             
             return Option.withValue(group);

@@ -19,5 +19,5 @@ package com.baidu.oped.apm.plugin.httpclient3;
  *
  */
 public interface ProxyPortNumberGetter {
-    int _$PINPOINT$_getProxyPortNumber();
+    int _$APM$_getProxyPortNumber();
 }

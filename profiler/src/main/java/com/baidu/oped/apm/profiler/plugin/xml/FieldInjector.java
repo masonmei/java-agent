@@ -18,7 +18,7 @@ package com.baidu.oped.apm.profiler.plugin.xml;
 
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentClass;
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentException;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.plugin.xml.FieldInitializationStrategy.ByConstructor;
 import com.baidu.oped.apm.profiler.plugin.xml.transformer.ClassRecipe;
 
@@ -45,7 +45,7 @@ public class FieldInjector implements ClassRecipe {
                 String javaExpression = "new " + ((ByConstructor)strategy).getClassName() + "();";
                 target.addField(accessorTypeName, javaExpression);
             } else {
-                throw new PinpointException("Unsupported strategy: " + strategy);
+                throw new ApmException("Unsupported strategy: " + strategy);
             }
         }
     }

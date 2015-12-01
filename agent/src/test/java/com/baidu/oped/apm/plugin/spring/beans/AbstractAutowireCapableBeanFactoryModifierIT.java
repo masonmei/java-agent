@@ -25,12 +25,12 @@ import com.baidu.oped.apm.bootstrap.plugin.test.Expectations;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointConfig;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmConfig;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"org.springframework:spring-context:[3.0.7.RELEASE],[3.1.4.RELEASE],[3.2.14.RELEASE],[4.0.9.RELEASE],[4.1.7.RELEASE],[4.2.0.RELEASE,)", "cglib:cglib-nodep:3.1"})
-@PinpointConfig("pinpoint-spring-bean-test.config")
+@ApmConfig("apm-spring-bean-test.config")
 public class AbstractAutowireCapableBeanFactoryModifierIT {
 
     @Test

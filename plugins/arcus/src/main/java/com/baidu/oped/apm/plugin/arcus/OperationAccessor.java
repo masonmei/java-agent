@@ -21,6 +21,6 @@ import net.spy.memcached.ops.Operation;
  *
  */
 public interface OperationAccessor {
-    void _$PINPOINT$_setOperation(Operation operation);
-    Operation _$PINPOINT$_getOperation();
+    void _$APM$_setOperation(Operation operation);
+    Operation _$APM$_getOperation();
 }

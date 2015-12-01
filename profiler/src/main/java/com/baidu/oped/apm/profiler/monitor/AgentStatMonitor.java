@@ -22,7 +22,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import com.baidu.oped.apm.common.util.PinpointThreadFactory;
+import com.baidu.oped.apm.common.util.ApmThreadFactory;
 import com.baidu.oped.apm.profiler.monitor.codahale.AgentStatCollectorFactory;
 import com.baidu.oped.apm.profiler.monitor.codahale.cpu.CpuLoadCollector;
 import com.baidu.oped.apm.profiler.monitor.codahale.gc.GarbageCollector;
@@ -53,7 +53,7 @@ public class AgentStatMonitor {
     private final long collectionIntervalMs;
     private final int numCollectionsPerBatch;
 
-    private final ScheduledExecutorService executor = new ScheduledThreadPoolExecutor(1, new PinpointThreadFactory("Pinpoint-stat-monitor", true));
+    private final ScheduledExecutorService executor = new ScheduledThreadPoolExecutor(1, new ApmThreadFactory("Apm-stat-monitor", true));
 
     private final DataSender dataSender;
     private final String agentId;

@@ -39,7 +39,7 @@ public class TAsyncMethodCallCleanUpAndFireCallbackInterceptor extends TAsyncMet
         if (throwable != null) {
             return;
         }
-        ((AsyncCallEndFlagFieldAccessor)target)._$PINPOINT$_setAsyncCallEndFlag(true);
+        ((AsyncCallEndFlagFieldAccessor)target)._$APM$_setAsyncCallEndFlag(true);
     }
 
     @Override

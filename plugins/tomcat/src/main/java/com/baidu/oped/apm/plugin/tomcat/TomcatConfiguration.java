@@ -23,11 +23,11 @@ import com.baidu.oped.apm.bootstrap.config.ProfilerConfig;
  *
  */
 public class TomcatConfiguration {
-    private final boolean tomcatHidePinpointHeader;
+    private final boolean tomcatHideApmHeader;
     private Filter<String> tomcatExcludeUrlFilter;
 
     public TomcatConfiguration(ProfilerConfig config) {
-        this.tomcatHidePinpointHeader = config.readBoolean("profiler.tomcat.hidepinpointheader", true);
+        this.tomcatHideApmHeader = config.readBoolean("profiler.tomcat.hideapmheader", true);
         final String tomcatExcludeURL = config.readString("profiler.tomcat.excludeurl", "");
         
         if (!tomcatExcludeURL.isEmpty()) {
@@ -39,7 +39,7 @@ public class TomcatConfiguration {
         return tomcatExcludeUrlFilter;
     }
 
-    public boolean isTomcatHidePinpointHeader() {
-        return tomcatHidePinpointHeader;
+    public boolean isTomcatHideApmHeader() {
+        return tomcatHideApmHeader;
     }
 }

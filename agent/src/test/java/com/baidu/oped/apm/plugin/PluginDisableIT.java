@@ -25,12 +25,12 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointConfig;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmConfig;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"com.fasterxml.jackson.core:jackson-databind:[2.6.1]"})
-@PinpointConfig("pinpoint-disabled-plugin-test.config")
+@ApmConfig("apm-disabled-plugin-test.config")
 public class PluginDisableIT {
 
     @Test

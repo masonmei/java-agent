@@ -228,7 +228,7 @@ public class StandardHostValveInvokeInterceptor implements AroundInterceptor {
 
     private void setTraceMetadata(final Request request, final Trace trace) {
         if (request instanceof TraceAccessor) {
-            ((TraceAccessor)request)._$PINPOINT$_setTrace(trace);
+            ((TraceAccessor)request)._$APM$_setTrace(trace);
         }
     }
 
@@ -237,7 +237,7 @@ public class StandardHostValveInvokeInterceptor implements AroundInterceptor {
             return null;
         }
 
-        return ((TraceAccessor)request)._$PINPOINT$_getTrace();
+        return ((TraceAccessor)request)._$APM$_getTrace();
     }
 
     private boolean getAsyncMetadata(final Request request) {
@@ -245,7 +245,7 @@ public class StandardHostValveInvokeInterceptor implements AroundInterceptor {
             return false;
         }
 
-        return ((AsyncAccessor)request)._$PINPOINT$_isAsync();
+        return ((AsyncAccessor)request)._$APM$_isAsync();
     }
 
     private boolean isAsynchronousProcess(final Request request) {

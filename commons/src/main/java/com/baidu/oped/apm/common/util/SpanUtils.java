@@ -16,7 +16,7 @@
 
 package com.baidu.oped.apm.common.util;
 
-import static com.baidu.oped.apm.common.PinpointConstants.*;
+import static com.baidu.oped.apm.common.ApmConstants.*;
 
 import com.baidu.oped.apm.common.buffer.AutomaticBuffer;
 import com.baidu.oped.apm.common.buffer.Buffer;

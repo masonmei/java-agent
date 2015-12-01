@@ -28,13 +28,13 @@ import org.junit.runner.RunWith;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.JvmVersion;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author Jongho Moon
  *
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @JvmVersion({6, 7, 8})
 public class HttpURLConnectionIT {
 

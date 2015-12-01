@@ -53,7 +53,7 @@ public class ConcurrentCall {
             "/arcus",
             "/nested"
     };
-    private String pinpoint = ".pinpoint";
+    private String apm = ".apm";
 
     private AtomicInteger id = new AtomicInteger(new Random().nextInt());
     private ExecutorService executorService = Executors.newFixedThreadPool(200);
@@ -98,7 +98,7 @@ public class ConcurrentCall {
     }
 
     private String getUrl() {
-        return host + getUrls() + pinpoint;
+        return host + getUrls() + apm;
     }
 
     private String getUrls() {

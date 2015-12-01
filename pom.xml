@@ -8,7 +8,7 @@
     <groupId>com.baidu.oped.apm</groupId>
     <artifactId>pom</artifactId>
     <version>1.2.0-SNAPSHOT</version>
-    <name>pinpoint</name>
+    <name>apm</name>
     <packaging>pom</packaging>
 
     <repositories>
@@ -85,60 +85,60 @@
         <dependencies>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-commons</artifactId>
+                <artifactId>apm-commons</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-commons-hbase</artifactId>
+                <artifactId>apm-commons-hbase</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-rpc</artifactId>
+                <artifactId>apm-rpc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-thrift</artifactId>
+                <artifactId>apm-thrift</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-bootstrap-core</artifactId>
+                <artifactId>apm-bootstrap-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-bootstrap</artifactId>
+                <artifactId>apm-bootstrap</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-profiler</artifactId>
+                <artifactId>apm-profiler</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-profiler-optional</artifactId>
+                <artifactId>apm-profiler-optional</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-plugins</artifactId>
+                <artifactId>apm-plugins</artifactId>
                 <type>pom</type>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-plugins</artifactId>
+                <artifactId>apm-plugins</artifactId>
                 <type>zip</type>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baidu.oped.apm</groupId>
-                <artifactId>pinpoint-test</artifactId>
+                <artifactId>apm-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -736,7 +736,7 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>enforce-pinpoint-build-requirements</id>
+                        <id>enforce-apm-build-requirements</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>enforce</goal>
@@ -771,8 +771,8 @@
                     <aggregate>true</aggregate>
                     <inputEncoding>${encoding}</inputEncoding>
                     <outputEncoding>${encoding}</outputEncoding>
-                    <windowTitle>Pinpoint ${project.version} Cross Reference</windowTitle>
-                    <docTitle>Pinpoint ${project.version} Cross Reference</docTitle>
+                    <windowTitle>Apm ${project.version} Cross Reference</windowTitle>
+                    <docTitle>Apm ${project.version} Cross Reference</docTitle>
                 </configuration>
             </plugin>
             <plugin>

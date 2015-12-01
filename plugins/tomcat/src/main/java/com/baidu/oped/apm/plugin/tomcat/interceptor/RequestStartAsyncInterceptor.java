@@ -71,13 +71,13 @@ public class RequestStartAsyncInterceptor implements AroundInterceptor {
         try {
             SpanEventRecorder recorder = trace.currentSpanEventRecorder();
             if (validate(target, result, throwable)) {
-                ((AsyncAccessor)target)._$PINPOINT$_setAsync(Boolean.TRUE);
+                ((AsyncAccessor)target)._$APM$_setAsync(Boolean.TRUE);
 
                 // make asynchronous trace-id
                 final AsyncTraceId asyncTraceId = trace.getAsyncTraceId();
                 recorder.recordNextAsyncId(asyncTraceId.getAsyncId());
                 // result is BasicFuture
-                ((AsyncTraceIdAccessor)result)._$PINPOINT$_setAsyncTraceId(asyncTraceId);
+                ((AsyncTraceIdAccessor)result)._$APM$_setAsyncTraceId(asyncTraceId);
                 if (isDebug) {
                     logger.debug("Set asyncTraceId metadata {}", asyncTraceId);
                 }

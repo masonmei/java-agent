@@ -56,8 +56,8 @@ public class SimpleServerMessageListener extends SimpleMessageListener implement
     }
 
     @Override
-    public void handlePing(PingPacket pingPacket, PinpointServer pinpointServer) {
-        logger.info("handlePing packet:{}, remote:{} ", pingPacket, pinpointServer.getRemoteAddress());
+    public void handlePing(PingPacket pingPacket, ApmServer apmServer) {
+        logger.info("handlePing packet:{}, remote:{} ", pingPacket, apmServer.getRemoteAddress());
     }
 
 }

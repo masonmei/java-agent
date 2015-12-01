@@ -63,18 +63,18 @@ public class DefaultProfilerConfig implements ProfilerConfig {
         }
     }
 
-    public static ProfilerConfig load(String pinpointConfigFileName) throws IOException {
+    public static ProfilerConfig load(String apmConfigFileName) throws IOException {
         try {
-            Properties properties = PropertyUtils.loadProperty(pinpointConfigFileName);
+            Properties properties = PropertyUtils.loadProperty(apmConfigFileName);
             return new DefaultProfilerConfig(properties);
         } catch (FileNotFoundException fe) {
             if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, pinpointConfigFileName + " file does not exist. Please check your configuration.");
+                logger.log(Level.WARNING, apmConfigFileName + " file does not exist. Please check your configuration.");
             }
             throw fe;
         } catch (IOException e) {
             if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, pinpointConfigFileName + " file I/O error. Error:" + e.getMessage(), e);
+                logger.log(Level.WARNING, apmConfigFileName + " file I/O error. Error:" + e.getMessage(), e);
             }
             throw e;
         }
@@ -109,7 +109,7 @@ public class DefaultProfilerConfig implements ProfilerConfig {
     
     private int jdbcSqlCacheSize = 1024;
 
-    private boolean tomcatHidePinpointHeader = true;
+    private boolean tomcatHideApmHeader = true;
     private Filter<String> tomcatExcludeUrlFilter = new SkipFilter<String>();
     private String tomcatRealIpHeader;
     private String tomcatRealIpEmptyValue;
@@ -309,8 +309,8 @@ public class DefaultProfilerConfig implements ProfilerConfig {
     }
 
     @Override
-    public boolean isTomcatHidePinpointHeader() {
-        return tomcatHidePinpointHeader;
+    public boolean isTomcatHideApmHeader() {
+        return tomcatHideApmHeader;
     }
 
     @Override
@@ -535,7 +535,7 @@ public class DefaultProfilerConfig implements ProfilerConfig {
 
         this.tcpDataSenderCommandAcceptEnable = readBoolean("profiler.tcpdatasender.command.accept.enable", false);
 
-        this.traceAgentActiveThread = readBoolean("profiler.pinpoint.activethread", true);
+        this.traceAgentActiveThread = readBoolean("profiler.apm.activethread", true);
 
         // CallStck
         this.callStackMaxDepth = readInt("profiler.callstack.max.depth", 64);
@@ -546,7 +546,7 @@ public class DefaultProfilerConfig implements ProfilerConfig {
         // JDBC
         this.jdbcSqlCacheSize = readInt("profiler.jdbc.sqlcachesize", 1024);
 
-        this.tomcatHidePinpointHeader = readBoolean("profiler.tomcat.hidepinpointheader", true);
+        this.tomcatHideApmHeader = readBoolean("profiler.tomcat.hideapmheader", true);
         final String tomcatExcludeURL = readString("profiler.tomcat.excludeurl", "");
         if (!tomcatExcludeURL.isEmpty()) {
             this.tomcatExcludeUrlFilter = new ExcludeUrlFilter(tomcatExcludeURL);
@@ -766,8 +766,8 @@ public class DefaultProfilerConfig implements ProfilerConfig {
         builder.append(callStackMaxDepth);
         builder.append(", jdbcSqlCacheSize=");
         builder.append(jdbcSqlCacheSize);
-        builder.append(", tomcatHidePinpointHeader=");
-        builder.append(tomcatHidePinpointHeader);
+        builder.append(", tomcatHideApmHeader=");
+        builder.append(tomcatHideApmHeader);
         builder.append(", tomcatExcludeUrlFilter=");
         builder.append(tomcatExcludeUrlFilter);
         builder.append(", tomcatExcludeProfileMethodFilter=");

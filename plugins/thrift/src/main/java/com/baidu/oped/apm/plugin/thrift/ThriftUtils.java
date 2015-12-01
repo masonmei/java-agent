@@ -43,7 +43,7 @@ public class ThriftUtils {
     
     /**
      * Returns the name of the specified {@link org.apache.thrift.TBaseProcessor TBaseProcessor}
-     * as uri to be used in Pinpoint.
+     * as uri to be used in Apm.
      */
     public static String getProcessorNameAsUri(TBaseProcessor<?> processor) {
         String actualProcessorName = processor.getClass().getName();
@@ -52,7 +52,7 @@ public class ThriftUtils {
     
     /**
      * Returns the name of the specified {@link org.apache.thrift.TBaseAsyncProcessor TBaseAsyncProcessor}
-     * as uri to be used in Pinpoint.
+     * as uri to be used in Apm.
      */
     public static String getAsyncProcessorNameAsUri(TBaseAsyncProcessor<?> asyncProcessor) {
         String actualAsyncProcessorName = asyncProcessor.getClass().getName();
@@ -61,7 +61,7 @@ public class ThriftUtils {
     
     /**
      * Returns the name of the specified {@link org.apache.thrift.TServiceClient TServiceClient}
-     * to be used in Pinpoint.
+     * to be used in Apm.
      */
     public static String getClientServiceName(TServiceClient client) {
         String clientClassName = client.getClass().getName();
@@ -70,7 +70,7 @@ public class ThriftUtils {
     
     /**
      * Returns the name of the specified {@link org.apache.thrift.async.TAsyncMethodCall TAsyncMethodCall}
-     * to be used in Pinpoint.
+     * to be used in Apm.
      */
     public static String getAsyncMethodCallName(TAsyncMethodCall<?> asyncMethodCall) {
         String asyncMethodCallClassName = asyncMethodCall.getClass().getName();

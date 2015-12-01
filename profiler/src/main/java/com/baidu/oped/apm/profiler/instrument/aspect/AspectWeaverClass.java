@@ -232,7 +232,7 @@ public class AspectWeaverClass {
 
     public static class DefaultMethodNameReplacer implements MethodNameReplacer {
         public static final String PREFIX = "__";
-        public static final String POSTFIX = "_$$pinpoint";
+        public static final String POSTFIX = "_$$apm";
 
         public String replaceMethodName(String methodName) {
             if (methodName == null) {

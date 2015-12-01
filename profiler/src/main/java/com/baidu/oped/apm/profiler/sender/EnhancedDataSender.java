@@ -18,7 +18,7 @@ package com.baidu.oped.apm.profiler.sender;
 
 import com.baidu.oped.apm.rpc.FutureListener;
 import com.baidu.oped.apm.rpc.ResponseMessage;
-import com.baidu.oped.apm.rpc.client.PinpointClientReconnectEventListener;
+import com.baidu.oped.apm.rpc.client.ApmClientReconnectEventListener;
 
 import org.apache.thrift.TBase;
 
@@ -31,7 +31,7 @@ public interface EnhancedDataSender extends DataSender {
     boolean request(TBase<?, ?> data, int retry);
     boolean request(TBase<?, ?> data, FutureListener<ResponseMessage> listener);
 
-    boolean addReconnectEventListener(PinpointClientReconnectEventListener eventListener);
-    boolean removeReconnectEventListener(PinpointClientReconnectEventListener eventListener);
+    boolean addReconnectEventListener(ApmClientReconnectEventListener eventListener);
+    boolean removeReconnectEventListener(ApmClientReconnectEventListener eventListener);
 
 }

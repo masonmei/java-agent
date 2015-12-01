@@ -11,7 +11,7 @@ import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
 import com.baidu.oped.apm.test.plugin.JvmVersion;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 import com.ning.http.client.AsyncHandler;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
@@ -20,7 +20,7 @@ import com.ning.http.client.Response;
 /**
  * @author netspider
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({ "com.ning:async-http-client:[1.7.24],[1.8.16,1.8.999)" })
 @JvmVersion(7)
 public class NingAsyncHttpClientIT {

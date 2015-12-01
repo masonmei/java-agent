@@ -146,7 +146,7 @@ public class TBaseProcessorProcessInterceptor implements AroundInterceptor {
             TProtocol inputProtocol = (TProtocol)args[0];
             TTransport inputTransport = inputProtocol.getTransport();
             if (inputTransport instanceof SocketFieldAccessor) {
-                Socket socket = ((SocketFieldAccessor)inputTransport)._$PINPOINT$_getSocket();
+                Socket socket = ((SocketFieldAccessor)inputTransport)._$APM$_getSocket();
                 if (socket != null) {
                     localIpPort = ThriftUtils.getHostPort(socket.getLocalSocketAddress());
                     remoteAddress = ThriftUtils.getHost(socket.getRemoteSocketAddress());

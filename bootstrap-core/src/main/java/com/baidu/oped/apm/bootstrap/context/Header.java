@@ -28,14 +28,14 @@ import java.util.Map;
  */
 public enum Header {
 
-    HTTP_TRACE_ID("Pinpoint-TraceID"),
-    HTTP_SPAN_ID("Pinpoint-SpanID"),
-    HTTP_PARENT_SPAN_ID("Pinpoint-pSpanID"),
-    HTTP_SAMPLED("Pinpoint-Sampled"),
-    HTTP_FLAGS("Pinpoint-Flags"),
-    HTTP_PARENT_APPLICATION_NAME("Pinpoint-pAppName"),
-    HTTP_PARENT_APPLICATION_TYPE("Pinpoint-pAppType"),
-    HTTP_HOST("Pinpoint-Host");
+    HTTP_TRACE_ID("Apm-TraceID"),
+    HTTP_SPAN_ID("Apm-SpanID"),
+    HTTP_PARENT_SPAN_ID("Apm-pSpanID"),
+    HTTP_SAMPLED("Apm-Sampled"),
+    HTTP_FLAGS("Apm-Flags"),
+    HTTP_PARENT_APPLICATION_NAME("Apm-pAppName"),
+    HTTP_PARENT_APPLICATION_TYPE("Apm-pAppType"),
+    HTTP_HOST("Apm-Host");
 
     private String name;
 
@@ -62,7 +62,7 @@ public enum Header {
         if (name == null) {
             return null;
         }
-        if (!startWithPinpointHeader(name)) {
+        if (!startWithApmHeader(name)) {
             return null;
         }
         return NAME_SET.get(name);
@@ -82,7 +82,7 @@ public enum Header {
         if (header == null) {
             return null;
         }
-        // if pinpoint header
+        // if apm header
         return new EmptyEnumeration();
     }
 
@@ -100,7 +100,7 @@ public enum Header {
         }
     };
 
-    private static boolean startWithPinpointHeader(String name) {
-        return name.startsWith("Pinpoint-");
+    private static boolean startWithApmHeader(String name) {
+        return name.startsWith("Apm-");
     }
 }

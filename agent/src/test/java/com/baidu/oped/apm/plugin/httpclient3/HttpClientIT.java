@@ -29,12 +29,12 @@ import com.baidu.oped.apm.bootstrap.plugin.test.Expectations;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author jaehong.kim
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({ "commons-httpclient:commons-httpclient:[3.0],[3.0.1],[3.1]" })
 public class HttpClientIT {
     @Test

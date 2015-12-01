@@ -19,7 +19,7 @@ package com.baidu.oped.apm.common.util;
 import java.util.Arrays;
 
 import com.google.common.primitives.Longs;
-import com.baidu.oped.apm.common.PinpointConstants;
+import com.baidu.oped.apm.common.ApmConstants;
 import com.baidu.oped.apm.thrift.dto.TSpan;
 
 import org.junit.Assert;
@@ -46,7 +46,7 @@ public class SpanUtilsTest {
     @Test
     public void testGetTraceIndexRowKey2() throws Exception {
         String agentId = "";
-        for (int i = 0; i < PinpointConstants.AGENT_NAME_MAX_LEN; i++) {
+        for (int i = 0; i < ApmConstants.AGENT_NAME_MAX_LEN; i++) {
             agentId += "1";
         }
 
@@ -57,7 +57,7 @@ public class SpanUtilsTest {
     @Test
     public void testGetTraceIndexRowKey3() throws Exception {
         String agentId = "";
-        for (int i = 0; i < PinpointConstants.AGENT_NAME_MAX_LEN + 1; i++) {
+        for (int i = 0; i < ApmConstants.AGENT_NAME_MAX_LEN + 1; i++) {
             agentId += "1";
         }
 
@@ -76,10 +76,10 @@ public class SpanUtilsTest {
 
         byte[] traceIndexRowKey = SpanUtils.getAgentIdTraceIndexRowKey(span.getAgentId(), span.getStartTime());
 
-        String agentId = BytesUtils.toString(traceIndexRowKey, 0, PinpointConstants.AGENT_NAME_MAX_LEN).trim();
+        String agentId = BytesUtils.toString(traceIndexRowKey, 0, ApmConstants.AGENT_NAME_MAX_LEN).trim();
         Assert.assertEquals(agentId0, agentId);
 
-        long time = Longs.fromByteArray(Arrays.copyOfRange(traceIndexRowKey, PinpointConstants.AGENT_NAME_MAX_LEN, PinpointConstants.AGENT_NAME_MAX_LEN + 8));
+        long time = Longs.fromByteArray(Arrays.copyOfRange(traceIndexRowKey, ApmConstants.AGENT_NAME_MAX_LEN, ApmConstants.AGENT_NAME_MAX_LEN + 8));
         time = TimeUtils.recoveryTimeMillis(time);
         Assert.assertEquals(time, l1);
     }

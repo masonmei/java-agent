@@ -72,7 +72,7 @@ public class TProtocolReadMessageBeginInterceptor implements AroundInterceptor {
         if (!validate(target)) {
             return;
         }
-        final boolean shouldTrace = ((AsyncMarkerFlagFieldAccessor)target)._$PINPOINT$_getAsyncMarkerFlag();
+        final boolean shouldTrace = ((AsyncMarkerFlagFieldAccessor)target)._$APM$_getAsyncMarkerFlag();
         if (shouldTrace) {
             String methodName = ThriftConstants.UNKNOWN_METHOD_NAME;
             if (result instanceof TMessage) {

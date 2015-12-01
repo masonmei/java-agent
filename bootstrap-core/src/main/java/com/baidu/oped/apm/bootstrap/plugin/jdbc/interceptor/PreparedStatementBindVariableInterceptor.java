@@ -60,7 +60,7 @@ public class PreparedStatementBindVariableInterceptor implements StaticAroundInt
         }
         Map<Integer, String> bindList = null;
         if (target instanceof BindValueAccessor) {
-            bindList = ((BindValueAccessor)target)._$PINPOINT$_getBindValue();
+            bindList = ((BindValueAccessor)target)._$APM$_getBindValue();
         }
         if (bindList == null) {
             if (logger.isWarnEnabled()) {

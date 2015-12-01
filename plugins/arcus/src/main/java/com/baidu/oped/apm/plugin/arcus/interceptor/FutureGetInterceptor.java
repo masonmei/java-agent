@@ -57,7 +57,7 @@ public class FutureGetInterceptor extends SpanAsyncEventSimpleAroundInterceptor 
         }
 
         // find the target node
-        final Operation op = ((OperationAccessor) target)._$PINPOINT$_getOperation();
+        final Operation op = ((OperationAccessor) target)._$APM$_getOperation();
         if (op == null) {
             logger.info("operation is null");
             return;
@@ -77,7 +77,7 @@ public class FutureGetInterceptor extends SpanAsyncEventSimpleAroundInterceptor 
 
         if (op instanceof ServiceCodeAccessor) {
             // determine the service type
-            String serviceCode = ((ServiceCodeAccessor) op)._$PINPOINT$_getServiceCode();
+            String serviceCode = ((ServiceCodeAccessor) op)._$APM$_getServiceCode();
             if (serviceCode != null) {
                 recorder.recordDestinationId(serviceCode);
                 recorder.recordServiceType(ArcusConstants.ARCUS_FUTURE_GET);

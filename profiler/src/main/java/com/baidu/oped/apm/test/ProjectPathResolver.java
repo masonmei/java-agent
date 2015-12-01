@@ -37,12 +37,12 @@ public class ProjectPathResolver {
             throw new NullPointerException("testClass must not be null");
         }
         String testClassDir = getTestClassPath(testClass);
-        // /D:/pinpoint_project/pinpoint/profiler/target/test-classes/
+        // /D:/apm_project/apm/profiler/target/test-classes/
         String targetPath = getTargetPath(testClassDir);
         String modulePath = getModulePath(targetPath);
         String projectPath = getProjectPath(modulePath);
-        String pinpointAgentPath = getPinpointAgentPath(projectPath);
-        return new ProjectPath(testClassDir, targetPath, modulePath, projectPath, pinpointAgentPath);
+        String apmAgentPath = getApmAgentPath(projectPath);
+        return new ProjectPath(testClassDir, targetPath, modulePath, projectPath, apmAgentPath);
     }
 
     private String getTestClassPath(Class<?> testClass) {
@@ -92,14 +92,14 @@ public class ProjectPathResolver {
         return modulePath;
     }
 
-    private String getPinpointAgentPath(String projectPath) {
+    private String getApmAgentPath(String projectPath) {
         if (projectPath == null) {
             throw new NullPointerException("projectPath must not be null");
         }
 
-        String pinpointAgentDir = projectPath + "/profiler/target/pinpoint-agent";
-        logger.debug("pinpointAgentDir:{}", pinpointAgentDir);
-        return pinpointAgentDir;
+        String apmAgentDir = projectPath + "/profiler/target/apm-agent";
+        logger.debug("apmAgentDir:{}", apmAgentDir);
+        return apmAgentDir;
 
     }
 
@@ -109,7 +109,7 @@ public class ProjectPathResolver {
             throw new NullPointerException("testClassDir must not be null");
         }
         // remove last '/'
-        // D:/pinpoint_project/pinpoint/profiler/target/test-classes/ -> D:/pinpoint_project/pinpoint/profiler/target/test-classes
+        // D:/apm_project/apm/profiler/target/test-classes/ -> D:/apm_project/apm/profiler/target/test-classes
 
         final String target = "target";
         int targetFound = testClassDir.lastIndexOf(target);
@@ -138,14 +138,14 @@ public class ProjectPathResolver {
         private final String targetPath;
         private final String modulePath;
         private final String projectPath;
-        private final String pinpointAgentPath;
+        private final String apmAgentPath;
 
-        public ProjectPath(String testClassPath,String targetPath, String modulePath, String projectPath, String pinpointAgentPath) {
+        public ProjectPath(String testClassPath,String targetPath, String modulePath, String projectPath, String apmAgentPath) {
             this.testClassPath = testClassPath;
             this.targetPath = targetPath;
             this.modulePath = modulePath;
             this.projectPath = projectPath;
-            this.pinpointAgentPath = pinpointAgentPath;
+            this.apmAgentPath = apmAgentPath;
         }
 
         public String getTestClassPath() {
@@ -164,8 +164,8 @@ public class ProjectPathResolver {
             return projectPath;
         }
 
-        public  String getPinpointAgentPath() {
-            return pinpointAgentPath;
+        public  String getApmAgentPath() {
+            return apmAgentPath;
         }
 
         @Override
@@ -175,7 +175,7 @@ public class ProjectPathResolver {
             sb.append(", targetPath='").append(targetPath).append('\'');
             sb.append(", modulePath='").append(modulePath).append('\'');
             sb.append(", projectPath='").append(projectPath).append('\'');
-            sb.append(", pinpointAgentPath='").append(pinpointAgentPath).append('\'');
+            sb.append(", apmAgentPath='").append(apmAgentPath).append('\'');
             sb.append('}');
             return sb.toString();
         }

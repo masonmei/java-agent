@@ -24,7 +24,7 @@ import com.baidu.oped.apm.bootstrap.instrument.aspect.PointCut;
 import java.util.Enumeration;
 
 /**
- * filtering pinpoint header
+ * filtering apm header
  * @author emeroad
  */
 @Aspect

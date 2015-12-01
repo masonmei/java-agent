@@ -19,5 +19,5 @@ package com.baidu.oped.apm.profiler.interceptor.bci;
  *
  */
 public interface StringGetter {
-    public String _$PINPOINT$_getString();
+    public String _$APM$_getString();
 }

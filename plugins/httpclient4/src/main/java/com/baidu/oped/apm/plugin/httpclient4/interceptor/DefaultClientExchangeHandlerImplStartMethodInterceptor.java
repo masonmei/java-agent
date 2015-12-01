@@ -136,7 +136,7 @@ public class DefaultClientExchangeHandlerImplStartMethodInterceptor implements A
                 // set asynchronous trace
                 final AsyncTraceId asyncTraceId = trace.getAsyncTraceId();
                 recorder.recordNextAsyncId(asyncTraceId.getAsyncId());
-                ((AsyncTraceIdAccessor)((ResultFutureGetter)target)._$PINPOINT$_getResultFuture())._$PINPOINT$_setAsyncTraceId(asyncTraceId);
+                ((AsyncTraceIdAccessor)((ResultFutureGetter)target)._$APM$_getResultFuture())._$APM$_setAsyncTraceId(asyncTraceId);
                 if (isDebug) {
                     logger.debug("Set asyncTraceId metadata {}", asyncTraceId);
                 }
@@ -152,7 +152,7 @@ public class DefaultClientExchangeHandlerImplStartMethodInterceptor implements A
                 return null;
             }
 
-            final HttpAsyncRequestProducer requestProducer = ((RequestProducerGetter)target)._$PINPOINT$_getRequestProducer();
+            final HttpAsyncRequestProducer requestProducer = ((RequestProducerGetter)target)._$APM$_getRequestProducer();
             return requestProducer.generateRequest();
         } catch (Exception e) {
             return null;
@@ -165,7 +165,7 @@ public class DefaultClientExchangeHandlerImplStartMethodInterceptor implements A
             return false;
         }
         
-        BasicFuture<?> future = ((ResultFutureGetter)target)._$PINPOINT$_getResultFuture();
+        BasicFuture<?> future = ((ResultFutureGetter)target)._$APM$_getResultFuture();
 
         if (future == null) {
             logger.debug("Invalid target object. field is null({}).", HttpClient4Constants.FIELD_RESULT_FUTURE);
@@ -216,7 +216,7 @@ public class DefaultClientExchangeHandlerImplStartMethodInterceptor implements A
             return null;
         }
 
-        final HttpAsyncRequestProducer producer = ((RequestProducerGetter)target)._$PINPOINT$_getRequestProducer();
+        final HttpAsyncRequestProducer producer = ((RequestProducerGetter)target)._$APM$_getRequestProducer();
         final HttpHost httpHost = producer.getTarget();
 
         return new NameIntValuePair<String>(httpHost.getHostName(), httpHost.getPort());

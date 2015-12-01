@@ -38,7 +38,7 @@ public class SetCacheManagerInterceptor implements BeforeInterceptor {
             logger.beforeInterceptor(target, args);
         }
 
-        String serviceCode = ((ServiceCodeAccessor)args[0])._$PINPOINT$_getServiceCode();
-        ((ServiceCodeAccessor)target)._$PINPOINT$_setServiceCode(serviceCode);
+        String serviceCode = ((ServiceCodeAccessor)args[0])._$APM$_getServiceCode();
+        ((ServiceCodeAccessor)target)._$APM$_setServiceCode(serviceCode);
     }
 }

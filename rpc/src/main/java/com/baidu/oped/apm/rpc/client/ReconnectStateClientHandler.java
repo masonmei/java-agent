@@ -18,7 +18,7 @@ package com.baidu.oped.apm.rpc.client;
 
 import com.baidu.oped.apm.rpc.DefaultFuture;
 import com.baidu.oped.apm.rpc.Future;
-import com.baidu.oped.apm.rpc.PinpointSocketException;
+import com.baidu.oped.apm.rpc.ApmSocketException;
 import com.baidu.oped.apm.rpc.ResponseMessage;
 import com.baidu.oped.apm.rpc.client.ConnectFuture.Result;
 import com.baidu.oped.apm.rpc.cluster.ClusterOption;
@@ -31,7 +31,7 @@ import java.net.SocketAddress;
  * @author emeroad
  * @author netspider
  */
-public class ReconnectStateClientHandler implements PinpointClientHandler {
+public class ReconnectStateClientHandler implements ApmClientHandler {
 
     private static final ConnectFuture failedConnectFuture = new ConnectFuture();
     static {
@@ -55,7 +55,7 @@ public class ReconnectStateClientHandler implements PinpointClientHandler {
     }
     
     @Override
-    public void setPinpointClient(PinpointClient pinpointClient) {
+    public void setApmClient(ApmClient apmClient) {
     }
 
     @Override
@@ -83,8 +83,8 @@ public class ReconnectStateClientHandler implements PinpointClientHandler {
     public void send(byte[] bytes) {
     }
 
-    private PinpointSocketException newReconnectException() {
-        return new PinpointSocketException("reconnecting...");
+    private ApmSocketException newReconnectException() {
+        return new ApmSocketException("reconnecting...");
     }
 
     @Override

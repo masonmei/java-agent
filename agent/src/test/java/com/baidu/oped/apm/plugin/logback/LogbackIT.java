@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"ch.qos.logback:logback-classic:[1.0.13],[1.1.3,)", "org.slf4j:slf4j-api:1.7.12"})
 public class LogbackIT {
 

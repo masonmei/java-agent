@@ -31,8 +31,8 @@ import org.mockito.MockitoAnnotations;
 
 import com.baidu.oped.apm.common.Version;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointAgent;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmAgent;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * Tests against mybatis 3.0.3+. Prior versions are missing some APIs that are called during the IT. (Most notably,
@@ -40,8 +40,8 @@ import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
  * 
  * @author HyunGil Jeong
  */
-@RunWith(PinpointPluginTestSuite.class)
-@PinpointAgent("agent/target/pinpoint-agent-" + Version.VERSION)
+@RunWith(ApmPluginTestSuite.class)
+@ApmAgent("agent/target/apm-agent-" + Version.VERSION)
 @Dependency({ "org.mybatis:mybatis:[3.0.3,)", "org.mockito:mockito-all:1.8.4" })
 public class DefaultSqlSessionIT extends SqlSessionTestBase {
 

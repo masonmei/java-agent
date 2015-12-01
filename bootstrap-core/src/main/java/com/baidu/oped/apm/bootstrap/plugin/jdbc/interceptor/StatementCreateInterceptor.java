@@ -70,13 +70,13 @@ public class StatementCreateInterceptor implements AroundInterceptor {
             return;
         }
         if (target instanceof Connection) {
-            DatabaseInfo databaseInfo = (target instanceof DatabaseInfoAccessor) ? ((DatabaseInfoAccessor)target)._$PINPOINT$_getDatabaseInfo() : null;
+            DatabaseInfo databaseInfo = (target instanceof DatabaseInfoAccessor) ? ((DatabaseInfoAccessor)target)._$APM$_getDatabaseInfo() : null;
             
             if (databaseInfo == null) {
                 databaseInfo = UnKnownDatabaseInfo.INSTANCE;
             }
             
-            ((DatabaseInfoAccessor)result)._$PINPOINT$_setDatabaseInfo(databaseInfo);
+            ((DatabaseInfoAccessor)result)._$APM$_setDatabaseInfo(databaseInfo);
         }
     }
 }

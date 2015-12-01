@@ -75,8 +75,8 @@ public class HttpURLConnectionInterceptor implements AroundInterceptor {
 
         HttpURLConnection request = (HttpURLConnection) target;
         
-        boolean connected = ((ConnectedGetter)target)._$PINPOINT$_isConnected();
-        boolean connecting = (target instanceof ConnectingGetter)  && ((ConnectingGetter)target)._$PINPOINT$_isConnecting();
+        boolean connected = ((ConnectedGetter)target)._$APM$_isConnected();
+        boolean connecting = (target instanceof ConnectingGetter)  && ((ConnectingGetter)target)._$APM$_isConnecting();
         
         if (connected || connecting) {
             return;

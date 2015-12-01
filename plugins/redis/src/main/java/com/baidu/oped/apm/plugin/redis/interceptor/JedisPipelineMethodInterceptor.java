@@ -60,7 +60,7 @@ public class JedisPipelineMethodInterceptor extends SpanEventSimpleAroundInterce
     public void doInAfterTrace(SpanEventRecorder recorder, Object target, Object[] args, Object result, Throwable throwable) {
         String endPoint = null;
         if (target instanceof EndPointAccessor) {
-            endPoint = ((EndPointAccessor)target)._$PINPOINT$_getEndPoint();
+            endPoint = ((EndPointAccessor)target)._$APM$_getEndPoint();
         }
 
         final InterceptorGroupInvocation invocation = interceptorGroup.getCurrentInvocation();

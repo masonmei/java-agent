@@ -89,7 +89,7 @@ public final class HeaderTBaseSerializerFactory implements SerializerFactory<Hea
     public HeaderTBaseSerializer createSerializer() {
         ResettableByteArrayOutputStream baos = null;
         if (safetyGuaranteed) {
-            baos = new PinpointByteArrayOutputStream(outputStreamSize, autoExpand);
+            baos = new ApmByteArrayOutputStream(outputStreamSize, autoExpand);
         } else {
             baos = new UnsafeByteArrayOutputStream(outputStreamSize, autoExpand);
         }

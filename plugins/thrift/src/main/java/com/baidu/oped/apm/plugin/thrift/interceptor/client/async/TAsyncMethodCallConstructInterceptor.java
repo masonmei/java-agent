@@ -45,10 +45,10 @@ public class TAsyncMethodCallConstructInterceptor implements AroundInterceptor {
             logger.afterInterceptor(target, args, result, throwable);
         }
         if (validate(target)) {
-            TNonblockingTransport transport = ((TNonblockingTransportFieldGetter)target)._$PINPOINT$_getTNonblockingTransport();
+            TNonblockingTransport transport = ((TNonblockingTransportFieldGetter)target)._$APM$_getTNonblockingTransport();
             if (validateTransport(transport)) {
-                SocketAddress socketAddress = ((SocketAddressFieldAccessor)transport)._$PINPOINT$_getSocketAddress();
-                ((SocketAddressFieldAccessor)target)._$PINPOINT$_setSocketAddress(socketAddress);
+                SocketAddress socketAddress = ((SocketAddressFieldAccessor)transport)._$APM$_getSocketAddress();
+                ((SocketAddressFieldAccessor)target)._$APM$_setSocketAddress(socketAddress);
             }
         }
     }

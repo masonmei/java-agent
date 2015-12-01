@@ -70,7 +70,7 @@ public class FrontCacheGetFutureGetInterceptor implements AroundInterceptor {
         try {
             final SpanEventRecorder recorder = trace.currentSpanEventRecorder();
             recorder.recordApi(methodDescriptor);
-            String cacheName = ((CacheNameAccessor)target)._$PINPOINT$_getCacheName();
+            String cacheName = ((CacheNameAccessor)target)._$APM$_getCacheName();
             if (cacheName != null) {
                 recorder.recordDestinationId(cacheName);
             }

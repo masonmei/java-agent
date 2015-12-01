@@ -33,7 +33,7 @@ public class ValidIdCheckerTest {
 
     @Test
     public void checkValidId() {
-        Assert.assertFalse(p.matcher("PINPOINT123").find());
+        Assert.assertFalse(p.matcher("APM123").find());
         Assert.assertFalse(p.matcher("P1NPOINT").find());
         Assert.assertFalse(p.matcher("1PNPOINT").find());
         Assert.assertFalse(p.matcher("P1NPOINT.DEV").find());

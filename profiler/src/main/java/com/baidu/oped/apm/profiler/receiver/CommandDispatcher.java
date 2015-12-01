@@ -17,7 +17,7 @@
 package com.baidu.oped.apm.profiler.receiver;
 
 import com.baidu.oped.apm.rpc.MessageListener;
-import com.baidu.oped.apm.rpc.PinpointSocket;
+import com.baidu.oped.apm.rpc.ApmSocket;
 import com.baidu.oped.apm.rpc.packet.RequestPacket;
 import com.baidu.oped.apm.rpc.packet.SendPacket;
 import com.baidu.oped.apm.rpc.packet.stream.StreamClosePacket;
@@ -44,16 +44,16 @@ public class CommandDispatcher implements MessageListener, ServerStreamChannelMe
     }
 
     @Override
-    public void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket) {
-        logger.info("handleSend packet:{}, remote:{}", sendPacket, pinpointSocket.getRemoteAddress());
+    public void handleSend(SendPacket sendPacket, ApmSocket apmSocket) {
+        logger.info("handleSend packet:{}, remote:{}", sendPacket, apmSocket.getRemoteAddress());
     }
 
     @Override
-    public void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket) {
-        logger.info("handleRequest packet:{}, remote:{}", requestPacket, pinpointSocket.getRemoteAddress());
+    public void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket) {
+        logger.info("handleRequest packet:{}, remote:{}", requestPacket, apmSocket.getRemoteAddress());
 
         final TBase<?, ?> request = SerializationUtils.deserialize(requestPacket.getPayload(), CommandSerializer.DESERIALIZER_FACTORY, null);
-        logger.debug("handleRequest request:{}, remote:{}", request, pinpointSocket.getRemoteAddress());
+        logger.debug("handleRequest request:{}, remote:{}", request, apmSocket.getRemoteAddress());
 
         TBase response;
         if (request == null) {
@@ -75,7 +75,7 @@ public class CommandDispatcher implements MessageListener, ServerStreamChannelMe
 
         final byte[] payload = SerializationUtils.serialize(response, CommandSerializer.SERIALIZER_FACTORY, null);
         if (payload != null) {
-            pinpointSocket.response(requestPacket, payload);
+            apmSocket.response(requestPacket, payload);
         }
     }
 

@@ -50,7 +50,7 @@ public class InvokeAfterCodeGenerator extends InvokeCodeGenerator {
         builder.begin();
 
         // try {
-        //    (($INTERCEPTOR_TYPE)_$PINPOINT$_holder13.getInterceptor.before($ARGUMENTS);
+        //    (($INTERCEPTOR_TYPE)_$APM$_holder13.getInterceptor.before($ARGUMENTS);
         // } catch (Throwable t) {
         //     InterceptorInvokerHelper.handleException(t);
         // }
@@ -69,7 +69,7 @@ public class InvokeAfterCodeGenerator extends InvokeCodeGenerator {
             builder.format(");");
         }
         
-        builder.format("} catch (java.lang.Throwable _$PINPOINT_EXCEPTION$_) { %1$s.handleException(_$PINPOINT_EXCEPTION$_); }", getInterceptorInvokerHelperClassName());
+        builder.format("} catch (java.lang.Throwable _$APM_EXCEPTION$_) { %1$s.handleException(_$APM_EXCEPTION$_); }", getInterceptorInvokerHelperClassName());
         
         if (catchClause) {
             builder.append(" throw $e;");

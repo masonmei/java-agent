@@ -45,7 +45,7 @@ public class TSocketConstructInterceptor implements AroundInterceptor {
         }
         if (validate(target)) {
             Socket socket = ((TSocket)target).getSocket();
-            ((SocketFieldAccessor)target)._$PINPOINT$_setSocket(socket);
+            ((SocketFieldAccessor)target)._$APM$_setSocket(socket);
         }
     }
 

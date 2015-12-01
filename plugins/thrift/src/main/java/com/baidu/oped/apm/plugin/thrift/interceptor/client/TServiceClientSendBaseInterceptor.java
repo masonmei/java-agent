@@ -105,7 +105,7 @@ public class TServiceClientSendBaseInterceptor implements AroundInterceptor {
                 // retrieve connection information
                 String remoteAddress = ThriftConstants.UNKNOWN_ADDRESS;
                 if (transport instanceof SocketFieldAccessor) {
-                    Socket socket = ((SocketFieldAccessor)transport)._$PINPOINT$_getSocket();
+                    Socket socket = ((SocketFieldAccessor)transport)._$APM$_getSocket();
                     if (socket != null) {
                         remoteAddress = ThriftUtils.getHostPort(socket.getRemoteSocketAddress());
                     }

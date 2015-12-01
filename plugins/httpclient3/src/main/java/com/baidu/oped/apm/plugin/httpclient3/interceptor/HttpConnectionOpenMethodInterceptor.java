@@ -43,12 +43,12 @@ public class HttpConnectionOpenMethodInterceptor extends SpanEventSimpleAroundIn
 
         if (target instanceof HostNameGetter && target instanceof PortNumberGetter && target instanceof ProxyHostNameGetter && target instanceof ProxyPortNumberGetter) {
             final StringBuilder sb = new StringBuilder();
-            if (((ProxyHostNameGetter)target)._$PINPOINT$_getProxyHostName() != null) {
-                sb.append(((ProxyHostNameGetter)target)._$PINPOINT$_getProxyHostName());
-                sb.append(":").append(((ProxyPortNumberGetter)target)._$PINPOINT$_getProxyPortNumber());
+            if (((ProxyHostNameGetter)target)._$APM$_getProxyHostName() != null) {
+                sb.append(((ProxyHostNameGetter)target)._$APM$_getProxyHostName());
+                sb.append(":").append(((ProxyPortNumberGetter)target)._$APM$_getProxyPortNumber());
             } else {
-                sb.append(((HostNameGetter)target)._$PINPOINT$_getHostName());
-                sb.append(":").append(((PortNumberGetter)target)._$PINPOINT$_getPortNumber());
+                sb.append(((HostNameGetter)target)._$APM$_getHostName());
+                sb.append(":").append(((PortNumberGetter)target)._$APM$_getPortNumber());
             }
             recorder.recordAttribute(AnnotationKey.HTTP_INTERNAL_DISPLAY, sb.toString());
         }

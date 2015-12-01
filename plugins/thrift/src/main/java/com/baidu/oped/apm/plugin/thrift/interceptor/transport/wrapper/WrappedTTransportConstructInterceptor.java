@@ -43,8 +43,8 @@ public abstract class WrappedTTransportConstructInterceptor implements AroundInt
         if (validateTransport(target)) {
             TTransport wrappedTransport = getWrappedTransport(args);
             if (validateTransport(wrappedTransport)) {
-                Socket socket = ((SocketFieldAccessor)wrappedTransport)._$PINPOINT$_getSocket();
-                ((SocketFieldAccessor)target)._$PINPOINT$_setSocket(socket);
+                Socket socket = ((SocketFieldAccessor)wrappedTransport)._$APM$_getSocket();
+                ((SocketFieldAccessor)target)._$APM$_setSocket(socket);
             }
         }
     }

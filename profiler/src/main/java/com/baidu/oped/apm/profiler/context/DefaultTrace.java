@@ -27,7 +27,7 @@ import com.baidu.oped.apm.bootstrap.context.Trace;
 import com.baidu.oped.apm.bootstrap.context.TraceContext;
 import com.baidu.oped.apm.bootstrap.context.TraceId;
 import com.baidu.oped.apm.bootstrap.context.TraceType;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.context.storage.Storage;
 
 /**
@@ -138,7 +138,7 @@ public final class DefaultTrace implements Trace {
 
         if (this.closed) {
             if (isWarn) {
-                PinpointException exception = new PinpointException("already closed trace.");
+                ApmException exception = new ApmException("already closed trace.");
                 logger.warn("[DefaultTrace] Corrupted call stack found.", exception);
             }
         } else {
@@ -157,7 +157,7 @@ public final class DefaultTrace implements Trace {
     public void traceBlockEnd(int stackId) {
         if (this.closed) {
             if (isWarn) {
-                final PinpointException exception = new PinpointException("already closed trace.");
+                final ApmException exception = new ApmException("already closed trace.");
                 logger.warn("[DefaultTrace] Corrupted call stack found.", exception);
             }
             return;
@@ -166,7 +166,7 @@ public final class DefaultTrace implements Trace {
         final SpanEvent spanEvent = callStack.pop();
         if (spanEvent == null) {
             if (isWarn) {
-                PinpointException exception = new PinpointException("call stack is empty.");
+                ApmException exception = new ApmException("call stack is empty.");
                 logger.warn("[DefaultTrace] Corrupted call stack found.", exception);
             }
             return;
@@ -175,7 +175,7 @@ public final class DefaultTrace implements Trace {
         if (spanEvent.getStackId() != stackId) {
             // stack dump will make debugging easy.
             if (isWarn) {
-                PinpointException exception = new PinpointException("not matched stack id. expected=" + stackId + ", current=" + spanEvent.getStackId());
+                ApmException exception = new ApmException("not matched stack id. expected=" + stackId + ", current=" + spanEvent.getStackId());
                 logger.warn("[DefaultTrace] Corrupted call stack found.", exception);
             }
         }
@@ -196,7 +196,7 @@ public final class DefaultTrace implements Trace {
 
         if (!callStack.empty()) {
             if (isWarn) {
-                PinpointException exception = new PinpointException("not empty call stack.");
+                ApmException exception = new ApmException("not empty call stack.");
                 logger.warn("[DefaultTrace] Corrupted call stack found.", exception);
             }
             // skip
@@ -302,7 +302,7 @@ public final class DefaultTrace implements Trace {
         SpanEvent spanEvent = callStack.peek();
         if (spanEvent == null) {
             if (isWarn) {
-                PinpointException exception = new PinpointException("call stack is empty");
+                ApmException exception = new ApmException("call stack is empty");
                 logger.warn("[DefaultTrace] Corrupted call stack found.", exception);
             }
             // make dummy.

@@ -20,6 +20,6 @@ package com.baidu.oped.apm.plugin.thrift.field.accessor;
  * @author HyunGil Jeong
  */
 public interface AsyncCallRemoteAddressFieldAccessor {
-    void _$PINPOINT$_setAsyncCallRemoteAddress(String asyncCallRemoteAddress);
-    String _$PINPOINT$_getAsyncCallRemoteAddress();
+    void _$APM$_setAsyncCallRemoteAddress(String asyncCallRemoteAddress);
+    String _$APM$_getAsyncCallRemoteAddress();
 }

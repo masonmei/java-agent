@@ -35,12 +35,12 @@ import com.baidu.oped.apm.bootstrap.plugin.test.ExpectedAnnotation;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author ChaYoung You
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"com.google.code.gson:gson:[1.1],[1.4],[1.5],[1.6],[1.7.2],[2.0],[2.1],[2.2.4],[2.3.1,)"})
 public class GsonIT {
     private static final boolean v1_2;
@@ -64,7 +64,7 @@ public class GsonIT {
         v1_6 = c != null;
     }
     
-    private static final String java = "Pinpoint";
+    private static final String java = "Apm";
     private static final String json = new Gson().toJson(java);
     private static final String serviceType = "GSON";
     private static final String annotationKeyName = "gson.json.length";

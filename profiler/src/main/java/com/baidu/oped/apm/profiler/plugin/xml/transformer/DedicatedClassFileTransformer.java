@@ -23,7 +23,7 @@ import com.baidu.oped.apm.bootstrap.instrument.InstrumentClass;
 import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
 import com.baidu.oped.apm.bootstrap.instrument.matcher.Matcher;
 import com.baidu.oped.apm.bootstrap.instrument.matcher.Matchers;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.util.JavaAssistUtils;
 
 public class DedicatedClassFileTransformer implements MatchableClassFileTransformer {
@@ -45,11 +45,11 @@ public class DedicatedClassFileTransformer implements MatchableClassFileTransfor
             InstrumentClass target = context.getInstrumentClass(classLoader, className, classfileBuffer);
             recipe.edit(classLoader, target);
             return target.toBytecode();
-        } catch (PinpointException e) {
+        } catch (ApmException e) {
             throw e;
         } catch (Throwable e) {
             String msg = "Fail to invoke plugin class recipe: " + toString();
-            throw new PinpointException(msg, e);
+            throw new ApmException(msg, e);
         }
     }
 

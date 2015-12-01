@@ -38,8 +38,8 @@ public class AddOpInterceptor implements AroundInterceptor {
             logger.beforeInterceptor(target, args);
         }
 
-        String serviceCode = ((ServiceCodeAccessor)target)._$PINPOINT$_getServiceCode();
-        ((ServiceCodeAccessor)args[1])._$PINPOINT$_setServiceCode(serviceCode);
+        String serviceCode = ((ServiceCodeAccessor)target)._$APM$_getServiceCode();
+        ((ServiceCodeAccessor)args[1])._$APM$_setServiceCode(serviceCode);
     }
 
     @Override

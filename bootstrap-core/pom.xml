@@ -8,14 +8,14 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>pinpoint-bootstrap-core</artifactId>
-    <name>pinpoint-bootstrap-core</name>
+    <artifactId>apm-bootstrap-core</artifactId>
+    <name>apm-bootstrap-core</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-commons</artifactId>
+            <artifactId>apm-commons</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.thrift</groupId>
@@ -69,7 +69,7 @@
                             <dependencyReducedPomLocation>${basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
                             <filters>
                                 <filter>
-                                    <artifact>com.baidu.oped.apm:pinpoint-commons</artifact>
+                                    <artifact>com.baidu.oped.apm:apm-commons</artifact>
                                     <excludes>
                                         <exclude>com.baidu.oped.apm/common/bo/**</exclude>
                                     </excludes>

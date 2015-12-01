@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.oped.apm.common.util.PinpointThreadFactory;
+import com.baidu.oped.apm.common.util.ApmThreadFactory;
 
 /**
  * @author Taejin Koo
@@ -51,7 +51,7 @@ public class StandbySpanStreamDataSendWorker implements Runnable {
         this.standbySpanStreamDataStorage = dataStorage;
         this.blockTime = blockTime;
 
-        final ThreadFactory threadFactory = new PinpointThreadFactory(this.getClass().getSimpleName(), true);
+        final ThreadFactory threadFactory = new ApmThreadFactory(this.getClass().getSimpleName(), true);
         this.workerThread = threadFactory.newThread(this);
     }
 

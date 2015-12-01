@@ -21,6 +21,6 @@ import com.baidu.oped.apm.bootstrap.context.AsyncTraceId;
  *
  */
 public interface AsyncTraceIdAccessor {
-    void _$PINPOINT$_setAsyncTraceId(AsyncTraceId id);
-    AsyncTraceId _$PINPOINT$_getAsyncTraceId();
+    void _$APM$_setAsyncTraceId(AsyncTraceId id);
+    AsyncTraceId _$APM$_getAsyncTraceId();
 }

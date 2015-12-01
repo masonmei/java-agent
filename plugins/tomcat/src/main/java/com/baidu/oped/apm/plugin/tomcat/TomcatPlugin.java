@@ -45,7 +45,7 @@ public class TomcatPlugin implements ProfilerPlugin {
 
         TomcatConfiguration config = new TomcatConfiguration(context.getConfig());
 
-        if (config.isTomcatHidePinpointHeader()) {
+        if (config.isTomcatHideApmHeader()) {
             addRequestFacadeEditor(context);
         }
 

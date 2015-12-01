@@ -4,7 +4,7 @@ import com.baidu.oped.apm.bootstrap.plugin.test.Expectations;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 import com.squareup.okhttp.*;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by nbp on 2015-09-04.
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({"com.squareup.okhttp:okhttp:[2.5.0]"})
 public class OkHttpClientIT {
 

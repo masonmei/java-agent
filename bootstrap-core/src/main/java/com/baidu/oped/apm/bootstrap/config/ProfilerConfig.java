@@ -71,7 +71,7 @@ public interface ProfilerConfig {
 
     long getAgentInfoSendRetryInterval();
 
-    boolean isTomcatHidePinpointHeader();
+    boolean isTomcatHideApmHeader();
 
     Filter<String> getTomcatExcludeUrlFilter();
 

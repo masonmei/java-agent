@@ -144,7 +144,7 @@ public class HttpEngineSendRequestMethodInterceptor implements AroundInterceptor
             recorder.recordApi(methodDescriptor);
             recorder.recordException(throwable);
 
-            Request request = ((UserRequestGetter) target)._$PINPOINT$_getUserRequest();
+            Request request = ((UserRequestGetter) target)._$APM$_getUserRequest();
             if (request != null) {
                 recorder.recordAttribute(AnnotationKey.HTTP_URL, request.httpUrl().toString());
                 final String endpoint = getDestinationId(request.httpUrl());

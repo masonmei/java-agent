@@ -33,7 +33,7 @@ import com.baidu.oped.apm.bootstrap.context.ServerMetaData;
 import com.baidu.oped.apm.bootstrap.context.ServerMetaDataHolder.ServerMetaDataListener;
 import com.baidu.oped.apm.bootstrap.context.ServiceInfo;
 import com.baidu.oped.apm.common.Version;
-import com.baidu.oped.apm.common.util.PinpointThreadFactory;
+import com.baidu.oped.apm.common.util.ApmThreadFactory;
 import com.baidu.oped.apm.profiler.sender.EnhancedDataSender;
 import com.baidu.oped.apm.thrift.dto.TAgentInfo;
 import com.baidu.oped.apm.thrift.dto.TServerMetaData;
@@ -48,7 +48,7 @@ import com.baidu.oped.apm.thrift.dto.TServiceInfo;
 public class AgentInfoSender implements ServerMetaDataListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(AgentInfoSender.class);
 
-    private static final ThreadFactory THREAD_FACTORY = new PinpointThreadFactory("Pinpoint-agentInfo-sender", true);
+    private static final ThreadFactory THREAD_FACTORY = new ApmThreadFactory("Apm-agentInfo-sender", true);
     
     private final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor(THREAD_FACTORY);
     private final long agentInfoSendIntervalMs; 
@@ -70,7 +70,7 @@ public class AgentInfoSender implements ServerMetaDataListener {
     public void start() {
         final TAgentInfo agentInfo = createTAgentInfo();
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("AgentInfoSender started. Sending startup information to Pinpoint server via {}. agentInfo={}", dataSender.getClass().getSimpleName(), agentInfo);
+            LOGGER.info("AgentInfoSender started. Sending startup information to Apm server via {}. agentInfo={}", dataSender.getClass().getSimpleName(), agentInfo);
         }
         send(agentInfo);
     }

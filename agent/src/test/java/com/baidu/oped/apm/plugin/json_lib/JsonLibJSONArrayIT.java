@@ -27,12 +27,12 @@ import com.baidu.oped.apm.bootstrap.plugin.test.Expectations;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * @author Sangyoon Lee
  */
-@RunWith(PinpointPluginTestSuite.class)
+@RunWith(ApmPluginTestSuite.class)
 @Dependency({ "net.sf.json-lib:json-lib:jar:jdk15:(,)" })
 public class JsonLibJSONArrayIT {
 
@@ -85,7 +85,7 @@ public class JsonLibJSONArrayIT {
         Method fromObject = JSONArray.class.getMethod("fromObject", Object.class);
         Method toString = JSONArray.class.getMethod("toString");
 
-        JSONArray jsonArray = JSONArray.fromObject(new Object[] { "pinpoint", "json-lib" });
+        JSONArray jsonArray = JSONArray.fromObject(new Object[] { "apm", "json-lib" });
         String json = jsonArray.toString();
 
         PluginTestVerifier verifier = PluginTestVerifierHolder.getInstance();

@@ -60,7 +60,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.baidu.oped.apm.bootstrap.PinpointBootStrap;
+import com.baidu.oped.apm.bootstrap.ApmBootStrap;
 import com.baidu.oped.apm.common.util.SimpleProperty;
 import com.baidu.oped.apm.common.util.SystemProperty;
 
@@ -71,7 +71,7 @@ import com.baidu.oped.apm.common.util.SystemProperty;
 public class DependencyResolver {
     private static final String FOLLOW_PRECEEDING = "FOLLOW_PRECEEDING";
     private static final String DEFAULT_LOCAL_REPOSITORY = "target/local-repo";
-    private static final Logger logger = Logger.getLogger(PinpointBootStrap.class.getName());
+    private static final Logger logger = Logger.getLogger(ApmBootStrap.class.getName());
 
     private static final SimpleProperty SYSTEM_PROPERTY = SystemProperty.INSTANCE;
 

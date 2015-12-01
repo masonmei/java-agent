@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
 
-import com.baidu.oped.apm.common.util.PinpointThreadFactory;
+import com.baidu.oped.apm.common.util.ApmThreadFactory;
 import com.baidu.oped.apm.thrift.io.ChunkHeaderBufferedTBaseSerializer;
 import com.baidu.oped.apm.thrift.io.ChunkHeaderBufferedTBaseSerializerFactory;
 import com.baidu.oped.apm.thrift.io.ChunkHeaderBufferedTBaseSerializerFlushHandler;
@@ -90,7 +90,7 @@ public class BufferedUdpDataSender extends UdpDataSender {
     }
 
     private Thread startScheduledFlush() {
-        final ThreadFactory threadFactory = new PinpointThreadFactory(SCHEDULED_FLUSH, true);
+        final ThreadFactory threadFactory = new ApmThreadFactory(SCHEDULED_FLUSH, true);
         final Thread thread = threadFactory.newThread(new Runnable() {
             @Override
             public void run() {

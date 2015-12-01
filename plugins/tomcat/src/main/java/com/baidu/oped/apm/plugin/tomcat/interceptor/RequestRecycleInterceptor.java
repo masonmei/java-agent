@@ -43,17 +43,17 @@ public class RequestRecycleInterceptor implements AroundInterceptor {
         try {
             if (target instanceof AsyncAccessor) {
                 // reset
-                ((AsyncAccessor) target)._$PINPOINT$_setAsync(Boolean.FALSE);
+                ((AsyncAccessor) target)._$APM$_setAsync(Boolean.FALSE);
             }
 
             if (target instanceof TraceAccessor) {
-                final Trace trace = ((TraceAccessor) target)._$PINPOINT$_getTrace();
+                final Trace trace = ((TraceAccessor) target)._$APM$_getTrace();
                 if (trace != null && trace.canSampled()) {
                     // end of root span
                     trace.close();
                 }
                 // reset
-                ((TraceAccessor) target)._$PINPOINT$_setTrace(null);
+                ((TraceAccessor) target)._$APM$_setTrace(null);
             }
         } catch (Throwable t) {
             logger.warn("Failed to BEFORE process. {}", t.getMessage(), t);

@@ -22,6 +22,6 @@ import com.baidu.oped.apm.bootstrap.context.DatabaseInfo;
  * @author emeroad
  */
 public interface DatabaseInfoTraceValue {
-    void _$PINPOINT$_setTraceDatabaseInfo(DatabaseInfo value);
-    DatabaseInfo _$PINPOINT$_getTraceDatabaseInfo();
+    void _$APM$_setTraceDatabaseInfo(DatabaseInfo value);
+    DatabaseInfo _$APM$_getTraceDatabaseInfo();
 }

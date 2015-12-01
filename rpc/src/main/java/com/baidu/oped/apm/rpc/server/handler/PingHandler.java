@@ -17,12 +17,12 @@
 package com.baidu.oped.apm.rpc.server.handler;
 
 import com.baidu.oped.apm.rpc.packet.PingPacket;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
+import com.baidu.oped.apm.rpc.server.ApmServer;
 
 /**
  * @author HyunGil Jeong
  */
 public interface PingHandler {
 
-    void handlePing(PingPacket pingPacket, PinpointServer pinpointServer); 
+    void handlePing(PingPacket pingPacket, ApmServer apmServer); 
 }

@@ -19,5 +19,5 @@ package com.baidu.oped.apm.plugin.jdk.http;
  *
  */
 public interface ConnectedGetter {
-    boolean _$PINPOINT$_isConnected();
+    boolean _$APM$_isConnected();
 }

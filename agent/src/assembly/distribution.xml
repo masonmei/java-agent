@@ -1,7 +1,7 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
-  <id>pinpoint-naver-agent</id>
+  <id>apm-naver-agent</id>
   <formats>
     <format>dir</format>
     <format>zip</format>
@@ -23,21 +23,21 @@
   <dependencySets>
     <dependencySet>
         <includes>
-            <include>com.baidu.oped.apm:pinpoint-bootstrap</include>
+            <include>com.baidu.oped.apm:apm-bootstrap</include>
         </includes>
     </dependencySet>
     <dependencySet>
         <includes>
-            <include>com.baidu.oped.apm:pinpoint-bootstrap-core</include>
+            <include>com.baidu.oped.apm:apm-bootstrap-core</include>
         </includes>
         <outputDirectory>boot</outputDirectory>
     </dependencySet>
     <dependencySet>
         <excludes>
-            <exclude>com.baidu.oped.apm:pinpoint-commons</exclude>
-            <exclude>com.baidu.oped.apm:pinpoint-bootstrap-core</exclude>
-            <exclude>com.baidu.oped.apm:pinpoint-bootstrap</exclude>
-            <exclude>com.baidu.oped.apm:pinpoint-plugins</exclude>
+            <exclude>com.baidu.oped.apm:apm-commons</exclude>
+            <exclude>com.baidu.oped.apm:apm-bootstrap-core</exclude>
+            <exclude>com.baidu.oped.apm:apm-bootstrap</exclude>
+            <exclude>com.baidu.oped.apm:apm-plugins</exclude>
         </excludes>
         <outputDirectory>lib</outputDirectory>
         <useProjectArtifact>false</useProjectArtifact>
@@ -45,7 +45,7 @@
     </dependencySet>
     <dependencySet>
         <includes>
-            <include>com.baidu.oped.apm:pinpoint-plugins</include>
+            <include>com.baidu.oped.apm:apm-plugins</include>
         </includes>
         <outputDirectory>plugin</outputDirectory>
         <unpack>true</unpack>

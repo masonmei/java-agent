@@ -21,7 +21,7 @@ package com.baidu.oped.apm.bootstrap;
  */
 public class ProfilerLibClass implements LibClass {
 
-    private static final String[] PINPOINT_PROFILER_CLASS = new String[] {
+    private static final String[] APM_PROFILER_CLASS = new String[] {
             "com.baidu.oped.apm.profiler",
             "com.baidu.oped.apm.thrift",
             "com.baidu.oped.apm.rpc",
@@ -38,9 +38,9 @@ public class ProfilerLibClass implements LibClass {
 
     @Override
     public boolean onLoadClass(String clazzName) {
-        final int length = PINPOINT_PROFILER_CLASS.length;
+        final int length = APM_PROFILER_CLASS.length;
         for (int i = 0; i < length; i++) {
-            if (clazzName.startsWith(PINPOINT_PROFILER_CLASS[i])) {
+            if (clazzName.startsWith(APM_PROFILER_CLASS[i])) {
                 return ON_LOAD_CLASS;
             }
         }

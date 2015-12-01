@@ -28,7 +28,7 @@ import com.baidu.oped.apm.bootstrap.interceptor.annotation.TargetMethod;
 import com.baidu.oped.apm.bootstrap.interceptor.annotation.TargetMethods;
 import com.baidu.oped.apm.bootstrap.interceptor.group.ExecutionPolicy;
 import com.baidu.oped.apm.bootstrap.plugin.ObjectRecipe;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.objectfactory.AutoBindingObjectFactory;
 import com.baidu.oped.apm.profiler.objectfactory.InterceptorArgumentProvider;
 import com.baidu.oped.apm.profiler.plugin.DefaultProfilerPluginContext;
@@ -105,7 +105,7 @@ public class TargetAnnotatedInterceptorInjector implements ClassRecipe {
         }
         
         if (editors.isEmpty()) {
-            throw new PinpointException("No target is specified. At least one of @Targets, @TargetMethod, @TargetConstructor, @TargetFilter must present. interceptor: " + interceptorClassName);
+            throw new ApmException("No target is specified. At least one of @Targets, @TargetMethod, @TargetConstructor, @TargetFilter must present. interceptor: " + interceptorClassName);
         }
         
         return editors.size() == 1 ? editors.get(0) : new ClassCookBook(editors);
@@ -115,7 +115,7 @@ public class TargetAnnotatedInterceptorInjector implements ClassRecipe {
         String methodName = annotation.name();
         
         if (methodName == null) {
-            throw new PinpointException("name() of @TargetMethod cannot be null: " + interceptorClassName);
+            throw new ApmException("name() of @TargetMethod cannot be null: " + interceptorClassName);
         }
         
         String[] parameterTypeNames = annotation.paramTypes();
@@ -132,7 +132,7 @@ public class TargetAnnotatedInterceptorInjector implements ClassRecipe {
         String type = annotation.type();
         
         if (type == null) {
-            throw new PinpointException("type of @TargetFilter is null: " + interceptorClassName);
+            throw new ApmException("type of @TargetFilter is null: " + interceptorClassName);
         }
         
         AutoBindingObjectFactory filterFactory = new AutoBindingObjectFactory(pluginContext, classLoader, new InterceptorArgumentProvider(pluginContext.getTraceContext(), targetClass));

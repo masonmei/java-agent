@@ -27,7 +27,7 @@ import com.baidu.oped.apm.bootstrap.instrument.Instrumentor;
 import com.baidu.oped.apm.bootstrap.plugin.ObjectRecipe;
 import com.baidu.oped.apm.bootstrap.plugin.ObjectRecipe.ByConstructor;
 import com.baidu.oped.apm.bootstrap.plugin.ObjectRecipe.ByStaticFactoryMethod;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 /**
  * @author Jongho Moon
@@ -65,7 +65,7 @@ public class AutoBindingObjectFactory {
         ConstructorResolver resolver = new ConstructorResolver(type, argumentsResolver);
         
         if (!resolver.resolve()) {
-            throw new PinpointException("Cannot find suitable constructor for " + type.getName());
+            throw new ApmException("Cannot find suitable constructor for " + type.getName());
         }
         
         Constructor<?> constructor = resolver.getResolvedConstructor();
@@ -78,7 +78,7 @@ public class AutoBindingObjectFactory {
         try {
             return constructor.newInstance(resolvedArguments);
         } catch (Exception e) {
-            throw new PinpointException("Fail to invoke constructor: " + constructor + ", arguments: " + Arrays.toString(resolvedArguments), e);
+            throw new ApmException("Fail to invoke constructor: " + constructor + ", arguments: " + Arrays.toString(resolvedArguments), e);
         }
     }
     
@@ -86,7 +86,7 @@ public class AutoBindingObjectFactory {
         StaticMethodResolver resolver = new StaticMethodResolver(type, recipe.getFactoryMethodName(), argumentsResolver);
         
         if (!resolver.resolve()) {
-            throw new PinpointException("Cannot find suitable factory method " + type.getName() + "." + recipe.getFactoryMethodName());
+            throw new ApmException("Cannot find suitable factory method " + type.getName() + "." + recipe.getFactoryMethodName());
         }
         
         Method method = resolver.getResolvedMethod();
@@ -99,7 +99,7 @@ public class AutoBindingObjectFactory {
         try {
             return method.invoke(null, resolvedArguments);
         } catch (Exception e) {
-            throw new PinpointException("Fail to invoke factory method: " + type.getName() + "." + recipe.getFactoryMethodName() + ", arguments: " + Arrays.toString(resolvedArguments), e);
+            throw new ApmException("Fail to invoke factory method: " + type.getName() + "." + recipe.getFactoryMethodName() + ", arguments: " + Arrays.toString(resolvedArguments), e);
         }
 
     }

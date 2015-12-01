@@ -20,6 +20,6 @@ package com.baidu.oped.apm.plugin.thrift.field.accessor;
  * @author HyunGil Jeong
  */
 public interface AsyncNextSpanIdFieldAccessor {
-    void _$PINPOINT$_setAsyncNextSpanId(long asyncNextSpanId);
-    long _$PINPOINT$_getAsyncNextSpanId();
+    void _$APM$_setAsyncNextSpanId(long asyncNextSpanId);
+    long _$APM$_getAsyncNextSpanId();
 }

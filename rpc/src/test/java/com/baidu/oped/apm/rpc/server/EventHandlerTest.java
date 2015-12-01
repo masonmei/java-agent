@@ -16,14 +16,14 @@
 
 package com.baidu.oped.apm.rpc.server;
 
-import com.baidu.oped.apm.rpc.PinpointSocket;
+import com.baidu.oped.apm.rpc.ApmSocket;
 import com.baidu.oped.apm.rpc.common.SocketStateCode;
 import com.baidu.oped.apm.rpc.control.ProtocolException;
 import com.baidu.oped.apm.rpc.packet.*;
 import com.baidu.oped.apm.rpc.server.handler.ServerStateChangeEventHandler;
 import com.baidu.oped.apm.rpc.util.ControlMessageEncodingUtils;
 import com.baidu.oped.apm.rpc.util.MapUtils;
-import com.baidu.oped.apm.rpc.util.PinpointRPCTestUtils;
+import com.baidu.oped.apm.rpc.util.ApmRPCTestUtils;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.junit.Assert;
@@ -50,7 +50,7 @@ public class EventHandlerTest {
     
     @BeforeClass
     public static void setUp() throws IOException {
-        bindPort = PinpointRPCTestUtils.findAvailablePort();
+        bindPort = ApmRPCTestUtils.findAvailablePort();
     }
 
     // Test for being possible to send messages in case of failure of registering packet ( return code : 2, lack of parameter)
@@ -58,7 +58,7 @@ public class EventHandlerTest {
     public void registerAgentSuccessTest() throws Exception {
         EventHandler eventHandler = new EventHandler();
 
-        PinpointServerAcceptor serverAcceptor = new PinpointServerAcceptor();
+        ApmServerAcceptor serverAcceptor = new ApmServerAcceptor();
         serverAcceptor.addStateChangeEventHandler(eventHandler);
         serverAcceptor.setMessageListener(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE);
         serverAcceptor.bind("127.0.0.1", bindPort);
@@ -69,7 +69,7 @@ public class EventHandlerTest {
             sendAndReceiveSimplePacket(socket);
             Assert.assertEquals(eventHandler.getCode(), SocketStateCode.RUN_WITHOUT_HANDSHAKE);
 
-            int code = sendAndReceiveRegisterPacket(socket, PinpointRPCTestUtils.getParams());
+            int code = sendAndReceiveRegisterPacket(socket, ApmRPCTestUtils.getParams());
             Assert.assertEquals(eventHandler.getCode(), SocketStateCode.RUN_DUPLEX);
 
             sendAndReceiveSimplePacket(socket);
@@ -78,7 +78,7 @@ public class EventHandlerTest {
                 socket.close();
             }
             
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
     
@@ -86,7 +86,7 @@ public class EventHandlerTest {
     public void registerAgentFailTest() throws Exception {
         ThrowExceptionEventHandler eventHandler = new ThrowExceptionEventHandler();
 
-        PinpointServerAcceptor serverAcceptor = new PinpointServerAcceptor();
+        ApmServerAcceptor serverAcceptor = new ApmServerAcceptor();
         serverAcceptor.addStateChangeEventHandler(eventHandler);
         serverAcceptor.setMessageListener(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE);
         serverAcceptor.bind("127.0.0.1", bindPort);
@@ -102,7 +102,7 @@ public class EventHandlerTest {
                 socket.close();
             }
             
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -191,12 +191,12 @@ public class EventHandlerTest {
         private SocketStateCode code;
 
         @Override
-        public void eventPerformed(PinpointServer pinpointServer, SocketStateCode stateCode) {
+        public void eventPerformed(ApmServer apmServer, SocketStateCode stateCode) {
             this.code = stateCode;
         }
         
         @Override
-        public void exceptionCaught(PinpointServer pinpointServer, SocketStateCode stateCode, Throwable e) {
+        public void exceptionCaught(ApmServer apmServer, SocketStateCode stateCode, Throwable e) {
         }
 
         public SocketStateCode getCode() {
@@ -209,12 +209,12 @@ public class EventHandlerTest {
         private int errorCount = 0;
         
         @Override
-        public void eventPerformed(PinpointServer pinpointServer, SocketStateCode stateCode) throws Exception {
+        public void eventPerformed(ApmServer apmServer, SocketStateCode stateCode) throws Exception {
             throw new Exception("always error.");
         }
 
         @Override
-        public void exceptionCaught(PinpointServer pinpointServer, SocketStateCode stateCode, Throwable e) {
+        public void exceptionCaught(ApmServer apmServer, SocketStateCode stateCode, Throwable e) {
             errorCount++;
         }
 

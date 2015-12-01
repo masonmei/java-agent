@@ -20,7 +20,7 @@ import com.baidu.oped.apm.profiler.context.Span;
 import com.baidu.oped.apm.profiler.context.SpanChunk;
 import com.baidu.oped.apm.rpc.FutureListener;
 import com.baidu.oped.apm.rpc.ResponseMessage;
-import com.baidu.oped.apm.rpc.client.PinpointClientReconnectEventListener;
+import com.baidu.oped.apm.rpc.client.ApmClientReconnectEventListener;
 
 import org.apache.thrift.TBase;
 
@@ -58,12 +58,12 @@ public class CountingDataSender implements EnhancedDataSender {
     }
 
     @Override
-    public boolean addReconnectEventListener(PinpointClientReconnectEventListener eventListener) {
+    public boolean addReconnectEventListener(ApmClientReconnectEventListener eventListener) {
         return false;
     }
 
     @Override
-    public boolean removeReconnectEventListener(PinpointClientReconnectEventListener eventListener) {
+    public boolean removeReconnectEventListener(ApmClientReconnectEventListener eventListener) {
         return false;
     }
 

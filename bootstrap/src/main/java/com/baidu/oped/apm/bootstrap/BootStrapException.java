@@ -16,12 +16,12 @@
 
 package com.baidu.oped.apm.bootstrap;
 
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 
 /**
  * @author emeroad
  */
-public class BootStrapException extends PinpointException {
+public class BootStrapException extends ApmException {
 
     public BootStrapException(String message, Throwable cause) {
         super(message, cause);

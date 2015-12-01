@@ -37,60 +37,60 @@ public class ClassPathResolverTest {
 
     @Test
     public void testFindAgentJar() throws Exception {
-        String path = "D:\\nhn_source\\pinpoint_project\\deploy\\apache-tomcat-6.0.35\\bin\\bootstrap.jar;D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/lib/javassist-3.16.1.GA.jar;" +
-                "D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/lib/pinpoint-commons-0.0.2.jar;;D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/pinpoint-bootstrap-0.0.2.jar";
-        // D:\nhn_source\pinpoint_project\deploy\agent\agentlib/pinpoint-tomcat-profiler-0.0.2.jar
+        String path = "D:\\nhn_source\\apm_project\\deploy\\apache-tomcat-6.0.35\\bin\\bootstrap.jar;D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/lib/javassist-3.16.1.GA.jar;" +
+                "D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/lib/apm-commons-0.0.2.jar;;D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/apm-bootstrap-0.0.2.jar";
+        // D:\nhn_source\apm_project\deploy\agent\agentlib/apm-tomcat-profiler-0.0.2.jar
         ClassPathResolver classPathResolver = new ClassPathResolver(path);
         boolean findAgentJar = classPathResolver.findAgentJar();
         Assert.assertTrue(findAgentJar);
 
         String agentJar = classPathResolver.getAgentJarName();
-        Assert.assertEquals("pinpoint-bootstrap-0.0.2.jar", agentJar);
+        Assert.assertEquals("apm-bootstrap-0.0.2.jar", agentJar);
 
         String agentPath = classPathResolver.getAgentJarFullPath();
-        Assert.assertEquals("D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/pinpoint-bootstrap-0.0.2.jar", agentPath);
+        Assert.assertEquals("D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/apm-bootstrap-0.0.2.jar", agentPath);
 
         String agentDirPath = classPathResolver.getAgentDirPath();
-        Assert.assertEquals("D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib", agentDirPath );
+        Assert.assertEquals("D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib", agentDirPath );
 
         String agentLibPath = classPathResolver.getAgentLibPath();
-        Assert.assertEquals("D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib"+File.separator+ "lib", agentLibPath);
+        Assert.assertEquals("D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib"+File.separator+ "lib", agentLibPath);
     }
 
     @Test
     public void testFindAgentSnapshotJar() throws Exception {
-        String path = "D:\\nhn_source\\pinpoint_project\\deploy\\apache-tomcat-6.0.35\\bin\\bootstrap.jar;D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/lib/javassist-3.16.1.GA.jar;" +
-                "D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/lib/pinpoint-commons-0.0.2.jar;;D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib" +
-                "/pinpoint-bootstrap-0.0.2-SNAPSHOT.jar";
-        // D:\nhn_source\pinpoint_project\deploy\agent\agentlib/pinpoint-tomcat-profiler-0.0.2.jar
+        String path = "D:\\nhn_source\\apm_project\\deploy\\apache-tomcat-6.0.35\\bin\\bootstrap.jar;D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/lib/javassist-3.16.1.GA.jar;" +
+                "D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/lib/apm-commons-0.0.2.jar;;D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib" +
+                "/apm-bootstrap-0.0.2-SNAPSHOT.jar";
+        // D:\nhn_source\apm_project\deploy\agent\agentlib/apm-tomcat-profiler-0.0.2.jar
         ClassPathResolver classPathResolver = new ClassPathResolver(path);
         boolean findAgentJar = classPathResolver.findAgentJar();
         Assert.assertTrue(findAgentJar);
 
         String agentJar = classPathResolver.getAgentJarName();
-        Assert.assertEquals("pinpoint-bootstrap-0.0.2-SNAPSHOT.jar", agentJar);
+        Assert.assertEquals("apm-bootstrap-0.0.2-SNAPSHOT.jar", agentJar);
 
         String agentPath = classPathResolver.getAgentJarFullPath();
-        Assert.assertEquals("D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib/pinpoint-bootstrap-0.0.2-SNAPSHOT.jar", agentPath);
+        Assert.assertEquals("D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib/apm-bootstrap-0.0.2-SNAPSHOT.jar", agentPath);
 
         String agentDirPath = classPathResolver.getAgentDirPath();
-        Assert.assertEquals("D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib", agentDirPath );
+        Assert.assertEquals("D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib", agentDirPath );
 
         String agentLibPath = classPathResolver.getAgentLibPath();
-        Assert.assertEquals("D:\\nhn_source\\pinpoint_project\\deploy\\agent\\agentlib"+File.separator+ "lib", agentLibPath);
+        Assert.assertEquals("D:\\nhn_source\\apm_project\\deploy\\agent\\agentlib"+File.separator+ "lib", agentLibPath);
     }
 
     @Test
     public void findAgentJar() {
-        findAgentJar("pinpoint-bootstrap-0.0.2.jar");
-        findAgentJar("pinpoint-bootstrap-1.0.0.jar");
-        findAgentJar("pinpoint-bootstrap-1.10.20.jar");
-        findAgentJar("pinpoint-bootstrap.jar");
+        findAgentJar("apm-bootstrap-0.0.2.jar");
+        findAgentJar("apm-bootstrap-1.0.0.jar");
+        findAgentJar("apm-bootstrap-1.10.20.jar");
+        findAgentJar("apm-bootstrap.jar");
 
 
-        findAgentJarAssertFail("pinpoint-bootstrap-1.a.test.jar");
-        findAgentJarAssertFail("pinpointbootstrap-1.a.test.jar");
-        findAgentJarAssertFail("pinpointbootstrap.jar");
+        findAgentJarAssertFail("apm-bootstrap-1.a.test.jar");
+        findAgentJarAssertFail("apmbootstrap-1.a.test.jar");
+        findAgentJarAssertFail("apmbootstrap.jar");
     }
 
     private void findAgentJar(String path) {

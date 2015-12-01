@@ -36,13 +36,13 @@ import com.baidu.oped.apm.common.bo.SpanBo;
 import com.baidu.oped.apm.common.bo.SpanEventBo;
 import com.baidu.oped.apm.common.trace.ServiceType;
 import com.baidu.oped.apm.common.util.TransactionIdUtils;
-import com.baidu.oped.apm.test.junit4.BasePinpointTest;
+import com.baidu.oped.apm.test.junit4.BaseApmTest;
 import com.baidu.oped.apm.test.junit4.IsRootSpan;
 
 /**
  * @author hyungil.jeong
  */
-public class StandardHostValveInvokeModifierTest extends BasePinpointTest {
+public class StandardHostValveInvokeModifierTest extends BaseApmTest {
 
     private static final ServiceType SERVICE_TYPE = TomcatConstants.TOMCAT;
     private static final String REQUEST_URI = "testRequestUri";

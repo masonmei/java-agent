@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.baidu.oped.apm.rpc.common.SocketStateCode;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
+import com.baidu.oped.apm.rpc.server.ApmServer;
 
 /**
  * @author koo.taejin
@@ -32,13 +32,13 @@ public class DoNothingChannelStateEventHandler implements ServerStateChangeEvent
     public static final ServerStateChangeEventHandler INSTANCE = new DoNothingChannelStateEventHandler();
 
     @Override
-    public void eventPerformed(PinpointServer pinpointServer, SocketStateCode stateCode) {
-        logger.info("{} eventPerformed(). pinpointServer:{}, code:{}", this.getClass().getSimpleName(), pinpointServer, stateCode);
+    public void eventPerformed(ApmServer apmServer, SocketStateCode stateCode) {
+        logger.info("{} eventPerformed(). apmServer:{}, code:{}", this.getClass().getSimpleName(), apmServer, stateCode);
     }
     
     @Override
-    public void exceptionCaught(PinpointServer pinpointServer, SocketStateCode stateCode, Throwable e) {
-        logger.warn("{} exceptionCaught(). pinpointServer:{}, code:{}. Error: {}.", this.getClass().getSimpleName(), pinpointServer, stateCode, e.getMessage(), e);
+    public void exceptionCaught(ApmServer apmServer, SocketStateCode stateCode, Throwable e) {
+        logger.warn("{} exceptionCaught(). apmServer:{}, code:{}. Error: {}.", this.getClass().getSimpleName(), apmServer, stateCode, e.getMessage(), e);
     }
 
 }

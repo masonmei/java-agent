@@ -41,7 +41,7 @@ public class HttpEngineConnectMethodInterceptor extends SpanEventSimpleAroundInt
     @Override
     protected void doInAfterTrace(SpanEventRecorder recorder, Object target, Object[] args, Object result, Throwable throwable) {
         if(target instanceof ConnectionGetter) {
-            Connection connection = ((ConnectionGetter)target)._$PINPOINT$_getConnection();
+            Connection connection = ((ConnectionGetter)target)._$APM$_getConnection();
             if(connection != null) {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(connection.getRoute().getAddress().getUriHost()).append(":");

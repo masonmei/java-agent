@@ -32,5 +32,5 @@ public final class JettyConstants {
     public static final String METADATA_ASYNC = "async";
     public static final String METADATA_ASYNC_TRACE_ID = "asyncTraceId";
 
-    public static final String ATTRIBUTE_PINPOINT_TRACE = "PINPOINT_TRACE";
+    public static final String ATTRIBUTE_APM_TRACE = "APM_TRACE";
 }

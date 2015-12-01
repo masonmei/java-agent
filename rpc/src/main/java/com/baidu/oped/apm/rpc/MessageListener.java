@@ -24,8 +24,8 @@ import com.baidu.oped.apm.rpc.packet.SendPacket;
  */
 public interface MessageListener {
 
-    void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket);
+    void handleSend(SendPacket sendPacket, ApmSocket apmSocket);
 
-    void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket);
+    void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket);
 
 }

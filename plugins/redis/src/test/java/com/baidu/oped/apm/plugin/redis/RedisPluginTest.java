@@ -13,9 +13,9 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
 
 import com.baidu.oped.apm.common.bo.SpanEventBo;
-import com.baidu.oped.apm.test.junit4.BasePinpointTest;
+import com.baidu.oped.apm.test.junit4.BaseApmTest;
 
-public class RedisPluginTest extends BasePinpointTest {
+public class RedisPluginTest extends BaseApmTest {
 
     private static final String HOST = "localhost";
     private static final int PORT = 6379;

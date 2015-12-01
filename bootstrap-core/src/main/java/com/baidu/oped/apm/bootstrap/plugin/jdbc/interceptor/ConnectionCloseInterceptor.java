@@ -37,6 +37,6 @@ public class ConnectionCloseInterceptor implements BeforeInterceptor {
             logger.beforeInterceptor(target, args);
         }
         // In case of close, we have to delete data even if the invocation failed.
-        ((DatabaseInfoAccessor)target)._$PINPOINT$_setDatabaseInfo(null);
+        ((DatabaseInfoAccessor)target)._$APM$_setDatabaseInfo(null);
     }
 }

@@ -27,8 +27,8 @@ import org.junit.Test;
  */
 public class UnsafeByteArrayOutputStreamTest {
     
-    private final String TEST_STRING1 = "hello pinpoint";
-    private final String TEST_STRING2 = "hi pinpoint";
+    private final String TEST_STRING1 = "hello apm";
+    private final String TEST_STRING2 = "hi apm";
 
     @Test
     public void test1() throws IOException {

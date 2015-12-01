@@ -34,7 +34,7 @@ import com.baidu.oped.apm.bootstrap.instrument.InstrumentClass;
 import com.baidu.oped.apm.bootstrap.instrument.InstrumentMethod;
 import com.baidu.oped.apm.bootstrap.interceptor.Interceptor;
 import com.baidu.oped.apm.bootstrap.plugin.ObjectRecipe;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.interceptor.factory.AnnotatedInterceptorFactory;
 import com.baidu.oped.apm.profiler.plugin.TestInterceptors.TestInterceptor0;
 import com.baidu.oped.apm.profiler.plugin.TestInterceptors.TestInterceptor1;
@@ -84,7 +84,7 @@ public class AnnotatedInterceptorFactoryTest {
         assertEquals(args[0], getField(interceptor, "field0"));
     }
     
-    @Test(expected = PinpointException.class)
+    @Test(expected = ApmException.class)
     public void test2() throws Exception {
         Object[] args = new Object[] { 1 };
         
@@ -148,13 +148,13 @@ public class AnnotatedInterceptorFactoryTest {
         assertEquals(args[0], getField(interceptor, "field3"));
     }
 
-    @Test(expected=PinpointException.class)
+    @Test(expected=ApmException.class)
     public void test7() throws Exception {
         AnnotatedInterceptorFactory factory = new AnnotatedInterceptorFactory(pluginContext);
         factory.getInterceptor(getClass().getClassLoader(), TestInterceptor1.class.getName(), null, null, null, aClass, aMethod);
     }
 
-    @Test(expected=PinpointException.class)
+    @Test(expected=ApmException.class)
     public void test8() throws Exception {
         AnnotatedInterceptorFactory factory = new AnnotatedInterceptorFactory(pluginContext);
         factory.getInterceptor(getClass().getClassLoader(), TestInterceptor1.class.getName(), null, null, null, aClass, aMethod);

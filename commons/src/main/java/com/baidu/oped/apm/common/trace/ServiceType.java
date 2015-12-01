@@ -22,7 +22,7 @@ import static com.baidu.oped.apm.common.trace.ServiceTypeProperty.*;
 /**
  * 
  * 
- * <h3>Pinpoint Internal (0 ~ 999)</h3>
+ * <h3>Apm Internal (0 ~ 999)</h3>
  * 
  * <table>
  * <tr><td>-1</td><td>UNDEFINED</td></tr>

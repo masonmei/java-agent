@@ -20,6 +20,6 @@ package com.baidu.oped.apm.plugin.thrift.field.accessor;
  * @author HyunGil Jeong
  */
 public interface AsyncMarkerFlagFieldAccessor {
-    void _$PINPOINT$_setAsyncMarkerFlag(boolean flag);
-    boolean _$PINPOINT$_getAsyncMarkerFlag();
+    void _$APM$_setAsyncMarkerFlag(boolean flag);
+    boolean _$APM$_getAsyncMarkerFlag();
 }

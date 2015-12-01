@@ -76,7 +76,7 @@ public class JedisConstructorInterceptor implements AroundInterceptor {
                 endPoint.append(":");
                 endPoint.append(info.getPort());
             }
-            ((EndPointAccessor)target)._$PINPOINT$_setEndPoint(endPoint.toString());
+            ((EndPointAccessor)target)._$APM$_setEndPoint(endPoint.toString());
         } catch (Throwable t) {
             if (logger.isWarnEnabled()) {
                 logger.warn("Failed to BEFORE process. {}", t.getMessage(), t);

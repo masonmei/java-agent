@@ -19,9 +19,9 @@ package com.baidu.oped.apm.rpc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
-import com.baidu.oped.apm.rpc.server.PinpointServerAcceptor;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
+import com.baidu.oped.apm.rpc.server.ApmServerAcceptor;
 
 /**
  * @author emeroad
@@ -38,14 +38,14 @@ public final class ClassPreLoader {
     }
 
     public static void preload(int port) {
-        PinpointServerAcceptor serverAcceptor = null;
-        PinpointClient client = null;
-        PinpointClientFactory clientFactory = null;
+        ApmServerAcceptor serverAcceptor = null;
+        ApmClient client = null;
+        ApmClientFactory clientFactory = null;
         try {
-            serverAcceptor = new PinpointServerAcceptor();
+            serverAcceptor = new ApmServerAcceptor();
             serverAcceptor.bind("127.0.0.1", port);
 
-            clientFactory = new PinpointClientFactory();
+            clientFactory = new ApmClientFactory();
             client = clientFactory.connect("127.0.0.1", port);
             client.sendSync(new byte[0]);
 
@@ -57,10 +57,10 @@ public final class ClassPreLoader {
 
             final Logger logger = LoggerFactory.getLogger(ClassPreLoader.class);
             logger.warn("preLoad error Caused:{}", ex.getMessage(), ex);
-            if (ex instanceof PinpointSocketException) {
-                throw (PinpointSocketException)ex;
+            if (ex instanceof ApmSocketException) {
+                throw (ApmSocketException)ex;
             } else {
-                throw new PinpointSocketException(ex.getMessage(), ex);
+                throw new ApmSocketException(ex.getMessage(), ex);
             }
         } finally {
             if (client != null) {

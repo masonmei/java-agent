@@ -100,7 +100,7 @@ public class TProtocolReadMessageEndInterceptor implements AroundInterceptor {
         if (!validate(target)) {
             return;
         }
-        final boolean shouldTrace = ((ServerMarkerFlagFieldAccessor)target)._$PINPOINT$_getServerMarkerFlag();
+        final boolean shouldTrace = ((ServerMarkerFlagFieldAccessor)target)._$APM$_getServerMarkerFlag();
         if (shouldTrace) {
             InterceptorGroupInvocation currentTransaction = this.group.getCurrentInvocation();
             Object attachment = currentTransaction.getAttachment();
@@ -256,7 +256,7 @@ public class TProtocolReadMessageEndInterceptor implements AroundInterceptor {
         // retrieve connection information
         String localIpPort = ThriftConstants.UNKNOWN_ADDRESS;
         String remoteAddress = ThriftConstants.UNKNOWN_ADDRESS;
-        Socket socket = ((SocketFieldAccessor)transport)._$PINPOINT$_getSocket();
+        Socket socket = ((SocketFieldAccessor)transport)._$APM$_getSocket();
         if (socket != null) {
             localIpPort = ThriftUtils.getHostPort(socket.getLocalSocketAddress());
             remoteAddress = ThriftUtils.getHost(socket.getRemoteSocketAddress());

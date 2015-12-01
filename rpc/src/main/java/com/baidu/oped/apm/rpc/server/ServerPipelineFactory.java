@@ -19,7 +19,7 @@ package com.baidu.oped.apm.rpc.server;
 
 import com.baidu.oped.apm.rpc.codec.PacketDecoder;
 import com.baidu.oped.apm.rpc.codec.PacketEncoder;
-import com.baidu.oped.apm.rpc.server.PinpointServerAcceptor.PinpointServerChannelHandler;
+import com.baidu.oped.apm.rpc.server.ApmServerAcceptor.ApmServerChannelHandler;
 
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
@@ -29,13 +29,13 @@ import org.jboss.netty.channel.Channels;
  * @author emeroad
  */
 public class ServerPipelineFactory implements ChannelPipelineFactory {
-    private PinpointServerChannelHandler pinpointServerChannelHandler;
+    private ApmServerChannelHandler apmServerChannelHandler;
 
-    public ServerPipelineFactory(PinpointServerChannelHandler pinpointServerChannelHandler) {
-        if (pinpointServerChannelHandler == null) {
-            throw new NullPointerException("PinpointServerFactory");
+    public ServerPipelineFactory(ApmServerChannelHandler apmServerChannelHandler) {
+        if (apmServerChannelHandler == null) {
+            throw new NullPointerException("ApmServerFactory");
         }
-        this.pinpointServerChannelHandler = pinpointServerChannelHandler;
+        this.apmServerChannelHandler = apmServerChannelHandler;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ServerPipelineFactory implements ChannelPipelineFactory {
 
         pipeline.addLast("decoder", new PacketDecoder());
         pipeline.addLast("encoder", new PacketEncoder());
-        pipeline.addLast("handler", pinpointServerChannelHandler);
+        pipeline.addLast("handler", apmServerChannelHandler);
 
         return pipeline;
     }

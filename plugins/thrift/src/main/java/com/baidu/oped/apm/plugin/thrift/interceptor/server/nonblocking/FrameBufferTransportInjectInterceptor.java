@@ -74,10 +74,10 @@ public abstract class FrameBufferTransportInjectInterceptor implements AroundInt
 
     // Retrieve the socket information from the trans_ field of the given instance.
     protected final Socket getRootSocket(Object target) {
-        TNonblockingTransport inTrans = ((TNonblockingTransportFieldGetter)target)._$PINPOINT$_getTNonblockingTransport();
+        TNonblockingTransport inTrans = ((TNonblockingTransportFieldGetter)target)._$APM$_getTNonblockingTransport();
         if (inTrans != null) {
             if (inTrans instanceof SocketFieldAccessor) {
-                return ((SocketFieldAccessor)inTrans)._$PINPOINT$_getSocket();
+                return ((SocketFieldAccessor)inTrans)._$APM$_getSocket();
             } else {
                 if (isDebug) {
                     logger.debug("Invalid target object. Need field accessor({}).", SocketFieldAccessor.class.getName());
@@ -95,6 +95,6 @@ public abstract class FrameBufferTransportInjectInterceptor implements AroundInt
             }
             return;
         }
-        ((SocketFieldAccessor)inTrans)._$PINPOINT$_setSocket(rootSocket);
+        ((SocketFieldAccessor)inTrans)._$APM$_setSocket(rootSocket);
     }
 }

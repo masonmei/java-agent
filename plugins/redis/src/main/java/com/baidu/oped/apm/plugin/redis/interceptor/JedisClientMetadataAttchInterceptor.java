@@ -48,9 +48,9 @@ public abstract class JedisClientMetadataAttchInterceptor implements AroundInter
                 return;
             }
 
-            final String endPoint = ((EndPointAccessor) args[0])._$PINPOINT$_getEndPoint();
+            final String endPoint = ((EndPointAccessor) args[0])._$APM$_getEndPoint();
             if (endPoint != null) {
-                ((EndPointAccessor) target)._$PINPOINT$_setEndPoint(endPoint);
+                ((EndPointAccessor) target)._$APM$_setEndPoint(endPoint);
             }
         } catch (Throwable t) {
             logger.warn("Failed to BEFORE process. {}", t.getMessage(), t);

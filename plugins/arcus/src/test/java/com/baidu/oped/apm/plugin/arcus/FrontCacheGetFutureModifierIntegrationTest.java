@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * @author harebox
  */
-public class FrontCacheGetFutureModifierIntegrationTest /*extends BasePinpointTest*/ {
+public class FrontCacheGetFutureModifierIntegrationTest /*extends BaseApmTest*/ {
 
     @Before
     public void setUp() throws Exception {

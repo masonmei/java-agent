@@ -1,6 +1,6 @@
 package com.baidu.oped.apm.plugin.redis;
 
 public interface EndPointAccessor {
-    void _$PINPOINT$_setEndPoint(String endPoint);
-    String _$PINPOINT$_getEndPoint();
+    void _$APM$_setEndPoint(String endPoint);
+    String _$APM$_getEndPoint();
 }

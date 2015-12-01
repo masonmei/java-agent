@@ -16,12 +16,12 @@
 
 package com.baidu.oped.apm.profiler.sender;
 
-import com.baidu.oped.apm.rpc.PinpointSocket;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
+import com.baidu.oped.apm.rpc.ApmSocket;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
 import com.baidu.oped.apm.rpc.packet.*;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
-import com.baidu.oped.apm.rpc.server.PinpointServerAcceptor;
+import com.baidu.oped.apm.rpc.server.ApmServer;
+import com.baidu.oped.apm.rpc.server.ApmServerAcceptor;
 import com.baidu.oped.apm.rpc.server.ServerMessageListener;
 import com.baidu.oped.apm.rpc.util.ClientFactoryUtils;
 import com.baidu.oped.apm.thrift.dto.TApiMetaData;
@@ -47,25 +47,25 @@ public class TcpDataSenderTest {
     public static final int PORT = 10050;
     public static final String HOST = "127.0.0.1";
 
-    private PinpointServerAcceptor serverAcceptor;
+    private ApmServerAcceptor serverAcceptor;
     private CountDownLatch sendLatch;
 
     @Before
     public void serverStart() {
-        serverAcceptor = new PinpointServerAcceptor();
+        serverAcceptor = new ApmServerAcceptor();
         serverAcceptor.setMessageListener(new ServerMessageListener() {
 
             @Override
-            public void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket) {
-                logger.info("handleSend packet:{}, remote:{}", sendPacket, pinpointSocket.getRemoteAddress());
+            public void handleSend(SendPacket sendPacket, ApmSocket apmSocket) {
+                logger.info("handleSend packet:{}, remote:{}", sendPacket, apmSocket.getRemoteAddress());
                 if (sendLatch != null) {
                     sendLatch.countDown();
                 }
             }
 
             @Override
-            public void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket) {
-                logger.info("handleRequest packet:{}, remote:{}", requestPacket, pinpointSocket.getRemoteAddress());
+            public void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket) {
+                logger.info("handleRequest packet:{}, remote:{}", requestPacket, apmSocket.getRemoteAddress());
             }
 
             @Override
@@ -74,8 +74,8 @@ public class TcpDataSenderTest {
             }
 
             @Override
-            public void handlePing(PingPacket pingPacket, PinpointServer pinpointServer) {
-                logger.info("ping received {} {} ", pingPacket, pinpointServer);
+            public void handlePing(PingPacket pingPacket, ApmServer apmServer) {
+                logger.info("ping received {} {} ", pingPacket, apmServer);
             }
         });
         serverAcceptor.bind(HOST, PORT);
@@ -92,9 +92,9 @@ public class TcpDataSenderTest {
     public void connectAndSend() throws InterruptedException {
         this.sendLatch = new CountDownLatch(2);
 
-        PinpointClientFactory clientFactory = createPinpointClientFactory();
+        ApmClientFactory clientFactory = createApmClientFactory();
         
-        PinpointClient client = ClientFactoryUtils.createPinpointClient(HOST, PORT, clientFactory);
+        ApmClient client = ClientFactoryUtils.createApmClient(HOST, PORT, clientFactory);
         
         TcpDataSender sender = new TcpDataSender(client);
         try {
@@ -117,8 +117,8 @@ public class TcpDataSenderTest {
         }
     }
     
-    private PinpointClientFactory createPinpointClientFactory() {
-        PinpointClientFactory clientFactory = new PinpointClientFactory();
+    private ApmClientFactory createApmClientFactory() {
+        ApmClientFactory clientFactory = new ApmClientFactory();
         clientFactory.setTimeoutMillis(1000 * 5);
         clientFactory.setProperties(Collections.EMPTY_MAP);
 

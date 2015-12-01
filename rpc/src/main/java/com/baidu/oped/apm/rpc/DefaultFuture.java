@@ -52,7 +52,7 @@ public class DefaultFuture<T> implements TimerTask, Future<T> {
     @Override
     public synchronized T getResult() {
         if (this.cause != null) {
-            throw new PinpointSocketException(cause);
+            throw new ApmSocketException(cause);
         }
         return result;
     }
@@ -117,7 +117,7 @@ public class DefaultFuture<T> implements TimerTask, Future<T> {
             }
             this.ready = true;
 
-            this.cause = new PinpointSocketException("timeout");
+            this.cause = new ApmSocketException("timeout");
 
             if (waiters > 0) {
                 notifyAll();

@@ -48,15 +48,15 @@ public class AgentClassLoader {
         this.executeTemplate = new ContextClassLoaderExecuteTemplate<Object>(classLoader);
     }
 
-    private PinpointURLClassLoader createClassLoader(final URL[] urls, final ClassLoader bootStrapClassLoader) {
+    private ApmURLClassLoader createClassLoader(final URL[] urls, final ClassLoader bootStrapClassLoader) {
         if (SECURITY_MANAGER != null) {
-            return AccessController.doPrivileged(new PrivilegedAction<PinpointURLClassLoader>() {
-                public PinpointURLClassLoader run() {
-                    return new PinpointURLClassLoader(urls, bootStrapClassLoader);
+            return AccessController.doPrivileged(new PrivilegedAction<ApmURLClassLoader>() {
+                public ApmURLClassLoader run() {
+                    return new ApmURLClassLoader(urls, bootStrapClassLoader);
                 }
             });
         } else {
-            return new PinpointURLClassLoader(urls, bootStrapClassLoader);
+            return new ApmURLClassLoader(urls, bootStrapClassLoader);
         }
     }
 

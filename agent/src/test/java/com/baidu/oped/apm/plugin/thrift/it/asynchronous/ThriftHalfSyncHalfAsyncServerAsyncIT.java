@@ -29,8 +29,8 @@ import com.baidu.oped.apm.plugin.thrift.common.server.EchoTestServer;
 import com.baidu.oped.apm.plugin.thrift.common.server.AsyncEchoTestServer.AsyncEchoTestServerFactory;
 import com.baidu.oped.apm.plugin.thrift.it.EchoTestRunner;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointAgent;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmAgent;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * Integration test for THsHaServer with asynchronous processor.
@@ -39,8 +39,8 @@ import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
  * 
  * @author HyunGil Jeong
  */
-@RunWith(PinpointPluginTestSuite.class)
-@PinpointAgent("agent/target/pinpoint-agent-" + Version.VERSION)
+@RunWith(ApmPluginTestSuite.class)
+@ApmAgent("agent/target/apm-agent-" + Version.VERSION)
 @Dependency({ "org.apache.thrift:libthrift:[0.9.2,)", "log4j:log4j:1.2.16", "org.slf4j:slf4j-log4j12:1.5.8" })
 public class ThriftHalfSyncHalfAsyncServerAsyncIT extends EchoTestRunner<THsHaServer> {
 

@@ -46,10 +46,10 @@ import com.baidu.oped.apm.thrift.io.TCommandTypeVersion;
  */
 public class AgentEventMessageSerDesTest {
 
-    private static final String TEST_PINPOINT_VERSION = Version.VERSION;
+    private static final String TEST_APM_VERSION = Version.VERSION;
 
     private final TProtocolFactory protocolFactory = new TCompactProtocol.Factory();
-    private final TCommandRegistry commandTbaseRegistry = new TCommandRegistry(TCommandTypeVersion.getVersion(TEST_PINPOINT_VERSION));
+    private final TCommandRegistry commandTbaseRegistry = new TCommandRegistry(TCommandTypeVersion.getVersion(TEST_APM_VERSION));
 
     private final SerializerFactory<HeaderTBaseSerializer> serializerFactory = new HeaderTBaseSerializerFactory(true,
             HeaderTBaseSerializerFactory.DEFAULT_STREAM_SIZE, true, this.protocolFactory, this.commandTbaseRegistry);

@@ -19,6 +19,6 @@ package com.baidu.oped.apm.plugin.arcus;
  *
  */
 public interface CacheKeyAccessor {
-    void _$PINPOINT$_setCacheKey(Object serviceCode);
-    Object _$PINPOINT$_getCacheKey();
+    void _$APM$_setCacheKey(Object serviceCode);
+    Object _$APM$_getCacheKey();
 }

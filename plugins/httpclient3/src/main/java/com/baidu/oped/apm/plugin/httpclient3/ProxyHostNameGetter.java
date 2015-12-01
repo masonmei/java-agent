@@ -19,5 +19,5 @@ package com.baidu.oped.apm.plugin.httpclient3;
  *
  */
 public interface ProxyHostNameGetter {
-    String _$PINPOINT$_getProxyHostName();
+    String _$APM$_getProxyHostName();
 }

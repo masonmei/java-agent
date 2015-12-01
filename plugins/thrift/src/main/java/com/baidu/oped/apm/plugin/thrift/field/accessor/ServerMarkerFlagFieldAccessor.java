@@ -20,6 +20,6 @@ package com.baidu.oped.apm.plugin.thrift.field.accessor;
  * @author HyunGil Jeong
  */
 public interface ServerMarkerFlagFieldAccessor {
-    void _$PINPOINT$_setServerMarkerFlag(boolean flag);
-    boolean _$PINPOINT$_getServerMarkerFlag();
+    void _$APM$_setServerMarkerFlag(boolean flag);
+    boolean _$APM$_getServerMarkerFlag();
 }

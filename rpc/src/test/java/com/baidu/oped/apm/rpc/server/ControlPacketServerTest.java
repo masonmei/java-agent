@@ -24,7 +24,7 @@ import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.Map;
 
-import com.baidu.oped.apm.rpc.PinpointSocket;
+import com.baidu.oped.apm.rpc.ApmSocket;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.junit.Assert;
@@ -44,7 +44,7 @@ import com.baidu.oped.apm.rpc.packet.ResponsePacket;
 import com.baidu.oped.apm.rpc.packet.SendPacket;
 import com.baidu.oped.apm.rpc.util.ControlMessageEncodingUtils;
 import com.baidu.oped.apm.rpc.util.MapUtils;
-import com.baidu.oped.apm.rpc.util.PinpointRPCTestUtils;
+import com.baidu.oped.apm.rpc.util.ApmRPCTestUtils;
 
 /**
  * @author koo.taejin
@@ -57,13 +57,13 @@ public class ControlPacketServerTest {
     
     @BeforeClass
     public static void setUp() throws IOException {
-        bindPort = PinpointRPCTestUtils.findAvailablePort();
+        bindPort = ApmRPCTestUtils.findAvailablePort();
     }
 
     // Test for being possible to send messages in case of failure of registering packet ( return code : 2, lack of parameter)
     @Test
     public void registerAgentTest1() throws Exception {
-        PinpointServerAcceptor serverAcceptor = PinpointRPCTestUtils.createPinpointServerFactory(bindPort, new SimpleListener());
+        ApmServerAcceptor serverAcceptor = ApmRPCTestUtils.createApmServerFactory(bindPort, new SimpleListener());
 
         Socket socket = null;
         try {
@@ -76,15 +76,15 @@ public class ControlPacketServerTest {
 
             sendAndReceiveSimplePacket(socket);
         } finally {
-            PinpointRPCTestUtils.close(socket);
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(socket);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
     // Test for being possible to send messages in case of success of registering packet ( return code : 0)
     @Test
     public void registerAgentTest2() throws Exception {
-        PinpointServerAcceptor serverAcceptor = PinpointRPCTestUtils.createPinpointServerFactory(bindPort, new SimpleListener());
+        ApmServerAcceptor serverAcceptor = ApmRPCTestUtils.createApmServerFactory(bindPort, new SimpleListener());
 
         Socket socket = null;
         try {
@@ -92,20 +92,20 @@ public class ControlPacketServerTest {
 
             sendAndReceiveSimplePacket(socket);
 
-            int code= sendAndReceiveRegisterPacket(socket, PinpointRPCTestUtils.getParams());
+            int code= sendAndReceiveRegisterPacket(socket, ApmRPCTestUtils.getParams());
             Assert.assertEquals(0, code);
 
             sendAndReceiveSimplePacket(socket);
         } finally {
-            PinpointRPCTestUtils.close(socket);
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(socket);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
     // when failure of registering and retrying to register, confirm to return same code ( return code : 2
     @Test
     public void registerAgentTest3() throws Exception {
-        PinpointServerAcceptor serverAcceptor = PinpointRPCTestUtils.createPinpointServerFactory(bindPort, new SimpleListener());
+        ApmServerAcceptor serverAcceptor = ApmRPCTestUtils.createApmServerFactory(bindPort, new SimpleListener());
 
         Socket socket = null;
         try {
@@ -118,8 +118,8 @@ public class ControlPacketServerTest {
 
             sendAndReceiveSimplePacket(socket);
         } finally {
-            PinpointRPCTestUtils.close(socket);
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(socket);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -127,25 +127,25 @@ public class ControlPacketServerTest {
     // test 1) confirm to return success code, 2) confirm to return already success code.
     @Test
     public void registerAgentTest4() throws Exception {
-        PinpointServerAcceptor serverAcceptor = PinpointRPCTestUtils.createPinpointServerFactory(bindPort, new SimpleListener());
+        ApmServerAcceptor serverAcceptor = ApmRPCTestUtils.createApmServerFactory(bindPort, new SimpleListener());
 
         Socket socket = null;
         try {
             socket = new Socket("127.0.0.1", bindPort);
             sendAndReceiveSimplePacket(socket);
 
-            int code = sendAndReceiveRegisterPacket(socket, PinpointRPCTestUtils.getParams());
+            int code = sendAndReceiveRegisterPacket(socket, ApmRPCTestUtils.getParams());
             Assert.assertEquals(0, code);
 
             sendAndReceiveSimplePacket(socket);
 
-            code = sendAndReceiveRegisterPacket(socket, PinpointRPCTestUtils.getParams());
+            code = sendAndReceiveRegisterPacket(socket, ApmRPCTestUtils.getParams());
             Assert.assertEquals(1, code);
 
             sendAndReceiveSimplePacket(socket);
         } finally {
-            PinpointRPCTestUtils.close(socket);
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(socket);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -237,14 +237,14 @@ public class ControlPacketServerTest {
     class SimpleListener implements ServerMessageListener {
 
         @Override
-        public void handleSend(SendPacket sendPacket, PinpointSocket pinpointSocket) {
-            logger.info("handleSend packet:{}, remote:{}", sendPacket, pinpointSocket.getRemoteAddress());
+        public void handleSend(SendPacket sendPacket, ApmSocket apmSocket) {
+            logger.info("handleSend packet:{}, remote:{}", sendPacket, apmSocket.getRemoteAddress());
         }
 
         @Override
-        public void handleRequest(RequestPacket requestPacket, PinpointSocket pinpointSocket) {
-            logger.info("handleRequest packet:{}, remote:{}", requestPacket, pinpointSocket.getRemoteAddress());
-            pinpointSocket.response(requestPacket, requestPacket.getPayload());
+        public void handleRequest(RequestPacket requestPacket, ApmSocket apmSocket) {
+            logger.info("handleRequest packet:{}, remote:{}", requestPacket, apmSocket.getRemoteAddress());
+            apmSocket.response(requestPacket, requestPacket.getPayload());
         }
 
         @Override
@@ -262,7 +262,7 @@ public class ControlPacketServerTest {
         }
 
         @Override
-        public void handlePing(PingPacket pingPacket, PinpointServer pinpointServer) {
+        public void handlePing(PingPacket pingPacket, ApmServer apmServer) {
 
         }
     }

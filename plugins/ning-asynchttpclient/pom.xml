@@ -8,14 +8,14 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>pinpoint-ning-asynchttpclient-plugin</artifactId>
-    <name>pinpoint-ning-asynchttpclient-plugin</name>
+    <artifactId>apm-ning-asynchttpclient-plugin</artifactId>
+    <name>apm-ning-asynchttpclient-plugin</name>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.baidu.oped.apm</groupId>
-            <artifactId>pinpoint-bootstrap-core</artifactId>
+            <artifactId>apm-bootstrap-core</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

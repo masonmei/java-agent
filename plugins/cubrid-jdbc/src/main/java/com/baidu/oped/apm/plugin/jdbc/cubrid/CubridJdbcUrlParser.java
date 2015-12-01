@@ -101,7 +101,7 @@ public class CubridJdbcUrlParser extends JdbcUrlParser {
 
     /*
     private DatabaseInfo parseCubrid(String url) {
-        // jdbc:cubrid:10.20.30.40:12345:pinpoint:::
+        // jdbc:cubrid:10.20.30.40:12345:apm:::
         StringMaker maker = new StringMaker(url);
         maker.after("jdbc:cubrid:");
         // 10.11.12.13:3306 In case of replication driver could have multiple values

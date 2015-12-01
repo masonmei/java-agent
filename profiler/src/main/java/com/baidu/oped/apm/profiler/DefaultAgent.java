@@ -23,7 +23,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import com.baidu.oped.apm.profiler.receiver.service.ActiveThreadCountService;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
+import com.baidu.oped.apm.rpc.client.ApmClient;
 import com.baidu.oped.apm.rpc.util.ClientFactoryUtils;
 
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ import com.baidu.oped.apm.profiler.sender.UdpDataSender;
 import com.baidu.oped.apm.profiler.util.ApplicationServerTypeResolver;
 import com.baidu.oped.apm.profiler.util.RuntimeMXBeanUtils;
 import com.baidu.oped.apm.rpc.ClassPreLoader;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
 
 /**
  * @author emeroad
@@ -91,8 +91,8 @@ public class DefaultAgent implements Agent {
 
     private final TraceContext traceContext;
 
-    private PinpointClientFactory clientFactory;
-    private PinpointClient client;
+    private ApmClientFactory clientFactory;
+    private ApmClient client;
     private final EnhancedDataSender tcpDataSender;
 
     private final DataSender statDataSender;
@@ -113,7 +113,7 @@ public class DefaultAgent implements Agent {
     
 
     static {
-        // Preload classes related to pinpoint-rpc module.
+        // Preload classes related to apm-rpc module.
         ClassPreLoader.preload();
     }
     public DefaultAgent(AgentOption agentOption) {
@@ -180,10 +180,10 @@ public class DefaultAgent implements Agent {
 
         this.serverMetaDataHolder = createServerMetaDataHolder();
 
-        this.spanDataSender = createUdpSpanDataSender(this.profilerConfig.getCollectorSpanServerPort(), "Pinpoint-UdpSpanDataExecutor",
+        this.spanDataSender = createUdpSpanDataSender(this.profilerConfig.getCollectorSpanServerPort(), "Apm-UdpSpanDataExecutor",
                 this.profilerConfig.getSpanDataSenderWriteQueueSize(), this.profilerConfig.getSpanDataSenderSocketTimeout(),
                 this.profilerConfig.getSpanDataSenderSocketSendBufferSize());
-        this.statDataSender = createUdpStatDataSender(this.profilerConfig.getCollectorStatServerPort(), "Pinpoint-UdpStatDataExecutor",
+        this.statDataSender = createUdpStatDataSender(this.profilerConfig.getCollectorStatServerPort(), "Apm-UdpStatDataExecutor",
                 this.profilerConfig.getStatDataSenderWriteQueueSize(), this.profilerConfig.getStatDataSenderSocketTimeout(),
                 this.profilerConfig.getStatDataSenderSocketSendBufferSize());
 
@@ -315,30 +315,30 @@ public class DefaultAgent implements Agent {
         return serverMetaDataHolder;
     }
 
-    protected PinpointClientFactory createPinpointClientFactory(CommandDispatcher commandDispatcher) {
-        PinpointClientFactory pinpointClientFactory = new PinpointClientFactory();
-        pinpointClientFactory.setTimeoutMillis(1000 * 5);
+    protected ApmClientFactory createApmClientFactory(CommandDispatcher commandDispatcher) {
+        ApmClientFactory apmClientFactory = new ApmClientFactory();
+        apmClientFactory.setTimeoutMillis(1000 * 5);
 
         Map<String, Object> properties = this.agentInformation.toMap();
         
         boolean isSupportServerMode = this.profilerConfig.isTcpDataSenderCommandAcceptEnable();
         
         if (isSupportServerMode) {
-            pinpointClientFactory.setMessageListener(commandDispatcher);
-            pinpointClientFactory.setServerStreamChannelMessageListener(commandDispatcher);
+            apmClientFactory.setMessageListener(commandDispatcher);
+            apmClientFactory.setServerStreamChannelMessageListener(commandDispatcher);
 
             properties.put(AgentHandshakePropertyType.SUPPORT_SERVER.getName(), true);
         } else {
             properties.put(AgentHandshakePropertyType.SUPPORT_SERVER.getName(), false);
         }
 
-        pinpointClientFactory.setProperties(properties);
-        return pinpointClientFactory;
+        apmClientFactory.setProperties(properties);
+        return apmClientFactory;
     }
 
     protected EnhancedDataSender createTcpDataSender(CommandDispatcher commandDispatcher) {
-        this.clientFactory = createPinpointClientFactory(commandDispatcher);
-        this.client = ClientFactoryUtils.createPinpointClient(this.profilerConfig.getCollectorTcpServerIp(), this.profilerConfig.getCollectorTcpServerPort(), clientFactory);
+        this.clientFactory = createApmClientFactory(commandDispatcher);
+        this.client = ClientFactoryUtils.createApmClient(this.profilerConfig.getCollectorTcpServerIp(), this.profilerConfig.getCollectorTcpServerPort(), clientFactory);
         return new TcpDataSender(client);
     }
 

@@ -21,8 +21,8 @@ import com.baidu.oped.apm.bootstrap.config.ProfilerConfig;
 import com.baidu.oped.apm.profiler.sender.DataSender;
 import com.baidu.oped.apm.profiler.sender.TcpDataSender;
 import com.baidu.oped.apm.profiler.sender.UdpDataSender;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
 import com.baidu.oped.apm.rpc.util.ClientFactoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ import java.util.Collections;
  * @author netspider
  * 
  */
-public class NetworkAvailabilityChecker implements PinpointTools {
+public class NetworkAvailabilityChecker implements ApmTools {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NetworkAvailabilityChecker.class);
 
@@ -50,8 +50,8 @@ public class NetworkAvailabilityChecker implements PinpointTools {
         DataSender udpSpanSender = null;
         DataSender tcpSender = null;
 
-        PinpointClientFactory clientFactory = null;
-        PinpointClient client = null;
+        ApmClientFactory clientFactory = null;
+        ApmClient client = null;
         try {
             ProfilerConfig profilerConfig = DefaultProfilerConfig.load(configPath);
 
@@ -65,8 +65,8 @@ public class NetworkAvailabilityChecker implements PinpointTools {
 
             String collectorTcpIp = profilerConfig.getCollectorTcpServerIp();
             int collectorTcpPort = profilerConfig.getCollectorTcpServerPort();
-            clientFactory = createPinpointClientFactory();
-            client = ClientFactoryUtils.createPinpointClient(collectorTcpIp, collectorTcpPort, clientFactory);
+            clientFactory = createApmClientFactory();
+            client = ClientFactoryUtils.createApmClient(collectorTcpIp, collectorTcpPort, clientFactory);
 
             tcpSender = new TcpDataSender(client);
 
@@ -114,12 +114,12 @@ public class NetworkAvailabilityChecker implements PinpointTools {
         }
     }
     
-    private static PinpointClientFactory createPinpointClientFactory() {
-        PinpointClientFactory pinpointClientFactory = new PinpointClientFactory();
-        pinpointClientFactory.setTimeoutMillis(1000 * 5);
-        pinpointClientFactory.setProperties(Collections.<String, Object>emptyMap());
+    private static ApmClientFactory createApmClientFactory() {
+        ApmClientFactory apmClientFactory = new ApmClientFactory();
+        apmClientFactory.setTimeoutMillis(1000 * 5);
+        apmClientFactory.setProperties(Collections.<String, Object>emptyMap());
 
-        return pinpointClientFactory;
+        return apmClientFactory;
     }
 
 }

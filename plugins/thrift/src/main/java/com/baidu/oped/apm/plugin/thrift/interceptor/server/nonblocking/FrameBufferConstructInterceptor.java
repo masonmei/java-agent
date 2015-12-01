@@ -52,7 +52,7 @@ public class FrameBufferConstructInterceptor extends FrameBufferTransportInjectI
 
     @Override
     protected TTransport getInjectionTarget(Object target, Object[] args, Object result) {
-        return ((TTransportFieldGetter)target)._$PINPOINT$_getTTransport();
+        return ((TTransportFieldGetter)target)._$APM$_getTTransport();
     }
 
 }

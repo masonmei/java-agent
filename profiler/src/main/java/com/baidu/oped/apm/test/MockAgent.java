@@ -62,7 +62,7 @@ public class MockAgent extends DefaultAgent {
         try {
             URL resource = MockAgent.class.getClassLoader().getResource(configPath);
             if (resource == null) {
-                throw new FileNotFoundException("pinpoint.config not found. configPath:" + configPath);
+                throw new FileNotFoundException("apm.config not found. configPath:" + configPath);
             }
             profilerConfig = DefaultProfilerConfig.load(resource.getPath());
             profilerConfig.setApplicationServerType(ServiceType.TEST_STAND_ALONE.getName());

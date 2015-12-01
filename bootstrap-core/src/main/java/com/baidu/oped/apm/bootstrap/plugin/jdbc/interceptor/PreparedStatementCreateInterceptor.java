@@ -48,7 +48,7 @@ public class PreparedStatementCreateInterceptor extends SpanEventSimpleAroundInt
 
     @Override
     public void doInBeforeTrace(SpanEventRecorder recorder, Object target, Object[] args)  {
-        DatabaseInfo databaseInfo = (target instanceof DatabaseInfoAccessor) ? ((DatabaseInfoAccessor)target)._$PINPOINT$_getDatabaseInfo() : null;
+        DatabaseInfo databaseInfo = (target instanceof DatabaseInfoAccessor) ? ((DatabaseInfoAccessor)target)._$APM$_getDatabaseInfo() : null;
         
         if (databaseInfo == null) {
             databaseInfo = UnKnownDatabaseInfo.INSTANCE;
@@ -65,10 +65,10 @@ public class PreparedStatementCreateInterceptor extends SpanEventSimpleAroundInt
         if (success) {
             if (target instanceof DatabaseInfoAccessor) {
                 // set databaseInfo to PreparedStatement only when preparedStatement is generated successfully.
-                DatabaseInfo databaseInfo = ((DatabaseInfoAccessor)target)._$PINPOINT$_getDatabaseInfo();
+                DatabaseInfo databaseInfo = ((DatabaseInfoAccessor)target)._$APM$_getDatabaseInfo();
                 if (databaseInfo != null) {
                     if (result instanceof DatabaseInfoAccessor) {
-                        ((DatabaseInfoAccessor)result)._$PINPOINT$_setDatabaseInfo(databaseInfo);
+                        ((DatabaseInfoAccessor)result)._$APM$_setDatabaseInfo(databaseInfo);
                     }
                 }
             }
@@ -78,7 +78,7 @@ public class PreparedStatementCreateInterceptor extends SpanEventSimpleAroundInt
                 String sql = (String) args[0];
                 ParsingResult parsingResult = traceContext.parseSql(sql);
                 if (parsingResult != null) {
-                    ((ParsingResultAccessor)result)._$PINPOINT$_setParsingResult(parsingResult);
+                    ((ParsingResultAccessor)result)._$APM$_setParsingResult(parsingResult);
                 } else {
                     if (logger.isErrorEnabled()) {
                         logger.error("sqlParsing fail. parsingResult is null sql:{}", sql);
@@ -91,7 +91,7 @@ public class PreparedStatementCreateInterceptor extends SpanEventSimpleAroundInt
     @Override
     public void doInAfterTrace(SpanEventRecorder recorder, Object target, Object[] args, Object result, Throwable throwable) {
         if (result instanceof ParsingResultAccessor) {
-            ParsingResult parsingResult = ((ParsingResultAccessor)result)._$PINPOINT$_getParsingResult();
+            ParsingResult parsingResult = ((ParsingResultAccessor)result)._$APM$_getParsingResult();
             recorder.recordSqlParsingResult(parsingResult);
         }
         recorder.recordException(throwable);

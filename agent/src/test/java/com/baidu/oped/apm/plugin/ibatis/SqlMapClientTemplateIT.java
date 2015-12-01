@@ -41,16 +41,16 @@ import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifier;
 import com.baidu.oped.apm.bootstrap.plugin.test.PluginTestVerifierHolder;
 import com.baidu.oped.apm.common.Version;
 import com.baidu.oped.apm.test.plugin.Dependency;
-import com.baidu.oped.apm.test.plugin.PinpointAgent;
-import com.baidu.oped.apm.test.plugin.PinpointPluginTestSuite;
+import com.baidu.oped.apm.test.plugin.ApmAgent;
+import com.baidu.oped.apm.test.plugin.ApmPluginTestSuite;
 
 /**
  * Tests against spring-ibatis 2.0.7+. Prior versions require com.ibatis:ibatis2 dependency, which is not available in the repository.
  * 
  * @author HyunGil Jeong
  */
-@RunWith(PinpointPluginTestSuite.class)
-@PinpointAgent("agent/target/pinpoint-agent-" + Version.VERSION)
+@RunWith(ApmPluginTestSuite.class)
+@ApmAgent("agent/target/apm-agent-" + Version.VERSION)
 @Dependency({ "org.springframework:spring-ibatis:[2.0.7,)", "org.apache.ibatis:ibatis-sqlmap:[2.3.4.726]",
         "org.mockito:mockito-all:1.8.4" })
 public class SqlMapClientTemplateIT {

@@ -17,18 +17,18 @@
 package com.baidu.oped.apm.rpc.stream;
 
 import com.baidu.oped.apm.rpc.*;
-import com.baidu.oped.apm.rpc.client.PinpointClient;
-import com.baidu.oped.apm.rpc.client.PinpointClientFactory;
+import com.baidu.oped.apm.rpc.client.ApmClient;
+import com.baidu.oped.apm.rpc.client.ApmClientFactory;
 import com.baidu.oped.apm.rpc.client.SimpleMessageListener;
 import com.baidu.oped.apm.rpc.packet.stream.StreamClosePacket;
 import com.baidu.oped.apm.rpc.packet.stream.StreamCode;
 import com.baidu.oped.apm.rpc.packet.stream.StreamCreateFailPacket;
 import com.baidu.oped.apm.rpc.packet.stream.StreamCreatePacket;
-import com.baidu.oped.apm.rpc.server.PinpointServer;
-import com.baidu.oped.apm.rpc.server.PinpointServerAcceptor;
+import com.baidu.oped.apm.rpc.server.ApmServer;
+import com.baidu.oped.apm.rpc.server.ApmServerAcceptor;
 import com.baidu.oped.apm.rpc.server.ServerMessageListener;
 import com.baidu.oped.apm.rpc.server.SimpleServerMessageListener;
-import com.baidu.oped.apm.rpc.util.PinpointRPCTestUtils;
+import com.baidu.oped.apm.rpc.util.ApmRPCTestUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class StreamChannelManagerTest {
     
     @BeforeClass
     public static void setUp() throws IOException {
-        bindPort = PinpointRPCTestUtils.findAvailablePort();
+        bindPort = ApmRPCTestUtils.findAvailablePort();
     }
 
     // Client to Server Stream
@@ -51,12 +51,12 @@ public class StreamChannelManagerTest {
     public void streamSuccessTest1() throws IOException, InterruptedException {
         SimpleStreamBO bo = new SimpleStreamBO();
 
-        PinpointServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, new ServerListener(bo));
+        ApmServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, new ServerListener(bo));
         serverAcceptor.bind("localhost", bindPort);
 
-        PinpointClientFactory clientFactory = createSocketFactory();
+        ApmClientFactory clientFactory = createSocketFactory();
         try {
-            PinpointClient client = clientFactory.connect("127.0.0.1", bindPort);
+            ApmClient client = clientFactory.connect("127.0.0.1", bindPort);
 
             RecordedStreamChannelMessageListener clientListener = new RecordedStreamChannelMessageListener(4);
 
@@ -74,10 +74,10 @@ public class StreamChannelManagerTest {
 
             clientContext.getStreamChannel().close();
             
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
         } finally {
             clientFactory.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -86,12 +86,12 @@ public class StreamChannelManagerTest {
     public void streamSuccessTest2() throws IOException, InterruptedException {
         SimpleStreamBO bo = new SimpleStreamBO();
 
-        PinpointServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, new ServerListener(bo));
+        ApmServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, new ServerListener(bo));
         serverAcceptor.bind("localhost", bindPort);
 
-        PinpointClientFactory clientFactory = createSocketFactory();
+        ApmClientFactory clientFactory = createSocketFactory();
         try {
-            PinpointClient client = clientFactory.connect("127.0.0.1", bindPort);
+            ApmClient client = clientFactory.connect("127.0.0.1", bindPort);
 
             RecordedStreamChannelMessageListener clientListener = new RecordedStreamChannelMessageListener(4);
             ClientStreamChannelContext clientContext = client.openStream(new byte[0], clientListener);
@@ -127,36 +127,36 @@ public class StreamChannelManagerTest {
 
             clientContext2.getStreamChannel().close();
 
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
         } finally {
             clientFactory.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
     @Test
     public void streamSuccessTest3() throws IOException, InterruptedException {
-        PinpointServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, null);
+        ApmServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, null);
         serverAcceptor.bind("localhost", bindPort);
 
         SimpleStreamBO bo = new SimpleStreamBO();
 
-        PinpointClientFactory clientFactory = createSocketFactory(SimpleMessageListener.INSTANCE, new ServerListener(bo));
+        ApmClientFactory clientFactory = createSocketFactory(SimpleMessageListener.INSTANCE, new ServerListener(bo));
 
         try {
-            PinpointClient client = clientFactory.connect("127.0.0.1", bindPort);
+            ApmClient client = clientFactory.connect("127.0.0.1", bindPort);
 
             Thread.sleep(100);
 
-            List<PinpointSocket> writableServerList = serverAcceptor.getWritableSocketList();
+            List<ApmSocket> writableServerList = serverAcceptor.getWritableSocketList();
             Assert.assertEquals(1, writableServerList.size());
 
-            PinpointSocket writableServer = writableServerList.get(0);
+            ApmSocket writableServer = writableServerList.get(0);
 
             RecordedStreamChannelMessageListener clientListener = new RecordedStreamChannelMessageListener(4);
 
-            if (writableServer instanceof  PinpointServer) {
-                ClientStreamChannelContext clientContext = ((PinpointServer)writableServer).openStream(new byte[0], clientListener);
+            if (writableServer instanceof  ApmServer) {
+                ClientStreamChannelContext clientContext = ((ApmServer)writableServer).openStream(new byte[0], clientListener);
 
                 int sendCount = 4;
 
@@ -173,21 +173,21 @@ public class StreamChannelManagerTest {
                 Assert.fail();
             }
 
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
         } finally {
             clientFactory.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
     @Test
     public void streamClosedTest1() throws IOException, InterruptedException {
-        PinpointServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, null);
+        ApmServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, null);
         serverAcceptor.bind("localhost", bindPort);
 
-        PinpointClientFactory clientFactory = createSocketFactory();
+        ApmClientFactory clientFactory = createSocketFactory();
         try {
-            PinpointClient client = clientFactory.connect("127.0.0.1", bindPort);
+            ApmClient client = clientFactory.connect("127.0.0.1", bindPort);
 
             RecordedStreamChannelMessageListener clientListener = new RecordedStreamChannelMessageListener(4);
 
@@ -202,10 +202,10 @@ public class StreamChannelManagerTest {
 
             clientContext.getStreamChannel().close();
             
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
         } finally {
             clientFactory.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -213,12 +213,12 @@ public class StreamChannelManagerTest {
     public void streamClosedTest2() throws IOException, InterruptedException {
         SimpleStreamBO bo = new SimpleStreamBO();
 
-        PinpointServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, new ServerListener(bo));
+        ApmServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, new ServerListener(bo));
         serverAcceptor.bind("localhost", bindPort);
 
-        PinpointClientFactory clientFactory = createSocketFactory();
+        ApmClientFactory clientFactory = createSocketFactory();
 
-        PinpointClient client = null;
+        ApmClient client = null;
         try {
             client = clientFactory.connect("127.0.0.1", bindPort);
 
@@ -235,9 +235,9 @@ public class StreamChannelManagerTest {
             Assert.assertEquals(0, bo.getStreamChannelContextSize());
 
         } finally {
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
             clientFactory.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
@@ -245,29 +245,29 @@ public class StreamChannelManagerTest {
 
 
     // ServerStreamChannel first close.
-    @Test(expected = PinpointSocketException.class)
+    @Test(expected = ApmSocketException.class)
     public void streamClosedTest3() throws IOException, InterruptedException {
-        PinpointServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, null);
+        ApmServerAcceptor serverAcceptor = createServerFactory(SimpleServerMessageListener.DUPLEX_ECHO_INSTANCE, null);
         serverAcceptor.bind("localhost", bindPort);
 
         SimpleStreamBO bo = new SimpleStreamBO();
 
-        PinpointClientFactory clientFactory = createSocketFactory(SimpleMessageListener.INSTANCE, new ServerListener(bo));
+        ApmClientFactory clientFactory = createSocketFactory(SimpleMessageListener.INSTANCE, new ServerListener(bo));
 
-        PinpointClient client = clientFactory.connect("127.0.0.1", bindPort);
+        ApmClient client = clientFactory.connect("127.0.0.1", bindPort);
         try {
 
             Thread.sleep(100);
 
-            List<PinpointSocket> writableServerList = serverAcceptor.getWritableSocketList();
+            List<ApmSocket> writableServerList = serverAcceptor.getWritableSocketList();
             Assert.assertEquals(1, writableServerList.size());
 
-            PinpointSocket writableServer = writableServerList.get(0);
+            ApmSocket writableServer = writableServerList.get(0);
 
-            if (writableServer instanceof  PinpointServer) {
+            if (writableServer instanceof  ApmServer) {
                 RecordedStreamChannelMessageListener clientListener = new RecordedStreamChannelMessageListener(4);
 
-                ClientStreamChannelContext clientContext = ((PinpointServer)writableServer).openStream(new byte[0], clientListener);
+                ClientStreamChannelContext clientContext = ((ApmServer)writableServer).openStream(new byte[0], clientListener);
 
 
                 StreamChannelContext aaa = client.findStreamChannel(2);
@@ -285,15 +285,15 @@ public class StreamChannelManagerTest {
             }
 
         } finally {
-            PinpointRPCTestUtils.close(client);
+            ApmRPCTestUtils.close(client);
             clientFactory.release();
-            PinpointRPCTestUtils.close(serverAcceptor);
+            ApmRPCTestUtils.close(serverAcceptor);
         }
     }
 
 
-    private PinpointServerAcceptor createServerFactory(ServerMessageListener severMessageListener, ServerStreamChannelMessageListener serverStreamChannelMessageListener) {
-        PinpointServerAcceptor serverAcceptor = new PinpointServerAcceptor();
+    private ApmServerAcceptor createServerFactory(ServerMessageListener severMessageListener, ServerStreamChannelMessageListener serverStreamChannelMessageListener) {
+        ApmServerAcceptor serverAcceptor = new ApmServerAcceptor();
 
         if (severMessageListener != null) {
             serverAcceptor.setMessageListener(severMessageListener);
@@ -306,13 +306,13 @@ public class StreamChannelManagerTest {
         return serverAcceptor;
     }
 
-    private PinpointClientFactory createSocketFactory() {
-        PinpointClientFactory clientFactory = new PinpointClientFactory();
+    private ApmClientFactory createSocketFactory() {
+        ApmClientFactory clientFactory = new ApmClientFactory();
         return clientFactory;
     }
 
-    private PinpointClientFactory createSocketFactory(MessageListener messageListener, ServerStreamChannelMessageListener serverStreamChannelMessageListener) {
-        PinpointClientFactory clientFactory = new PinpointClientFactory();
+    private ApmClientFactory createSocketFactory(MessageListener messageListener, ServerStreamChannelMessageListener serverStreamChannelMessageListener) {
+        ApmClientFactory clientFactory = new ApmClientFactory();
         clientFactory.setMessageListener(messageListener);
         clientFactory.setServerStreamChannelMessageListener(serverStreamChannelMessageListener);
 

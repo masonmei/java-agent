@@ -51,7 +51,7 @@ import com.baidu.oped.apm.bootstrap.interceptor.group.ExecutionPolicy;
 import com.baidu.oped.apm.bootstrap.interceptor.group.InterceptorGroup;
 import com.baidu.oped.apm.bootstrap.plugin.ObjectRecipe;
 import com.baidu.oped.apm.common.util.Asserts;
-import com.baidu.oped.apm.exception.PinpointException;
+import com.baidu.oped.apm.exception.ApmException;
 import com.baidu.oped.apm.profiler.instrument.AccessorAnalyzer.AccessorDetails;
 import com.baidu.oped.apm.profiler.instrument.GetterAnalyzer.GetterDetails;
 import com.baidu.oped.apm.profiler.instrument.aspect.AspectWeaverClass;
@@ -76,9 +76,9 @@ public class JavassistClass implements InstrumentClass {
     private final ClassLoader classLoader;
     private final CtClass ctClass;
 
-    private static final String FIELD_PREFIX = "_$PINPOINT$_";
-    private static final String SETTER_PREFIX = "_$PINPOINT$_set";
-    private static final String GETTER_PREFIX = "_$PINPOINT$_get";
+    private static final String FIELD_PREFIX = "_$APM$_";
+    private static final String SETTER_PREFIX = "_$APM$_set";
+    private static final String GETTER_PREFIX = "_$APM$_get";
 
     public JavassistClass(Instrumentor pluginContext, InterceptorRegistryBinder interceptorRegistryBinder, ClassLoader classLoader, CtClass ctClass) {
         this.pluginContext = pluginContext;
@@ -516,7 +516,7 @@ public class JavassistClass implements InstrumentClass {
         }
 
         if (interceptorId == -1) {
-            throw new PinpointException("No target is specified. At least one of @Targets, @TargetMethod, @TargetConstructor, @TargetFilter must present. interceptor: " + interceptorClassName);
+            throw new ApmException("No target is specified. At least one of @Targets, @TargetMethod, @TargetConstructor, @TargetFilter must present. interceptor: " + interceptorClassName);
         }
 
         return interceptorId;
